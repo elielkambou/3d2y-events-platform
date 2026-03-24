@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 3D2Y Events Platform
 
-## Getting Started
+## Description
+3D2Y Events Platform est une plateforme de découverte culturelle et de billetterie premium orientée Abidjan.
+Elle permet de publier des événements, vendre ou réserver des billets, générer des QR codes et contrôler les entrées.
 
-First, run the development server:
+## Technologies
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Prisma ORM
+- PostgreSQL (local)
+- Docker
 
-```bash
+## Installation
+git clone <url-du-repo>
+cd 3d2y-events-platform
+npm install
+
+## Configuration
+Créer un fichier .env à la racine du projet :
+
+DATABASE_URL="postgresql://eliel:eliel123@localhost:5432/3d2y_local"
+DIRECT_URL="postgresql://eliel:eliel123@localhost:5432/3d2y_local"
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+
+## Base de données locale
+Démarrer PostgreSQL avec Docker :
+
+docker compose up -d
+
+Puis lancer Prisma :
+
+npx prisma migrate dev --name init_schema
+npx prisma generate --schema=./prisma/schema.prisma
+npm run db:seed
+
+## Lancer le projet
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+L'application sera disponible sur :
+http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Comptes de test
+- admin@3d2y.local : administrateur
+- agency@lagune.local : agence
+- scanner@lagune.local : scanner
+- client@test.local : client
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Fonctionnalités disponibles
+- catalogue public d'événements
+- détail d'un événement
+- création et soumission d'événements côté agence
+- validation et publication côté administration
+- achat direct de billets
+- réservation avec acompte
+- génération de billets avec QR code
+- contrôle des billets par scanner
+- statistiques côté agence
+- commandes et remboursements côté admin
 
-## Learn More
+## Organisation du projet
+- src/app : routes et pages Next.js
+- src/server : actions et queries serveur
+- src/lib : utilitaires et helpers
+- src/validators : validations Zod
+- prisma : schéma, migrations et seed
 
-To learn more about Next.js, take a look at the following resources:
+## Travail en équipe
+Workflow recommandé :
+- garder main comme branche stable
+- créer une branche par fonctionnalité
+- tester localement avant chaque merge
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Exemple :
+git checkout -b feature/nom-feature
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## À ne pas versionner
+- .env
+- .env.local
+- node_modules
+- .next
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## État du projet
+Le projet est actuellement développé en local afin de stabiliser l'architecture, le modèle de données et les workflows principaux avant l'intégration des services externes.
