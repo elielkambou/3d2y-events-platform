@@ -21,6 +21,9 @@ export async function PublicHeader() {
           <Link href="/login" className="text-sm text-white/75 transition hover:text-white">
             Connexion
           </Link>
+          <Link href="/register" className="text-sm text-white/75 transition hover:text-white">
+            Inscription
+          </Link>
         </nav>
 
         <div className="flex items-center gap-3">

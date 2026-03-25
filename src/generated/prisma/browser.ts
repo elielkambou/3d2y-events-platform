@@ -112,3 +112,8 @@ export type CommissionLedger = Prisma.CommissionLedgerModel
  * 
  */
 export type AgencyServiceOrder = Prisma.AgencyServiceOrderModel
+/**
+ * Model AuthSession
+ * 
+ */
+export type AuthSession = Prisma.AuthSessionModel

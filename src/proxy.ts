@@ -17,7 +17,7 @@ type DevSession = {
   roles: SessionRole[];
 };
 
-function readSession(request: NextRequest): DevSession | null {
+function readDevSession(request: NextRequest): DevSession | null {
   const raw = request.cookies.get("dev_session")?.value;
   if (!raw) return null;
 
@@ -36,22 +36,32 @@ function hasRole(session: DevSession | null, allowed: SessionRole[]) {
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const session = readSession(request);
 
-  if (pathname.startsWith("/account") && !session) {
+  const devSession = readDevSession(request);
+  const hasAuthSession = Boolean(request.cookies.get("auth_session")?.value);
+
+  if (pathname.startsWith("/account") && !devSession && !hasAuthSession) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  if (
+    pathname.startsWith("/agency/scanner") &&
+    !hasRole(devSession, ["AGENCY", "AGENCY_SCANNER", "SUPER_ADMIN"])
+  ) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
   if (
     pathname.startsWith("/agency") &&
-    !hasRole(session, ["AGENCY", "AGENCY_SCANNER", "SUPER_ADMIN"])
+    !pathname.startsWith("/agency/scanner") &&
+    !hasRole(devSession, ["AGENCY", "SUPER_ADMIN"])
   ) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
   if (
     pathname.startsWith("/admin") &&
-    !hasRole(session, [
+    !hasRole(devSession, [
       "SUPER_ADMIN",
       "CONTENT_ADMIN",
       "FINANCE_ADMIN",

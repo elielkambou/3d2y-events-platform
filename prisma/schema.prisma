@@ -144,6 +144,7 @@ model User {
   refundRequests  RefundRequest[]      @relation("RefundRequestedBy")
   reviewedRefunds RefundRequest[]      @relation("RefundReviewedBy")
   eventApprovals  EventApproval[]      @relation("EventApprovedBy")
+  sessions        AuthSession[]
 }
 
 model UserRoleAssignment {
@@ -518,4 +519,18 @@ model AgencyServiceOrder {
   @@index([eventId])
   @@index([serviceType])
   @@index([status])
+}
+
+model AuthSession {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
 }

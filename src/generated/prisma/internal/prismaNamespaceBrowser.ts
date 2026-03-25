@@ -69,7 +69,8 @@ export const ModelName = {
   RefundRequest: 'RefundRequest',
   EventApproval: 'EventApproval',
   CommissionLedger: 'CommissionLedger',
-  AgencyServiceOrder: 'AgencyServiceOrder'
+  AgencyServiceOrder: 'AgencyServiceOrder',
+  AuthSession: 'AuthSession'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -396,6 +397,18 @@ export const AgencyServiceOrderScalarFieldEnum = {
 } as const
 
 export type AgencyServiceOrderScalarFieldEnum = (typeof AgencyServiceOrderScalarFieldEnum)[keyof typeof AgencyServiceOrderScalarFieldEnum]
+
+
+export const AuthSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AuthSessionScalarFieldEnum = (typeof AuthSessionScalarFieldEnum)[keyof typeof AuthSessionScalarFieldEnum]
 
 
 export const SortOrder = {

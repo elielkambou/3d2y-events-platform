@@ -229,6 +229,7 @@ export type UserWhereInput = {
   refundRequests?: Prisma.RefundRequestListRelationFilter
   reviewedRefunds?: Prisma.RefundRequestListRelationFilter
   eventApprovals?: Prisma.EventApprovalListRelationFilter
+  sessions?: Prisma.AuthSessionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -249,6 +250,7 @@ export type UserOrderByWithRelationInput = {
   refundRequests?: Prisma.RefundRequestOrderByRelationAggregateInput
   reviewedRefunds?: Prisma.RefundRequestOrderByRelationAggregateInput
   eventApprovals?: Prisma.EventApprovalOrderByRelationAggregateInput
+  sessions?: Prisma.AuthSessionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -272,6 +274,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   refundRequests?: Prisma.RefundRequestListRelationFilter
   reviewedRefunds?: Prisma.RefundRequestListRelationFilter
   eventApprovals?: Prisma.EventApprovalListRelationFilter
+  sessions?: Prisma.AuthSessionListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -324,6 +327,7 @@ export type UserCreateInput = {
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutRequestedByInput
   reviewedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -344,6 +348,7 @@ export type UserUncheckedCreateInput = {
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutRequestedByInput
   reviewedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -364,6 +369,7 @@ export type UserUpdateInput = {
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutRequestedByNestedInput
   reviewedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -384,6 +390,7 @@ export type UserUncheckedUpdateInput = {
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   reviewedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -598,6 +605,20 @@ export type UserUpdateOneWithoutEventApprovalsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEventApprovalsInput, Prisma.UserUpdateWithoutEventApprovalsInput>, Prisma.UserUncheckedUpdateWithoutEventApprovalsInput>
 }
 
+export type UserCreateNestedOneWithoutSessionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
+  upsert?: Prisma.UserUpsertWithoutSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSessionsInput, Prisma.UserUpdateWithoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+}
+
 export type UserCreateWithoutRolesInput = {
   id?: string
   email: string
@@ -615,6 +636,7 @@ export type UserCreateWithoutRolesInput = {
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutRequestedByInput
   reviewedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRolesInput = {
@@ -634,6 +656,7 @@ export type UserUncheckedCreateWithoutRolesInput = {
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutRequestedByInput
   reviewedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRolesInput = {
@@ -669,6 +692,7 @@ export type UserUpdateWithoutRolesInput = {
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutRequestedByNestedInput
   reviewedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRolesInput = {
@@ -688,6 +712,7 @@ export type UserUncheckedUpdateWithoutRolesInput = {
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   reviewedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAgencyInput = {
@@ -707,6 +732,7 @@ export type UserCreateWithoutAgencyInput = {
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutRequestedByInput
   reviewedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAgencyInput = {
@@ -726,6 +752,7 @@ export type UserUncheckedCreateWithoutAgencyInput = {
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutRequestedByInput
   reviewedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAgencyInput = {
@@ -761,6 +788,7 @@ export type UserUpdateWithoutAgencyInput = {
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutRequestedByNestedInput
   reviewedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAgencyInput = {
@@ -780,6 +808,7 @@ export type UserUncheckedUpdateWithoutAgencyInput = {
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   reviewedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCustomerOrdersInput = {
@@ -799,6 +828,7 @@ export type UserCreateWithoutCustomerOrdersInput = {
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutRequestedByInput
   reviewedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCustomerOrdersInput = {
@@ -818,6 +848,7 @@ export type UserUncheckedCreateWithoutCustomerOrdersInput = {
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutRequestedByInput
   reviewedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCustomerOrdersInput = {
@@ -853,6 +884,7 @@ export type UserUpdateWithoutCustomerOrdersInput = {
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutRequestedByNestedInput
   reviewedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCustomerOrdersInput = {
@@ -872,6 +904,7 @@ export type UserUncheckedUpdateWithoutCustomerOrdersInput = {
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   reviewedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutScannedCheckInsInput = {
@@ -891,6 +924,7 @@ export type UserCreateWithoutScannedCheckInsInput = {
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutRequestedByInput
   reviewedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutScannedCheckInsInput = {
@@ -910,6 +944,7 @@ export type UserUncheckedCreateWithoutScannedCheckInsInput = {
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutRequestedByInput
   reviewedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutScannedCheckInsInput = {
@@ -945,6 +980,7 @@ export type UserUpdateWithoutScannedCheckInsInput = {
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutRequestedByNestedInput
   reviewedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutScannedCheckInsInput = {
@@ -964,6 +1000,7 @@ export type UserUncheckedUpdateWithoutScannedCheckInsInput = {
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   reviewedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRefundRequestsInput = {
@@ -983,6 +1020,7 @@ export type UserCreateWithoutRefundRequestsInput = {
   scannedCheckIns?: Prisma.TicketCheckInCreateNestedManyWithoutCheckedInByInput
   reviewedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRefundRequestsInput = {
@@ -1002,6 +1040,7 @@ export type UserUncheckedCreateWithoutRefundRequestsInput = {
   scannedCheckIns?: Prisma.TicketCheckInUncheckedCreateNestedManyWithoutCheckedInByInput
   reviewedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRefundRequestsInput = {
@@ -1026,6 +1065,7 @@ export type UserCreateWithoutReviewedRefundsInput = {
   scannedCheckIns?: Prisma.TicketCheckInCreateNestedManyWithoutCheckedInByInput
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutRequestedByInput
   eventApprovals?: Prisma.EventApprovalCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReviewedRefundsInput = {
@@ -1045,6 +1085,7 @@ export type UserUncheckedCreateWithoutReviewedRefundsInput = {
   scannedCheckIns?: Prisma.TicketCheckInUncheckedCreateNestedManyWithoutCheckedInByInput
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutRequestedByInput
   eventApprovals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReviewedRefundsInput = {
@@ -1080,6 +1121,7 @@ export type UserUpdateWithoutRefundRequestsInput = {
   scannedCheckIns?: Prisma.TicketCheckInUpdateManyWithoutCheckedInByNestedInput
   reviewedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRefundRequestsInput = {
@@ -1099,6 +1141,7 @@ export type UserUncheckedUpdateWithoutRefundRequestsInput = {
   scannedCheckIns?: Prisma.TicketCheckInUncheckedUpdateManyWithoutCheckedInByNestedInput
   reviewedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutReviewedRefundsInput = {
@@ -1129,6 +1172,7 @@ export type UserUpdateWithoutReviewedRefundsInput = {
   scannedCheckIns?: Prisma.TicketCheckInUpdateManyWithoutCheckedInByNestedInput
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutRequestedByNestedInput
   eventApprovals?: Prisma.EventApprovalUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewedRefundsInput = {
@@ -1148,6 +1192,7 @@ export type UserUncheckedUpdateWithoutReviewedRefundsInput = {
   scannedCheckIns?: Prisma.TicketCheckInUncheckedUpdateManyWithoutCheckedInByNestedInput
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   eventApprovals?: Prisma.EventApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutEventApprovalsInput = {
@@ -1167,6 +1212,7 @@ export type UserCreateWithoutEventApprovalsInput = {
   scannedCheckIns?: Prisma.TicketCheckInCreateNestedManyWithoutCheckedInByInput
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutRequestedByInput
   reviewedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEventApprovalsInput = {
@@ -1186,6 +1232,7 @@ export type UserUncheckedCreateWithoutEventApprovalsInput = {
   scannedCheckIns?: Prisma.TicketCheckInUncheckedCreateNestedManyWithoutCheckedInByInput
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutRequestedByInput
   reviewedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEventApprovalsInput = {
@@ -1221,6 +1268,7 @@ export type UserUpdateWithoutEventApprovalsInput = {
   scannedCheckIns?: Prisma.TicketCheckInUpdateManyWithoutCheckedInByNestedInput
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutRequestedByNestedInput
   reviewedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEventApprovalsInput = {
@@ -1240,6 +1288,103 @@ export type UserUncheckedUpdateWithoutEventApprovalsInput = {
   scannedCheckIns?: Prisma.TicketCheckInUncheckedUpdateManyWithoutCheckedInByNestedInput
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   reviewedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutSessionsInput = {
+  id?: string
+  email: string
+  fullName?: string | null
+  phone?: string | null
+  avatarUrl?: string | null
+  passwordHash?: string | null
+  isEmailVerified?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+  agency?: Prisma.AgencyCreateNestedOneWithoutOwnerInput
+  customerOrders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  scannedCheckIns?: Prisma.TicketCheckInCreateNestedManyWithoutCheckedInByInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutRequestedByInput
+  reviewedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
+  eventApprovals?: Prisma.EventApprovalCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserUncheckedCreateWithoutSessionsInput = {
+  id?: string
+  email: string
+  fullName?: string | null
+  phone?: string | null
+  avatarUrl?: string | null
+  passwordHash?: string | null
+  isEmailVerified?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+  agency?: Prisma.AgencyUncheckedCreateNestedOneWithoutOwnerInput
+  customerOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  scannedCheckIns?: Prisma.TicketCheckInUncheckedCreateNestedManyWithoutCheckedInByInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  eventApprovals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserCreateOrConnectWithoutSessionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+}
+
+export type UserUpsertWithoutSessionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSessionsInput, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSessionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSessionsInput, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+}
+
+export type UserUpdateWithoutSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+  agency?: Prisma.AgencyUpdateOneWithoutOwnerNestedInput
+  customerOrders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  scannedCheckIns?: Prisma.TicketCheckInUpdateManyWithoutCheckedInByNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
+  eventApprovals?: Prisma.EventApprovalUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  agency?: Prisma.AgencyUncheckedUpdateOneWithoutOwnerNestedInput
+  customerOrders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  scannedCheckIns?: Prisma.TicketCheckInUncheckedUpdateManyWithoutCheckedInByNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  eventApprovals?: Prisma.EventApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 
@@ -1254,6 +1399,7 @@ export type UserCountOutputType = {
   refundRequests: number
   reviewedRefunds: number
   eventApprovals: number
+  sessions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1263,6 +1409,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   refundRequests?: boolean | UserCountOutputTypeCountRefundRequestsArgs
   reviewedRefunds?: boolean | UserCountOutputTypeCountReviewedRefundsArgs
   eventApprovals?: boolean | UserCountOutputTypeCountEventApprovalsArgs
+  sessions?: boolean | UserCountOutputTypeCountSessionsArgs
 }
 
 /**
@@ -1317,6 +1464,13 @@ export type UserCountOutputTypeCountEventApprovalsArgs<ExtArgs extends runtime.T
   where?: Prisma.EventApprovalWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AuthSessionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1336,6 +1490,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   refundRequests?: boolean | Prisma.User$refundRequestsArgs<ExtArgs>
   reviewedRefunds?: boolean | Prisma.User$reviewedRefundsArgs<ExtArgs>
   eventApprovals?: boolean | Prisma.User$eventApprovalsArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1387,6 +1542,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   refundRequests?: boolean | Prisma.User$refundRequestsArgs<ExtArgs>
   reviewedRefunds?: boolean | Prisma.User$reviewedRefundsArgs<ExtArgs>
   eventApprovals?: boolean | Prisma.User$eventApprovalsArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1402,6 +1558,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     refundRequests: Prisma.$RefundRequestPayload<ExtArgs>[]
     reviewedRefunds: Prisma.$RefundRequestPayload<ExtArgs>[]
     eventApprovals: Prisma.$EventApprovalPayload<ExtArgs>[]
+    sessions: Prisma.$AuthSessionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1815,6 +1972,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   refundRequests<T extends Prisma.User$refundRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refundRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviewedRefunds<T extends Prisma.User$reviewedRefundsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewedRefundsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   eventApprovals<T extends Prisma.User$eventApprovalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$eventApprovalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventApprovalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuthSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2407,6 +2565,30 @@ export type User$eventApprovalsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.EventApprovalScalarFieldEnum | Prisma.EventApprovalScalarFieldEnum[]
+}
+
+/**
+ * User.sessions
+ */
+export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AuthSession
+   */
+  select?: Prisma.AuthSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AuthSession
+   */
+  omit?: Prisma.AuthSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AuthSessionInclude<ExtArgs> | null
+  where?: Prisma.AuthSessionWhereInput
+  orderBy?: Prisma.AuthSessionOrderByWithRelationInput | Prisma.AuthSessionOrderByWithRelationInput[]
+  cursor?: Prisma.AuthSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AuthSessionScalarFieldEnum | Prisma.AuthSessionScalarFieldEnum[]
 }
 
 /**

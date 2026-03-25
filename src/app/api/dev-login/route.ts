@@ -1,7 +1,13 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@/generated/prisma/client";
-import { encodeSession, SESSION_COOKIE_NAME } from "@/lib/auth/session";
+import {
+  AUTH_SESSION_COOKIE_NAME,
+  SESSION_COOKIE_NAME,
+  deleteDatabaseSession,
+  encodeSession,
+} from "@/lib/auth/session";
 
 const prisma = new PrismaClient({
   adapter: new PrismaPg({
@@ -33,6 +39,13 @@ export async function POST(request: Request) {
     );
   }
 
+  const cookieStore = await cookies();
+  const authRaw = cookieStore.get(AUTH_SESSION_COOKIE_NAME)?.value;
+
+  if (authRaw) {
+    await deleteDatabaseSession(authRaw);
+  }
+
   const sessionValue = encodeSession({
     userId: user.id,
     email: user.email,
@@ -48,6 +61,14 @@ export async function POST(request: Request) {
     secure: false,
     path: "/",
     maxAge: 60 * 60 * 24 * 7,
+  });
+
+  response.cookies.set(AUTH_SESSION_COOKIE_NAME, "", {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: false,
+    path: "/",
+    maxAge: 0,
   });
 
   return response;
