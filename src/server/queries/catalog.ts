@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma/client";
-
+import type { Prisma } from "@/generated/prisma/client";
 export async function getHomepageData() {
   const [featuredEvents, categories] = await Promise.all([
     prisma.event.findMany({
@@ -196,12 +196,29 @@ export async function getPublishedEventBySlug(slug: string) {
   };
 }
 
-function mapEventCardData(event: Awaited<ReturnType<typeof prisma.event.findMany>>[number]) {
+type EventCardEvent = Prisma.EventGetPayload<{
+  include: {
+    category: true;
+    agency: true;
+    occurrences: {
+      include: {
+        venue: true;
+        ticketTypes: true;
+      };
+    };
+  };
+}>;
+
+function mapEventCardData(event: EventCardEvent) {
   const firstOccurrence = event.occurrences[0] ?? null;
 
   const minPrice =
-    firstOccurrence?.ticketTypes.length
-      ? Math.min(...firstOccurrence.ticketTypes.map((t) => Number(t.priceAmount)))
+    firstOccurrence && firstOccurrence.ticketTypes.length > 0
+      ? Math.min(
+          ...firstOccurrence.ticketTypes.map((ticket) =>
+            Number(ticket.priceAmount),
+          ),
+        )
       : null;
 
   return {
