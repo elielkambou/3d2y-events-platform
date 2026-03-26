@@ -37,7 +37,12 @@ export default async function AgencyLayout({
             label: "Analytics",
             description: "Ventes, billets, net agence",
           },
-        ]
+          {
+            href: "/agency/profile",
+            label: "Profil agence",
+            description: "Informations publiques et contact",
+          },
+                  ]
       : []),
     {
       href: "/agency/scanner",

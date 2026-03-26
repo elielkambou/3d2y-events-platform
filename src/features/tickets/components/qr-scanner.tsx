@@ -41,12 +41,35 @@ type ScanResult =
 export function QrScanner() {
   const scannerRef = useRef<any>(null);
   const isBusyRef = useRef(false);
+  const lastTokenRef = useRef<string | null>(null);
+  const lastScanAtRef = useRef<number>(0);
+
   const [manualToken, setManualToken] = useState("");
   const [lastResult, setLastResult] = useState<ScanResult | null>(null);
   const [isStarting, setIsStarting] = useState(true);
+  const [isScannerRunning, setIsScannerRunning] = useState(false);
+  const [cameraError, setCameraError] = useState<string | null>(null);
+
+  async function stopScanner() {
+    const scanner = scannerRef.current;
+    if (!scanner) return;
+
+    try {
+      await scanner.stop();
+    } catch {}
+
+    try {
+      await scanner.clear();
+    } catch {}
+
+    scannerRef.current = null;
+    setIsScannerRunning(false);
+  }
 
   async function validateToken(rawToken: string) {
-    if (isBusyRef.current) return;
+    if (!rawToken.trim()) return null;
+    if (isBusyRef.current) return null;
+
     isBusyRef.current = true;
 
     try {
@@ -59,68 +82,83 @@ export function QrScanner() {
       });
 
       const data = (await response.json()) as ScanResult;
-
       setLastResult(data);
 
       if (data.ok) {
         toast.success(data.message);
+        await stopScanner();
       } else {
         toast.error(data.message);
       }
+
+      return data;
     } catch {
       toast.error("Erreur de validation du scan");
+      return null;
     } finally {
       setTimeout(() => {
         isBusyRef.current = false;
-      }, 1200);
+      }, 1500);
+    }
+  }
+
+  async function startScanner() {
+    try {
+      setIsStarting(true);
+      setCameraError(null);
+
+      const { Html5Qrcode } = await import("html5-qrcode");
+      const cameras = await Html5Qrcode.getCameras();
+
+      if (!cameras || cameras.length === 0) {
+        throw new Error("Aucune caméra détectée.");
+      }
+
+      const scanner = new Html5Qrcode("ticket-scanner-region");
+      scannerRef.current = scanner;
+
+      await scanner.start(
+        cameras[0].id,
+        {
+          fps: 8,
+          qrbox: { width: 240, height: 240 },
+        },
+        async (decodedText: string) => {
+          const now = Date.now();
+
+          if (
+            decodedText === lastTokenRef.current &&
+            now - lastScanAtRef.current < 5000
+          ) {
+            return;
+          }
+
+          lastTokenRef.current = decodedText;
+          lastScanAtRef.current = now;
+
+          await validateToken(decodedText);
+        },
+        () => {},
+      );
+
+      setIsScannerRunning(true);
+    } catch (error) {
+      setCameraError(
+        error instanceof Error
+          ? error.message
+          : "Impossible de démarrer la caméra",
+      );
+      setIsScannerRunning(false);
+    } finally {
+      setIsStarting(false);
     }
   }
 
   useEffect(() => {
-    let mounted = true;
-
-    async function startScanner() {
-      try {
-        const { Html5Qrcode } = await import("html5-qrcode");
-
-        if (!mounted) return;
-
-        const scanner = new Html5Qrcode("ticket-scanner-region");
-        scannerRef.current = scanner;
-
-        await scanner.start(
-          { facingMode: "environment" },
-          {
-            fps: 10,
-            qrbox: { width: 240, height: 240 },
-          },
-          async (decodedText: string) => {
-            await validateToken(decodedText);
-          },
-          () => {},
-        );
-
-        if (mounted) {
-          setIsStarting(false);
-        }
-      } catch {
-        setIsStarting(false);
-        toast.error("Impossible de démarrer la caméra");
-      }
-    }
-
-    startScanner();
+    void startScanner();
 
     return () => {
-      mounted = false;
-
-      const scanner = scannerRef.current;
-      if (scanner) {
-        scanner
-          .stop()
-          .then(() => scanner.clear())
-          .catch(() => {});
-      }
+      void stopScanner();
     };
   }, []);
 
@@ -140,7 +178,24 @@ export function QrScanner() {
         </div>
 
         {isStarting ? (
-          <p className="mt-4 text-sm text-white/50">Initialisation de la caméra…</p>
+          <p className="mt-4 text-sm text-white/50">
+            Initialisation de la caméra…
+          </p>
+        ) : null}
+
+        {cameraError ? (
+          <div className="mt-4 rounded-2xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-200">
+            {cameraError}
+          </div>
+        ) : null}
+
+        {!isScannerRunning ? (
+          <button
+            onClick={() => void startScanner()}
+            className="mt-4 rounded-2xl bg-orange-500 px-4 py-2 font-medium text-black transition hover:bg-orange-400"
+          >
+            Relancer la caméra
+          </button>
         ) : null}
 
         <div className="mt-8 border-t border-white/10 pt-6">
@@ -157,7 +212,7 @@ export function QrScanner() {
               className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
             />
             <button
-              onClick={() => validateToken(manualToken)}
+              onClick={() => void validateToken(manualToken)}
               className="rounded-2xl bg-orange-500 px-5 py-3 font-medium text-black transition hover:bg-orange-400"
             >
               Valider manuellement
@@ -190,15 +245,31 @@ export function QrScanner() {
 
             {lastResult.ticket ? (
               <div className="rounded-2xl border border-white/10 bg-black/30 p-4 text-white/80">
-                <p><span className="text-white/50">Référence :</span> {lastResult.ticket.serialNumber}</p>
-                <p><span className="text-white/50">Titulaire :</span> {lastResult.ticket.holderName ?? "—"}</p>
-                {"holderEmail" in lastResult.ticket ? (
-                  <p><span className="text-white/50">Email :</span> {lastResult.ticket.holderEmail ?? "—"}</p>
-                ) : null}
-                <p><span className="text-white/50">Événement :</span> {lastResult.ticket.eventTitle}</p>
-                <p><span className="text-white/50">Lieu :</span> {lastResult.ticket.venueName}</p>
+                <p>
+                  <span className="text-white/50">Référence :</span>{" "}
+                  {lastResult.ticket.serialNumber}
+                </p>
+                <p>
+                  <span className="text-white/50">Titulaire :</span>{" "}
+                  {lastResult.ticket.holderName ?? "—"}
+                </p>
+                <p>
+                  <span className="text-white/50">Email :</span>{" "}
+                  {lastResult.ticket.holderEmail ?? "—"}
+                </p>
+                <p>
+                  <span className="text-white/50">Événement :</span>{" "}
+                  {lastResult.ticket.eventTitle}
+                </p>
+                <p>
+                  <span className="text-white/50">Lieu :</span>{" "}
+                  {lastResult.ticket.venueName}
+                </p>
                 {"ticketTypeName" in lastResult.ticket ? (
-                  <p><span className="text-white/50">Billet :</span> {lastResult.ticket.ticketTypeName}</p>
+                  <p>
+                    <span className="text-white/50">Billet :</span>{" "}
+                    {(lastResult.ticket as any).ticketTypeName}
+                  </p>
                 ) : null}
               </div>
             ) : null}

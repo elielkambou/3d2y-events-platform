@@ -39,6 +39,16 @@ export default async function AccountPage() {
           </p>
         </Link>
 
+        <Link
+          href="/account/profile"
+          className="rounded-3xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10"
+        >
+          <p className="text-lg font-medium">Mon profil</p>
+          <p className="mt-2 text-sm text-white/60">
+            Modifier mes informations personnelles.
+          </p>
+        </Link>
+
         <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
           <p className="text-lg font-medium">Historique</p>
           <p className="mt-2 text-sm text-white/60">

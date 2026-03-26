@@ -110,93 +110,137 @@ export default async function NewAgencyEventPage() {
           </section>
 
           <section className="rounded-3xl border border-white/10 bg-white/5 p-6">
-            <h2 className="text-xl font-semibold">Occurrence principale</h2>
+          <h2 className="text-xl font-semibold">Occurrence principale</h2>
 
-            <div className="mt-6 grid gap-5 md:grid-cols-2">
-              <div className="md:col-span-2">
-                <label className="mb-2 block text-sm text-white/70">Lieu</label>
-                <select
-                  name="venueId"
-                  required
-                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-                >
-                  <option value="">Choisir</option>
-                  {venues.map((venue) => (
-                    <option key={venue.id} value={venue.id}>
-                      {venue.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+          <div className="mt-6 grid gap-5 md:grid-cols-2">
+            <div className="md:col-span-2">
+              <label className="mb-2 block text-sm text-white/70">Lieu existant</label>
+              <select
+                name="venueId"
+                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+              >
+                <option value="">Choisir un lieu existant</option>
+                {venues.map((venue) => (
+                  <option key={venue.id} value={venue.id}>
+                    {venue.name}
+                  </option>
+                ))}
+              </select>
+              <p className="mt-2 text-xs text-white/50">
+                Si le lieu n’existe pas encore, laisse vide et complète les champs ci-dessous.
+              </p>
+            </div>
 
-              <div>
-                <label className="mb-2 block text-sm text-white/70">Début</label>
-                <input
-                  name="startsAt"
-                  type="datetime-local"
-                  required
-                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-                />
-              </div>
+            <div className="md:col-span-2 rounded-2xl border border-white/10 bg-black/20 p-4">
+              <p className="text-sm font-medium text-white">Ajouter un nouveau lieu</p>
 
-              <div>
-                <label className="mb-2 block text-sm text-white/70">Fin</label>
-                <input
-                  name="endsAt"
-                  type="datetime-local"
-                  required
-                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-                />
-              </div>
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                <div className="md:col-span-2">
+                  <label className="mb-2 block text-sm text-white/70">Nom du lieu</label>
+                  <input
+                    name="newVenueName"
+                    placeholder="Ex: Rooftop Cocody"
+                    className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                  />
+                </div>
 
-              <div>
-                <label className="mb-2 block text-sm text-white/70">
-                  Début ventes
-                </label>
-                <input
-                  name="salesStartAt"
-                  type="datetime-local"
-                  required
-                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-                />
-              </div>
+                <div>
+                  <label className="mb-2 block text-sm text-white/70">Quartier</label>
+                  <input
+                    name="newVenueDistrict"
+                    placeholder="Ex: Cocody"
+                    className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                  />
+                </div>
 
-              <div>
-                <label className="mb-2 block text-sm text-white/70">
-                  Fin ventes
-                </label>
-                <input
-                  name="salesEndAt"
-                  type="datetime-local"
-                  required
-                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-                />
-              </div>
+                <div>
+                  <label className="mb-2 block text-sm text-white/70">Commune</label>
+                  <input
+                    name="newVenueMunicipality"
+                    placeholder="Ex: Cocody"
+                    className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                  />
+                </div>
 
-              <div>
-                <label className="mb-2 block text-sm text-white/70">
-                  Fin réservation
-                </label>
-                <input
-                  name="reservationEndAt"
-                  type="datetime-local"
-                  required
-                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="mb-2 block text-sm text-white/70">Capacité</label>
-                <input
-                  name="capacity"
-                  type="number"
-                  min={1}
-                  required
-                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-                />
+                <div className="md:col-span-2">
+                  <label className="mb-2 block text-sm text-white/70">Adresse</label>
+                  <input
+                    name="newVenueAddressLine"
+                    placeholder="Ex: Riviera 3, Rue des Jardins"
+                    className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                  />
+                </div>
               </div>
             </div>
-          </section>
+
+            <div>
+              <label className="mb-2 block text-sm text-white/70">Début</label>
+              <input
+                name="startsAt"
+                type="datetime-local"
+                required
+                step={60}
+                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm text-white/70">Fin</label>
+              <input
+                name="endsAt"
+                type="datetime-local"
+                required
+                step={60}
+                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm text-white/70">Début ventes</label>
+              <input
+                name="salesStartAt"
+                type="datetime-local"
+                required
+                step={60}
+                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm text-white/70">Fin ventes</label>
+              <input
+                name="salesEndAt"
+                type="datetime-local"
+                required
+                step={60}
+                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm text-white/70">Fin réservation</label>
+              <input
+                name="reservationEndAt"
+                type="datetime-local"
+                required
+                step={60}
+                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm text-white/70">Capacité</label>
+              <input
+                name="capacity"
+                type="number"
+                min={1}
+                required
+                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+              />
+            </div>
+          </div>
+        </section>
+            
 
           <section className="rounded-3xl border border-white/10 bg-white/5 p-6">
             <h2 className="text-xl font-semibold">Billet principal</h2>

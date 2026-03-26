@@ -62,6 +62,16 @@ export default async function AgencyPage() {
             Contrôle d’entrée, validation et anti double-scan.
           </p>
         </Link>
+
+        <Link
+          href="/agency/profile"
+          className="rounded-3xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10"
+        >
+          <p className="text-lg font-medium">Profil agence</p>
+          <p className="mt-2 text-sm text-white/60">
+            Modifier les informations publiques et de contact.
+          </p>
+        </Link>
       </div>
     </section>
   );

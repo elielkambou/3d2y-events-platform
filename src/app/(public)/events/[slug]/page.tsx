@@ -4,6 +4,7 @@ import { getPublishedEventBySlug } from "@/server/queries/catalog";
 import { getSession } from "@/lib/auth/session";
 import { createCheckoutOrderAction } from "@/server/actions/checkout";
 import { createReservationAction } from "@/server/actions/reservations";
+import { CheckoutLinkActions } from "@/features/checkout/components/checkout-link-actions";
 type EventDetailPageProps = {
   params: Promise<{
     slug: string;
@@ -168,69 +169,25 @@ export default async function EventDetailPage({
                             </div>
 
                             <div className="mt-4 border-t border-white/10 pt-4">
-                                {session ? (
-                                    <div className="flex flex-wrap items-end gap-3">
-                                    <form action={createCheckoutOrderAction} className="flex flex-wrap items-end gap-3">
-                                        <input type="hidden" name="ticketTypeId" value={ticketType.id} />
-
-                                        <div>
-                                        <label className="mb-2 block text-xs text-white/50">Quantité</label>
-                                        <input
-                                            name="quantity"
-                                            type="number"
-                                            min={1}
-                                            max={ticketType.maxPerOrder ?? 10}
-                                            defaultValue={1}
-                                            className="w-24 rounded-xl border border-white/10 bg-black/40 px-3 py-2 outline-none"
-                                        />
-                                        </div>
-
-                                        <button
-                                        type="submit"
-                                        className="rounded-xl bg-orange-500 px-4 py-2 font-medium text-black transition hover:bg-orange-400"
-                                        >
-                                        Acheter
-                                        </button>
-                                    </form>
-
-                                    {ticketType.isReservable ? (
-                                        <form action={createReservationAction} className="flex flex-wrap items-end gap-3">
-                                        <input type="hidden" name="ticketTypeId" value={ticketType.id} />
-
-                                        <div>
-                                            <label className="mb-2 block text-xs text-white/50">Quantité</label>
-                                            <input
-                                            name="quantity"
-                                            type="number"
-                                            min={1}
-                                            max={ticketType.maxPerOrder ?? 10}
-                                            defaultValue={1}
-                                            className="w-24 rounded-xl border border-white/10 bg-black/40 px-3 py-2 outline-none"
-                                            />
-                                        </div>
-
-                                        <button
-                                            type="submit"
-                                            className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 font-medium text-white transition hover:bg-white/10"
-                                        >
-                                            Réserver
-                                        </button>
-                                        </form>
-                                    ) : null}
-                                    </div>
-                                ) : (
-                                    <div className="flex items-center justify-between gap-4">
-                                    <p className="text-sm text-white/60">
-                                        Connecte-toi pour acheter ou réserver ce billet.
-                                    </p>
-                                    <a
-                                        href="/login"
-                                        className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
-                                    >
-                                        Se connecter
-                                    </a>
-                                    </div>
-                                )}
+                              {session ? (
+                                <CheckoutLinkActions
+                                  ticketTypeId={ticketType.id}
+                                  maxPerOrder={ticketType.maxPerOrder ?? 10}
+                                  isReservable={ticketType.isReservable}
+                                />
+                              ) : (
+                                <div className="flex items-center justify-between gap-4">
+                                  <p className="text-sm text-white/60">
+                                    Connecte-toi pour acheter ou réserver ce billet.
+                                  </p>
+                                  <a
+                                    href="/login"
+                                    className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
+                                  >
+                                    Se connecter
+                                  </a>
+                                </div>
+                              )}
                             </div>
                         </div>
                         ))}

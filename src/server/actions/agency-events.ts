@@ -5,6 +5,53 @@ import { prisma } from "@/lib/prisma/client";
 import { createAgencyEventSchema } from "@/validators/agency-event";
 import { getCurrentAgencyContext } from "@/server/queries/agency";
 
+function slugify(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+async function createVenueIfNeeded(data: {
+  venueId?: string;
+  newVenueName?: string;
+  newVenueDistrict?: string;
+  newVenueMunicipality?: string;
+  newVenueAddressLine?: string;
+}) {
+  if (data.venueId) return data.venueId;
+
+  const newVenueName = data.newVenueName?.trim();
+  if (!newVenueName) {
+    throw new Error("Aucun lieu valide fourni.");
+  }
+
+  const baseSlug = slugify(newVenueName);
+  let slug = baseSlug;
+  let suffix = 1;
+
+  while (await prisma.venue.findUnique({ where: { slug }, select: { id: true } })) {
+    slug = `${baseSlug}-${suffix}`;
+    suffix += 1;
+  }
+
+  const venue = await prisma.venue.create({
+    data: {
+      name: newVenueName,
+      slug,
+      addressLine: data.newVenueAddressLine?.trim() || null,
+      municipality: data.newVenueMunicipality?.trim() || null,
+      district: data.newVenueDistrict?.trim() || null,
+      city: "Abidjan",
+      country: "Côte d'Ivoire",
+    },
+  });
+
+  return venue.id;
+}
+
 export async function createAgencyEventAction(formData: FormData) {
   const context = await getCurrentAgencyContext();
 
@@ -19,7 +66,11 @@ export async function createAgencyEventAction(formData: FormData) {
     fullDescription: formData.get("fullDescription"),
     categoryId: formData.get("categoryId"),
     coverImageUrl: formData.get("coverImageUrl"),
-    venueId: formData.get("venueId"),
+    venueId: formData.get("venueId") || undefined,
+    newVenueName: formData.get("newVenueName") || undefined,
+    newVenueDistrict: formData.get("newVenueDistrict") || undefined,
+    newVenueMunicipality: formData.get("newVenueMunicipality") || undefined,
+    newVenueAddressLine: formData.get("newVenueAddressLine") || undefined,
     startsAt: formData.get("startsAt"),
     endsAt: formData.get("endsAt"),
     salesStartAt: formData.get("salesStartAt"),
@@ -57,6 +108,14 @@ export async function createAgencyEventAction(formData: FormData) {
     throw new Error("Ce slug est déjà utilisé.");
   }
 
+  const venueId = await createVenueIfNeeded({
+    venueId: data.venueId,
+    newVenueName: data.newVenueName,
+    newVenueDistrict: data.newVenueDistrict,
+    newVenueMunicipality: data.newVenueMunicipality,
+    newVenueAddressLine: data.newVenueAddressLine,
+  });
+
   await prisma.event.create({
     data: {
       agencyId: context.agency.id,
@@ -74,7 +133,7 @@ export async function createAgencyEventAction(formData: FormData) {
         create: [
           {
             title: "Date principale",
-            venueId: data.venueId,
+            venueId,
             startsAt: new Date(data.startsAt),
             endsAt: new Date(data.endsAt),
             salesStartAt: new Date(data.salesStartAt),

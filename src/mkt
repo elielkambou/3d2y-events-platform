@@ -1,0 +1,30 @@
+touch_() {
+    verbose=false
+    paths=()
+
+    # Analyse des arguments
+    for arg in "$@"; do
+        if [ "$arg" = "-v" ] || [ "$arg" = "--verbose" ]; then
+            verbose=true
+        else
+            paths+=("$arg")
+        fi
+    done
+
+    # Traitement des fichiers
+    for path in "${paths[@]}"; do
+        dir="$(dirname "$path")"
+
+        if $verbose; then
+            echo "→ Création du dossier : $dir"
+        fi
+
+        mkdir -p "$dir"
+
+        if $verbose; then
+            echo "→ Création du fichier : $path"
+        fi
+
+        touch "$path"
+    done
+}

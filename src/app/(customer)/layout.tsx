@@ -12,6 +12,11 @@ const customerNav = [
     description: "Accueil du compte client",
   },
   {
+    href: "/account/profile",
+    label: "Mon profil",
+    description: "Informations personnelles",
+  },
+  {
     href: "/account/tickets",
     label: "Mes billets",
     description: "Billets émis et QR codes",
@@ -22,7 +27,6 @@ const customerNav = [
     description: "Acomptes et soldes",
   },
 ];
-
 export default async function CustomerLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
