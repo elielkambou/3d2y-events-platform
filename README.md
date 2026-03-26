@@ -59,9 +59,13 @@ http://localhost:3000
 - statistiques côté agence
 - commandes et remboursements côté admin
 
-- clic sur les chips “Catégories” depuis la home pour filtrer la page /explore 
-- confirmations avant actions (approve/reject/publish) + protection contre les double-actions sur états terminaux.
-- compteur de mots + garde-fous (courte 5-20 mots, complète min 50 mots).
+## Dernières modifications
+
+- Harmonisation UI "dark luxury" sur les pages public/agency/admin.
+- Renforcement UX admin: confirmations d’actions + meilleure gestion des doubles actions
+- Formulaire agence amélioré: compteur de mots + règles claires (courte 5-20 mots, complète min 50 mots)
+- Catégories de la home désormais cliquables avec filtrage 
+
 
 ## Organisation du projet
 - src/app : routes et pages Next.js
@@ -87,3 +91,4 @@ git checkout -b feature/nom-feature
 
 ## État du projet
 Le projet est actuellement développé en local afin de stabiliser l'architecture, le modèle de données et les workflows principaux avant l'intégration des services externes.
+
