@@ -32,7 +32,8 @@ export async function getAdminSubmittedEvents() {
   const events = await prisma.event.findMany({
     where: {
       status: {
-        in: ["SUBMITTED", "UNDER_REVIEW", "APPROVED", "REJECTED"],
+        // "À revoir" = uniquement les statuts qui nécessitent une décision.
+        in: ["SUBMITTED", "UNDER_REVIEW"],
       },
     },
     include: {

@@ -12,7 +12,7 @@ export default async function AccountReservationsPage() {
 
   return (
     <section>
-      <p className="text-sm uppercase tracking-[0.25em] text-orange-400">
+      <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
         Mes réservations
       </p>
 
@@ -43,7 +43,7 @@ export default async function AccountReservationsPage() {
             return (
               <div
                 key={order.id}
-                className="grid gap-6 rounded-3xl border border-white/10 bg-white/5 p-6 lg:grid-cols-[1fr_320px]"
+                className="grid gap-6 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl lg:grid-cols-[1fr_320px]"
               >
                 <div>
                   <div className="flex flex-wrap gap-2">
@@ -88,7 +88,7 @@ export default async function AccountReservationsPage() {
                   </div>
                 </div>
 
-                <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
+                <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#8B5CF6]/10 to-[#FF6B00]/5 p-5 backdrop-blur-xl">
                   <p className="text-sm text-white/50">Action</p>
 
                   {order.status === "PARTIALLY_PAID" ? (
@@ -102,7 +102,7 @@ export default async function AccountReservationsPage() {
                         <input type="hidden" name="orderId" value={order.id} />
                         <button
                           type="submit"
-                          className="w-full rounded-2xl bg-orange-500 px-5 py-3 font-medium text-black transition hover:bg-orange-400"
+                          className="w-full rounded-2xl bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] px-5 py-3 font-medium text-black transition hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]"
                         >
                           Payer le solde
                         </button>

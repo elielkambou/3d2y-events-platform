@@ -3,6 +3,7 @@ import { createAgencyEventAction } from "@/server/actions/agency-events";
 import { getSession } from "@/lib/auth/session";
 import { canAccessAgency } from "@/lib/permissions";
 import { prisma } from "@/lib/prisma/client";
+import { WordCountTextarea } from "@/components/forms/WordCountTextarea";
 
 export default async function NewAgencyEventPage() {
   const session = await getSession();
@@ -21,9 +22,9 @@ export default async function NewAgencyEventPage() {
   ]);
 
   return (
-    <main className="min-h-screen bg-black px-6 py-16 text-white">
+    <main className="min-h-screen bg-[#0A0A0C] px-6 py-16 text-white">
       <div className="mx-auto max-w-4xl">
-        <p className="text-sm uppercase tracking-[0.25em] text-orange-400">
+        <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
           Agence
         </p>
         <h1 className="mt-3 text-4xl font-semibold">Créer un événement</h1>
@@ -84,25 +85,26 @@ export default async function NewAgencyEventPage() {
               </div>
 
               <div className="md:col-span-2">
-                <label className="mb-2 block text-sm text-white/70">
-                  Description courte
-                </label>
-                <textarea
+                <WordCountTextarea
                   name="shortDescription"
+                  label="Description courte"
                   required
                   rows={3}
+                  minWords={5}
+                  maxWords={20}
+                  placeholder="Résumé accrocheur (5 à 20 mots)."
                   className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="mb-2 block text-sm text-white/70">
-                  Description complète
-                </label>
-                <textarea
+                <WordCountTextarea
                   name="fullDescription"
+                  label="Description complète"
                   required
                   rows={6}
+                  minWords={50}
+                  placeholder="Raconte l’expérience, le programme, les infos pratiques (min 50 mots)."
                   className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
                 />
               </div>
@@ -131,7 +133,7 @@ export default async function NewAgencyEventPage() {
               </p>
             </div>
 
-            <div className="md:col-span-2 rounded-2xl border border-white/10 bg-black/20 p-4">
+            <div className="md:col-span-2 rounded-2xl border border-white/10 bg-gradient-to-br from-[#8B5CF6]/10 to-[#FF6B00]/5 p-4 backdrop-blur-xl">
               <p className="text-sm font-medium text-white">Ajouter un nouveau lieu</p>
 
               <div className="mt-4 grid gap-4 md:grid-cols-2">
@@ -342,7 +344,7 @@ export default async function NewAgencyEventPage() {
           <div className="flex justify-end">
             <button
               type="submit"
-              className="rounded-2xl bg-orange-500 px-6 py-3 font-medium text-black transition hover:bg-orange-400"
+              className="rounded-2xl bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] px-6 py-3 font-medium text-black transition hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]"
             >
               Créer et soumettre
             </button>

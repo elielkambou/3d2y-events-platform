@@ -13,15 +13,27 @@ export const createAgencyEventSchema = z
       .string()
       .min(3, "Le slug doit contenir au moins 3 caractères.")
       .regex(/^[a-z0-9-]+$/, "Le slug doit contenir uniquement des lettres minuscules, chiffres et tirets."),
-    shortDescription: z
-      .string()
-      .min(20, "La description courte doit contenir au moins 20 caractères."),
-    fullDescription: z.string().superRefine((value, ctx) => {
+    shortDescription: z.string().superRefine((value, ctx) => {
       const words = countWords(value);
-      if (words < 100) {
+      if (words < 5) {
         ctx.addIssue({
           code: "custom",
-          message: `La description complète doit contenir au moins 100 mots. (${words}/100)`,
+          message: `La description courte doit contenir au moins 5 mots. (${words}/5)`,
+        });
+      }
+      if (words > 20) {
+        ctx.addIssue({
+          code: "custom",
+          message: `La description courte doit contenir au maximum 20 mots. (${words}/20)`,
+        });
+      }
+    }),
+    fullDescription: z.string().superRefine((value, ctx) => {
+      const words = countWords(value);
+      if (words < 50) {
+        ctx.addIssue({
+          code: "custom",
+          message: `La description complète doit contenir au moins 50 mots. (${words}/50)`,
         });
       }
     }),

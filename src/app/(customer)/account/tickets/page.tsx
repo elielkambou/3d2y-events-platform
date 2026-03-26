@@ -44,7 +44,7 @@ export default async function AccountTicketsPage() {
 
   return (
     <section>
-      <p className="text-sm uppercase tracking-[0.25em] text-orange-400">
+      <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
         Mes billets
       </p>
 
@@ -71,7 +71,7 @@ export default async function AccountTicketsPage() {
             return (
               <div
                 key={ticket.id}
-                className="grid gap-6 rounded-3xl border border-white/10 bg-white/5 p-6 lg:grid-cols-[1fr_240px]"
+                className="grid gap-6 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl lg:grid-cols-[1fr_240px]"
               >
                 <div>
                   <div className="flex flex-wrap gap-2">
@@ -111,7 +111,7 @@ export default async function AccountTicketsPage() {
                   </div>
                 </div>
 
-                <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
+                <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#8B5CF6]/10 to-[#FF6B00]/5 p-4 backdrop-blur-xl">
                   <p className="mb-4 text-sm text-white/50">QR de contrôle</p>
 
                   {qrDataUrl ? (
@@ -122,7 +122,7 @@ export default async function AccountTicketsPage() {
                         className="w-full rounded-2xl bg-white p-3"
                       />
 
-                      <div className="mt-4 rounded-xl border border-white/10 bg-black/40 p-3">
+                      <div className="mt-4 rounded-xl border border-white/10 bg-black/30 p-3">
                         <p className="text-xs text-white/50">Token de dev</p>
                         <p className="mt-2 break-all text-xs text-white/80">
                           {rawToken}
@@ -130,7 +130,7 @@ export default async function AccountTicketsPage() {
                       </div>
                     </>
                   ) : (
-                    <div className="rounded-2xl border border-white/10 bg-black/40 p-4 text-sm text-white/60">
+                    <div className="rounded-2xl border border-white/10 bg-black/30 p-4 text-sm text-white/60">
                       {getQrUnavailableMessage(ticket.status)}
                     </div>
                   )}

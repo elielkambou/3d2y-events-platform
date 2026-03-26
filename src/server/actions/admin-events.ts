@@ -26,6 +26,25 @@ export async function approveEventAction(formData: FormData) {
   }
 
   await prisma.$transaction(async (tx) => {
+    const current = await tx.event.findUnique({
+      where: { id: eventId },
+      select: { status: true },
+    });
+
+    if (!current) {
+      throw new Error("Événement introuvable.");
+    }
+
+    if (current.status === "APPROVED") {
+      throw new Error("Cet événement est déjà approuvé.");
+    }
+    if (current.status === "REJECTED") {
+      throw new Error("Cet événement est déjà rejeté.");
+    }
+    if (current.status === "PUBLISHED") {
+      throw new Error("Cet événement est déjà publié.");
+    }
+
     await tx.event.update({
       where: { id: eventId },
       data: {
@@ -59,6 +78,25 @@ export async function rejectEventAction(formData: FormData) {
   }
 
   await prisma.$transaction(async (tx) => {
+    const current = await tx.event.findUnique({
+      where: { id: eventId },
+      select: { status: true },
+    });
+
+    if (!current) {
+      throw new Error("Événement introuvable.");
+    }
+
+    if (current.status === "REJECTED") {
+      throw new Error("Cet événement est déjà rejeté.");
+    }
+    if (current.status === "APPROVED") {
+      throw new Error("Cet événement est déjà approuvé.");
+    }
+    if (current.status === "PUBLISHED") {
+      throw new Error("Cet événement est déjà publié.");
+    }
+
     await tx.event.update({
       where: { id: eventId },
       data: {

@@ -43,9 +43,9 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
       : completeReservationCheckoutAction;
 
   return (
-    <main className="min-h-screen bg-black px-6 py-16 text-white">
+    <main className="min-h-screen bg-[#0A0A0C] px-6 py-16 text-white">
       <div className="mx-auto max-w-7xl">
-        <p className="text-sm uppercase tracking-[0.25em] text-orange-400">
+        <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
           Checkout
         </p>
 
@@ -104,7 +104,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
               </div>
 
               <div className="p-6">
-                <p className="text-xs uppercase tracking-[0.25em] text-orange-400">
+                <p className="text-xs uppercase tracking-[0.25em] text-[#FF6B00]">
                   Récapitulatif
                 </p>
 
@@ -128,7 +128,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
             </section>
 
             <section className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-xl">
-              <p className="text-sm uppercase tracking-[0.25em] text-orange-400">
+              <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
                 Détail montant
               </p>
 
@@ -172,7 +172,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
             </section>
 
             <section className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-xl">
-              <p className="text-sm uppercase tracking-[0.25em] text-orange-400">
+              <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
                 Client
               </p>
 
@@ -184,23 +184,23 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
             </section>
 
             <section className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-xl">
-              <p className="text-sm uppercase tracking-[0.25em] text-orange-400">
+              <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
                 Réassurance
               </p>
 
               <div className="mt-5 space-y-4 text-sm text-white/70">
                 <div className="flex items-start gap-3">
-                  <LockKeyhole className="mt-0.5 h-4 w-4 text-orange-300" />
+                  <LockKeyhole className="mt-0.5 h-4 w-4 text-[#FF6B00]/70" />
                   <span>Données de paiement présentées dans une interface sécurisée.</span>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <ShieldCheck className="mt-0.5 h-4 w-4 text-orange-300" />
+                  <ShieldCheck className="mt-0.5 h-4 w-4 text-[#FF6B00]/70" />
                   <span>Vérification simulée de la transaction pour la démonstration.</span>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Ticket className="mt-0.5 h-4 w-4 text-orange-300" />
+                  <Ticket className="mt-0.5 h-4 w-4 text-[#FF6B00]/70" />
                   <span>
                     {preview.mode === "buy"
                       ? "Billets disponibles immédiatement après validation."

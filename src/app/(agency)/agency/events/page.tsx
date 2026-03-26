@@ -45,7 +45,7 @@ export default async function AgencyEventsPage() {
     <section>
       <div className="flex items-end justify-between gap-4">
         <div>
-          <p className="text-sm uppercase tracking-[0.25em] text-orange-400">
+          <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
             Mes événements
           </p>
           <h2 className="mt-3 text-3xl font-semibold">Catalogue agence</h2>
@@ -56,7 +56,7 @@ export default async function AgencyEventsPage() {
 
         <Link
           href="/agency/events/new"
-          className="rounded-2xl bg-orange-500 px-5 py-3 font-medium text-black transition hover:bg-orange-400"
+          className="rounded-2xl bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] px-5 py-3 font-medium text-black transition hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]"
         >
           Nouvel événement
         </Link>
@@ -75,17 +75,17 @@ export default async function AgencyEventsPage() {
             return (
               <div
                 key={event.id}
-                className="rounded-3xl border border-white/10 bg-white/5 p-6"
+                className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
               >
                 <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
                   <div className="max-w-3xl">
                     <div className="flex flex-wrap gap-2">
-                      <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/80">
+                        <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
                         {getStatusLabel(event.status)}
                       </span>
 
                       {event.category ? (
-                        <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/80">
+                          <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
                           {event.category.name}
                         </span>
                       ) : null}
@@ -109,7 +109,7 @@ export default async function AgencyEventsPage() {
                     ) : null}
                   </div>
 
-                  <div className="min-w-[220px] rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div className="min-w-[220px] rounded-2xl border border-white/10 bg-gradient-to-br from-[#8B5CF6]/10 to-[#FF6B00]/5 p-4 backdrop-blur-xl">
                     <p className="text-sm text-white/50">À partir de</p>
                     <p className="mt-1 text-2xl font-semibold">
                       {formatXof(firstTicket ? Number(firstTicket.priceAmount) : null)}

@@ -49,9 +49,9 @@ export default function RegisterPage() {
   }
 
   return (
-    <main className="min-h-screen bg-black px-6 py-16 text-white">
+    <main className="min-h-screen bg-[#0A0A0C] px-6 py-16 text-white">
       <div className="mx-auto max-w-2xl rounded-3xl border border-white/10 bg-white/5 p-8">
-        <p className="text-sm uppercase tracking-[0.25em] text-orange-400">
+        <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
           Inscription
         </p>
         <h1 className="mt-3 text-4xl font-semibold">Créer un compte client</h1>
@@ -104,7 +104,7 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full rounded-2xl bg-orange-500 px-5 py-3 font-medium text-black transition hover:bg-orange-400 disabled:opacity-60"
+            className="w-full rounded-2xl bg-[#FF6B00] px-5 py-3 font-medium text-black transition hover:bg-[#FF6B00]/90 disabled:opacity-60"
           >
             Créer mon compte
           </button>
@@ -112,7 +112,10 @@ export default function RegisterPage() {
 
         <p className="mt-6 text-sm text-white/60">
           Déjà inscrit ?{" "}
-          <Link href="/login" className="text-orange-300 hover:text-orange-200">
+          <Link
+            href="/login"
+            className="inline-flex items-center rounded-xl bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] px-3 py-1 text-sm font-medium text-black transition hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]"
+          >
             Se connecter
           </Link>
         </p>

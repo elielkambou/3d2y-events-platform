@@ -29,10 +29,10 @@ export default async function AdminEventsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-black px-6 py-16 text-white">
+    <main className="min-h-screen bg-[#0A0A0C] px-6 py-16 text-white">
       <div className="mx-auto max-w-7xl">
         <div>
-          <p className="text-sm uppercase tracking-[0.25em] text-orange-400">
+          <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
             Validation
           </p>
           <h1 className="mt-3 text-4xl font-semibold">Événements à revoir</h1>
@@ -56,21 +56,21 @@ export default async function AdminEventsPage() {
                 <Link
                   key={event.id}
                   href={`/admin/events/${event.id}`}
-                  className="block rounded-3xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10"
+                  className="block rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition hover:bg-white/10 hover:shadow-[0_0_25px_rgba(139,92,246,0.12)]"
                 >
                   <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
                     <div className="max-w-4xl">
                       <div className="flex flex-wrap gap-2">
-                        <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/80">
+                        <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
                           {getStatusLabel(event.status)}
                         </span>
 
-                        <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/80">
+                        <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
                           {event.agency.name}
                         </span>
 
                         {event.category ? (
-                          <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/80">
+                          <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
                             {event.category.name}
                           </span>
                         ) : null}
@@ -103,7 +103,7 @@ export default async function AdminEventsPage() {
                       ) : null}
                     </div>
 
-                    <div className="min-w-[220px] rounded-2xl border border-white/10 bg-black/20 p-4">
+                    <div className="min-w-[220px] rounded-2xl border border-white/10 bg-gradient-to-br from-[#8B5CF6]/10 to-[#FF6B00]/5 p-4 backdrop-blur-xl">
                       <p className="text-sm text-white/50">À partir de</p>
                       <p className="mt-1 text-2xl font-semibold">
                         {formatXof(firstTicket ? Number(firstTicket.priceAmount) : null)}

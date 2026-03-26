@@ -13,7 +13,7 @@ export default async function CheckoutSuccessPage({
   const mode = params.mode === "reserve" ? "reserve" : "buy";
 
   return (
-    <main className="min-h-screen bg-black px-6 py-16 text-white">
+    <main className="min-h-screen bg-[#0A0A0C] px-6 py-16 text-white">
       <div className="mx-auto max-w-3xl">
         <div className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-8 text-center shadow-2xl">
           <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-emerald-500/15">
@@ -22,7 +22,7 @@ export default async function CheckoutSuccessPage({
             </div>
           </div>
 
-          <p className="mt-6 text-sm uppercase tracking-[0.3em] text-orange-400">
+          <p className="mt-6 text-sm uppercase tracking-[0.3em] text-[#FF6B00]">
             Confirmation
           </p>
 
@@ -41,7 +41,7 @@ export default async function CheckoutSuccessPage({
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             <Link
               href={mode === "buy" ? "/account/tickets" : "/account/reservations"}
-              className="rounded-2xl bg-orange-500 px-5 py-3 font-medium text-black transition hover:bg-orange-400"
+              className="rounded-2xl bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] px-5 py-3 font-medium text-black transition hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]"
             >
               {mode === "buy" ? "Voir mes billets" : "Voir mes réservations"}
             </Link>

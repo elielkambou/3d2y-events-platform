@@ -59,6 +59,10 @@ http://localhost:3000
 - statistiques côté agence
 - commandes et remboursements côté admin
 
+- clic sur les chips “Catégories” depuis la home pour filtrer la page /explore 
+- confirmations avant actions (approve/reject/publish) + protection contre les double-actions sur états terminaux.
+- compteur de mots + garde-fous (courte 5-20 mots, complète min 50 mots).
+
 ## Organisation du projet
 - src/app : routes et pages Next.js
 - src/server : actions et queries serveur

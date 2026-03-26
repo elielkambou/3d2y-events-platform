@@ -6,10 +6,10 @@ export default async function HomePage() {
   const { featuredEvents, categories } = await getHomepageData();
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen bg-[#0A0A0C] text-white">
       <section className="border-b border-white/10">
         <div className="mx-auto max-w-7xl px-6 py-20">
-          <p className="text-sm uppercase tracking-[0.25em] text-orange-400">
+          <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
             3D2Y Events
           </p>
 
@@ -26,14 +26,14 @@ export default async function HomePage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/explore"
-                className="rounded-2xl bg-orange-500 px-5 py-3 font-medium text-black transition hover:bg-orange-400"
+                className="rounded-2xl bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] px-5 py-3 font-medium text-black transition hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]"
               >
                 Explorer les événements
               </Link>
 
               <Link
                 href="/login"
-                className="rounded-2xl border border-white/10 bg-white/5 px-5 py-3 font-medium text-white transition hover:bg-white/10"
+                className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#8B5CF6]/10 to-[#FF6B00]/5 px-5 py-3 font-medium text-white transition hover:bg-white/10"
               >
                 Connexion
               </Link>
@@ -45,7 +45,7 @@ export default async function HomePage() {
       <section className="mx-auto max-w-7xl px-6 py-12">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.25em] text-orange-400">
+            <p className="text-sm uppercase tracking-[0.25em] bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] bg-clip-text text-transparent">
               Catégories
             </p>
             <h2 className="mt-2 text-2xl font-semibold">
@@ -56,12 +56,13 @@ export default async function HomePage() {
 
         <div className="mt-6 flex flex-wrap gap-3">
           {categories.map((category) => (
-            <span
+            <Link
               key={category.id}
-              className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80"
+              href={`/explore?category=${encodeURIComponent(category.slug)}`}
+              className="rounded-full border border-white/10 bg-gradient-to-br from-[#8B5CF6]/10 to-[#FF6B00]/5 px-4 py-2 text-sm text-white/80 transition hover:shadow-[0_0_20px_rgba(139,92,246,0.18)]"
             >
               {category.name}
-            </span>
+            </Link>
           ))}
         </div>
       </section>
@@ -69,7 +70,7 @@ export default async function HomePage() {
       <section className="mx-auto max-w-7xl px-6 pb-16">
         <div className="mb-6 flex items-end justify-between gap-4">
           <div>
-            <p className="text-sm uppercase tracking-[0.25em] text-orange-400">
+            <p className="text-sm uppercase tracking-[0.25em] bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] bg-clip-text text-transparent">
               Sélection
             </p>
             <h2 className="mt-2 text-2xl font-semibold">

@@ -7,6 +7,7 @@ import {
 import { getAdminEventById } from "@/server/queries/admin";
 import { canAccessAdmin } from "@/lib/permissions";
 import { formatEventDate, formatXof } from "@/lib/formatters";
+import { ConfirmActionForm } from "@/components/forms/ConfirmActionForm";
 
 type AdminEventDetailPageProps = {
   params: Promise<{
@@ -46,9 +47,11 @@ export default async function AdminEventDetailPage({
   }
 
   const event = data.event;
+  const canDecide = event.status === "SUBMITTED" || event.status === "UNDER_REVIEW";
+  const isPublished = event.status === "PUBLISHED";
 
   return (
-    <main className="min-h-screen bg-black px-6 py-16 text-white">
+    <main className="min-h-screen bg-[#0A0A0C] px-6 py-16 text-white">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
@@ -59,6 +62,14 @@ export default async function AdminEventDetailPage({
               <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/80">
                 {event.agency.name}
               </span>
+              {isPublished ? (
+                <span className="rounded-full bg-emerald-500/15 px-3 py-1 text-xs text-emerald-200">
+                  Publié
+                  {event.publishedAt
+                    ? ` · ${event.publishedAt.toLocaleString("fr-FR")}`
+                    : ""}
+                </span>
+              ) : null}
               {event.category ? (
                 <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/80">
                   {event.category.name}
@@ -99,7 +110,7 @@ export default async function AdminEventDetailPage({
                 {event.occurrences.map((occurrence) => (
                   <div
                     key={occurrence.id}
-                    className="rounded-3xl border border-white/10 bg-white/5 p-6"
+                  className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
                   >
                     <h3 className="text-xl font-semibold">
                       {occurrence.title ?? "Occurrence"}
@@ -121,7 +132,7 @@ export default async function AdminEventDetailPage({
                       {occurrence.ticketTypes.map((ticketType) => (
                         <div
                           key={ticketType.id}
-                          className="rounded-2xl border border-white/10 bg-black/20 p-4"
+                          className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#8B5CF6]/10 to-[#FF6B00]/5 p-4 backdrop-blur-xl"
                         >
                           <div className="flex items-start justify-between gap-4">
                             <div>
@@ -133,7 +144,7 @@ export default async function AdminEventDetailPage({
                               ) : null}
                               {ticketType.isReservable &&
                               ticketType.reservationPolicy?.isEnabled ? (
-                                <p className="mt-2 text-xs text-orange-300">
+                                <p className="mt-2 text-xs text-[#FF6B00]/80">
                                   Réservation activée · acompte{" "}
                                   {ticketType.reservationPolicy.depositPercent
                                     ? Number(ticketType.reservationPolicy.depositPercent)
@@ -164,6 +175,21 @@ export default async function AdminEventDetailPage({
               <h2 className="text-2xl font-semibold">Historique validation</h2>
 
               <div className="mt-6 space-y-4">
+                {isPublished ? (
+                  <div className="rounded-3xl border border-emerald-400/20 bg-emerald-500/10 p-5">
+                    <p className="text-sm text-emerald-200/80">
+                      {event.publishedAt
+                        ? event.publishedAt.toLocaleString("fr-FR")
+                        : "Date inconnue"}
+                    </p>
+                    <p className="mt-2 text-lg font-medium text-emerald-100">
+                      PUBLISHED
+                    </p>
+                    <p className="mt-1 text-sm text-emerald-200/80">
+                      L’événement est publié et visible dans le catalogue.
+                    </p>
+                  </div>
+                ) : null}
                 {event.approvals.length === 0 ? (
                   <div className="rounded-3xl border border-white/10 bg-white/5 p-6 text-white/60">
                     Aucun historique.
@@ -195,72 +221,107 @@ export default async function AdminEventDetailPage({
 
           <div>
             <div className="sticky top-6 space-y-6">
-              <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-                <p className="text-sm uppercase tracking-[0.2em] text-orange-400">
-                  Décision admin
-                </p>
-                <p className="mt-3 text-white/70">
-                  Analyse la fiche, les dates, la billetterie et décide du statut.
-                </p>
-
-                <form action={approveEventAction} className="mt-6 space-y-3">
-                  <input type="hidden" name="eventId" value={event.id} />
-                  <textarea
-                    name="comment"
-                    rows={4}
-                    placeholder="Commentaire d’approbation"
-                    className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-                  />
-                  <button
-                    type="submit"
-                    className="w-full rounded-2xl bg-emerald-500 px-5 py-3 font-medium text-black transition hover:bg-emerald-400"
-                  >
-                    Approuver
-                  </button>
-                </form>
-
-                <form action={rejectEventAction} className="mt-4 space-y-3">
-                  <input type="hidden" name="eventId" value={event.id} />
-                  <textarea
-                    name="comment"
-                    rows={4}
-                    placeholder="Motif de rejet"
-                    className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-                  />
-                  <button
-                    type="submit"
-                    className="w-full rounded-2xl bg-red-500 px-5 py-3 font-medium text-white transition hover:bg-red-400"
-                  >
-                    Rejeter
-                  </button>
-                </form>
-              </div>
-
-              <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-                <p className="text-sm uppercase tracking-[0.2em] text-orange-400">
-                  Publication
-                </p>
-                <p className="mt-3 text-white/70">
-                  La publication active l’événement dans le catalogue public.
-                </p>
-
-                <form action={publishApprovedEventAction} className="mt-6">
-                  <input type="hidden" name="eventId" value={event.id} />
-                  <button
-                    type="submit"
-                    disabled={event.status !== "APPROVED"}
-                    className="w-full rounded-2xl bg-orange-500 px-5 py-3 font-medium text-black transition hover:bg-orange-400 disabled:cursor-not-allowed disabled:opacity-50"
-                  >
-                    Publier l’événement
-                  </button>
-                </form>
-
-                {event.status !== "APPROVED" ? (
-                  <p className="mt-3 text-xs text-white/50">
-                    L’événement doit être approuvé avant publication.
+              {canDecide ? (
+                <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+                  <p className="text-sm uppercase tracking-[0.2em] text-[#FF6B00]">
+                    Décision admin
                   </p>
-                ) : null}
-              </div>
+                  <p className="mt-3 text-white/70">
+                    Analyse la fiche, les dates, la billetterie et décide du statut.
+                  </p>
+
+                  <ConfirmActionForm
+                    action={approveEventAction}
+                    confirmMessage="Vous allez approuver cet événement. Confirmer ?"
+                    className="mt-6 space-y-3"
+                  >
+                    <input type="hidden" name="eventId" value={event.id} />
+                    <textarea
+                      name="comment"
+                      rows={4}
+                      placeholder="Commentaire d’approbation"
+                      className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                    />
+                    <button
+                      type="submit"
+                      className="w-full rounded-2xl bg-emerald-500 px-5 py-3 font-medium text-black transition hover:bg-emerald-400"
+                    >
+                      Approuver
+                    </button>
+                  </ConfirmActionForm>
+
+                  <ConfirmActionForm
+                    action={rejectEventAction}
+                    confirmMessage="Vous allez rejeter cet événement. Confirmer ?"
+                    className="mt-4 space-y-3"
+                  >
+                    <input type="hidden" name="eventId" value={event.id} />
+                    <textarea
+                      name="comment"
+                      rows={4}
+                      placeholder="Motif de rejet"
+                      className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                    />
+                    <button
+                      type="submit"
+                      className="w-full rounded-2xl bg-red-500 px-5 py-3 font-medium text-white transition hover:bg-red-400"
+                    >
+                      Rejeter
+                    </button>
+                  </ConfirmActionForm>
+                </div>
+              ) : (
+                <div className="rounded-3xl border border-white/10 bg-white/5 p-6 text-white/70">
+                  <p className="text-sm uppercase tracking-[0.2em] text-[#FF6B00]">
+                    Décision admin
+                  </p>
+                  <p className="mt-3">
+                    Décision indisponible : l’événement est déjà{" "}
+                    <span className="font-medium text-white">{getStatusLabel(event.status)}</span>.
+                  </p>
+                </div>
+              )}
+
+              {!isPublished ? (
+                <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+                  <p className="text-sm uppercase tracking-[0.2em] text-[#FF6B00]">
+                    Publication
+                  </p>
+                  <p className="mt-3 text-white/70">
+                    La publication active l’événement dans le catalogue public.
+                  </p>
+
+                  <ConfirmActionForm
+                    action={publishApprovedEventAction}
+                    confirmMessage="Vous allez publier cet événement. Confirmer ?"
+                    className="mt-6"
+                  >
+                    <input type="hidden" name="eventId" value={event.id} />
+                    <button
+                      type="submit"
+                      disabled={event.status !== "APPROVED"}
+                      className="w-full rounded-2xl bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] px-5 py-3 font-medium text-black transition hover:shadow-[0_0_25px_rgba(139,92,246,0.25)] disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      Publier l’événement
+                    </button>
+                  </ConfirmActionForm>
+
+                  {event.status !== "APPROVED" ? (
+                    <p className="mt-3 text-xs text-white/50">
+                      L’événement doit être approuvé avant publication.
+                    </p>
+                  ) : null}
+                </div>
+              ) : (
+                <div className="rounded-3xl border border-emerald-400/20 bg-emerald-500/10 p-6 text-emerald-100">
+                  <p className="text-sm uppercase tracking-[0.2em] text-emerald-200/80">
+                    Publication
+                  </p>
+                  <p className="mt-3">
+                    Déjà publié{event.publishedAt ? ` le ${event.publishedAt.toLocaleString("fr-FR")}` : ""}.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>

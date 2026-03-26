@@ -31,7 +31,7 @@ export function CheckoutLinkActions({
 
       <a
         href={`/checkout?ticketTypeId=${ticketTypeId}&quantity=${quantity}&mode=buy`}
-        className="rounded-xl bg-orange-500 px-4 py-2 font-medium text-black transition hover:bg-orange-400"
+        className="rounded-xl bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] px-4 py-2 font-medium text-black transition hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]"
       >
         Acheter
       </a>
@@ -39,7 +39,7 @@ export function CheckoutLinkActions({
       {isReservable ? (
         <a
           href={`/checkout?ticketTypeId=${ticketTypeId}&quantity=${quantity}&mode=reserve`}
-          className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 font-medium text-white transition hover:bg-white/10"
+          className="rounded-xl border border-white/10 bg-gradient-to-r from-[#FF6B00]/10 to-[#8B5CF6]/10 px-4 py-2 font-medium text-white transition hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]"
         >
           Réserver
         </a>

@@ -20,7 +20,7 @@ const paymentMethods = [
     type: "mobile_money",
     hint: "Paiement mobile instantané",
     icon: Smartphone,
-    accent: "from-orange-500/20 to-orange-300/5",
+    accent: "from-[#FF6B00]/20 to-[#8B5CF6]/5",
   },
   {
     id: "MTN_MOMO",
@@ -128,12 +128,12 @@ export function CheckoutForm({
 
       <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/10 to-white/5 shadow-2xl">
         <div className="border-b border-white/10 px-6 py-5">
-          <p className="text-sm uppercase tracking-[0.25em] text-orange-400">
+          <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
             Progression
           </p>
 
           <div className="mt-5 grid grid-cols-3 gap-3">
-            <div className="rounded-2xl bg-orange-500 px-4 py-3 text-center text-sm font-medium text-black">
+            <div className="rounded-2xl bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] px-4 py-3 text-center text-sm font-medium text-black shadow-[0_0_20px_rgba(255,107,0,0.18)]">
               1. Paiement
             </div>
             <div className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-center text-sm text-white/60">
@@ -160,7 +160,7 @@ export function CheckoutForm({
       </section>
 
       <section className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-xl">
-        <p className="text-sm uppercase tracking-[0.25em] text-orange-400">
+        <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
           Méthode de paiement
         </p>
 
@@ -176,7 +176,7 @@ export function CheckoutForm({
                 onClick={() => setSelectedMethod(method.id)}
                 className={`rounded-[1.5rem] border p-4 text-left transition ${
                   active
-                    ? "border-orange-400 bg-orange-500/10"
+                    ? "border-[#FF6B00]/50 bg-gradient-to-br from-[#FF6B00]/10 to-[#8B5CF6]/10"
                     : "border-white/10 bg-black/25 hover:bg-white/10"
                 }`}
               >
@@ -187,7 +187,9 @@ export function CheckoutForm({
                     <div className="flex items-center gap-4">
                       <div
                         className={`flex h-12 w-12 items-center justify-center rounded-2xl ${
-                          active ? "bg-orange-500 text-black" : "bg-white/10 text-white"
+                        active
+                          ? "bg-gradient-to-br from-[#FF6B00] to-[#8B5CF6] text-black"
+                          : "bg-white/10 text-white"
                         }`}
                       >
                         <Icon className="h-5 w-5" />
@@ -202,7 +204,7 @@ export function CheckoutForm({
                     <div
                       className={`h-5 w-5 rounded-full border ${
                         active
-                          ? "border-orange-400 bg-orange-400"
+                          ? "border-[#8B5CF6] bg-[#8B5CF6]"
                           : "border-white/20"
                       }`}
                     />
@@ -215,7 +217,7 @@ export function CheckoutForm({
       </section>
 
       <section className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-xl">
-        <p className="text-sm uppercase tracking-[0.25em] text-orange-400">
+        <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
           Informations de paiement
         </p>
 
@@ -359,7 +361,7 @@ export function CheckoutForm({
       </section>
 
       <section className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-xl">
-        <p className="text-sm uppercase tracking-[0.25em] text-orange-400">
+        <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
           Validation
         </p>
 
@@ -404,7 +406,7 @@ export function CheckoutForm({
         <button
           type="submit"
           disabled={!isFormValid}
-          className="mt-6 w-full rounded-2xl bg-orange-500 px-5 py-4 font-medium text-black transition hover:bg-orange-400 disabled:cursor-not-allowed disabled:opacity-50"
+          className="mt-6 w-full rounded-2xl bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] px-5 py-4 font-medium text-black transition hover:shadow-[0_0_25px_rgba(139,92,246,0.25)] disabled:cursor-not-allowed disabled:opacity-50"
         >
           {mode === "buy"
             ? `Confirmer le paiement — ${amountDueNow.toLocaleString("fr-FR")} FCFA`
@@ -418,7 +420,7 @@ export function CheckoutForm({
         ) : null}
 
         <div className="mt-6 flex items-center gap-3 rounded-2xl border border-white/10 bg-black/30 p-4 text-sm text-white/60">
-          <LockKeyhole className="h-4 w-4 text-orange-300" />
+          <LockKeyhole className="h-4 w-4 text-[#FF6B00]/80" />
           <span>Les informations sont utilisées uniquement pour la simulation de paiement.</span>
         </div>
       </section>

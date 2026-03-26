@@ -34,7 +34,7 @@ export function EventCard({ event }: EventCardProps) {
   return (
     <Link
       href={`/events/${event.slug}`}
-      className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 transition hover:border-white/20 hover:bg-white/[0.07]"
+      className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-white/20 hover:bg-white/[0.07] hover:shadow-[0_0_25px_rgba(255,107,0,0.12)]"
     >
       <div className="relative aspect-[16/10] overflow-hidden bg-white/5">
         {event.coverImageUrl ? (
@@ -49,17 +49,17 @@ export function EventCard({ event }: EventCardProps) {
           </div>
         )}
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C]/90 via-[#0A0A0C]/35 to-transparent" />
 
         <div className="absolute left-4 top-4 flex gap-2">
           {event.category ? (
-            <span className="rounded-full bg-black/50 px-3 py-1 text-xs text-white backdrop-blur">
+            <span className="rounded-full border border-white/10 bg-[#0A0A0C]/60 px-3 py-1 text-xs text-white backdrop-blur">
               {event.category.name}
             </span>
           ) : null}
 
           {event.isFeatured ? (
-            <span className="rounded-full bg-orange-500 px-3 py-1 text-xs font-medium text-black">
+            <span className="rounded-full bg-gradient-to-br from-[#FF6B00] to-[#8B5CF6] px-3 py-1 text-xs font-medium text-white">
               En vedette
             </span>
           ) : null}

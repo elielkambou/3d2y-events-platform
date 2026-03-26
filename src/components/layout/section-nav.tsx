@@ -20,7 +20,7 @@ export function SectionNav({ title, items }: SectionNavProps) {
 
   return (
     <aside className="rounded-3xl border border-white/10 bg-white/5 p-4">
-      <p className="px-3 pb-3 text-xs uppercase tracking-[0.25em] text-orange-400">
+      <p className="px-3 pb-3 text-xs uppercase tracking-[0.25em] text-[#FF6B00]">
         {title}
       </p>
 
@@ -37,7 +37,7 @@ export function SectionNav({ title, items }: SectionNavProps) {
               className={cn(
                 "block rounded-2xl px-3 py-3 transition",
                 isActive
-                  ? "bg-orange-500 text-black"
+                  ? "bg-[#FF6B00] text-black"
                   : "bg-white/0 text-white hover:bg-white/10",
               )}
             >
