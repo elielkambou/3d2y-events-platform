@@ -31,10 +31,7 @@ export async function getAdminSubmittedEvents() {
 
   const events = await prisma.event.findMany({
     where: {
-      status: {
-        // "À revoir" = uniquement les statuts qui nécessitent une décision.
-        in: ["SUBMITTED", "UNDER_REVIEW"],
-      },
+      isDeleted: false,
     },
     include: {
       agency: true,
@@ -62,6 +59,12 @@ export async function getAdminSubmittedEvents() {
         orderBy: {
           createdAt: "desc",
         },
+      },
+      deletionRequests: {
+        orderBy: {
+          createdAt: "desc",
+        },
+        take: 1,
       },
     },
     orderBy: {
