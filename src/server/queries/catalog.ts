@@ -6,6 +6,7 @@ export async function getHomepageData() {
       where: {
         status: "PUBLISHED",
         isPublished: true,
+        isDeleted: false,
       },
       include: {
         category: true,
@@ -54,6 +55,7 @@ export async function getPublishedEvents() {
     where: {
       status: "PUBLISHED",
       isPublished: true,
+      isDeleted: false,
     },
     include: {
       category: true,
@@ -93,6 +95,7 @@ export async function getPublishedEventBySlug(slug: string) {
       slug,
       status: "PUBLISHED",
       isPublished: true,
+      isDeleted: false,
     },
     include: {
       category: true,

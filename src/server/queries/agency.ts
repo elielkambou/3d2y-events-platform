@@ -49,9 +49,12 @@ export async function getAgencyEvents() {
         },
         take: 1,
       },
-    },
-    orderBy: {
-      createdAt: "desc",
+      deletionRequests: {
+        orderBy: {
+          createdAt: "desc",
+        },
+        take: 1,
+      },
     },
   });
 

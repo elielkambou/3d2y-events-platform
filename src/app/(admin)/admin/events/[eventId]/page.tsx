@@ -4,10 +4,12 @@ import {
   publishApprovedEventAction,
   rejectEventAction,
 } from "@/server/actions/admin-events";
+import { adminDeleteEventAction } from "@/server/actions/event-deletion";
 import { getAdminEventById } from "@/server/queries/admin";
 import { canAccessAdmin } from "@/lib/permissions";
 import { formatEventDate, formatXof } from "@/lib/formatters";
 import { ConfirmActionForm } from "@/components/forms/ConfirmActionForm";
+import { MinLengthTextarea } from "@/components/forms/min-length-textarea";
 
 type AdminEventDetailPageProps = {
   params: Promise<{
@@ -110,7 +112,7 @@ export default async function AdminEventDetailPage({
                 {event.occurrences.map((occurrence) => (
                   <div
                     key={occurrence.id}
-                  className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
+                    className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
                   >
                     <h3 className="text-xl font-semibold">
                       {occurrence.title ?? "Occurrence"}
@@ -322,6 +324,33 @@ export default async function AdminEventDetailPage({
                   </p>
                 </div>
               )}
+
+              <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+                <p className="text-sm uppercase tracking-[0.2em] text-orange-400">
+                  Suppression admin
+                </p>
+                <p className="mt-3 text-white/70">
+                  Retire immédiatement l’événement de la plateforme.
+                </p>
+
+                <form action={adminDeleteEventAction} className="mt-6 space-y-3">
+                  <input type="hidden" name="eventId" value={event.id} />
+                  <MinLengthTextarea
+                    name="reason"
+                    rows={4}
+                    minChars={10}
+                    placeholder="Motif interne de suppression"
+                  />
+                  <button
+                    type="submit"
+                    disabled={event.isDeleted}
+                    className="w-full rounded-2xl bg-red-500 px-5 py-3 font-medium text-white transition hover:bg-red-400 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    Supprimer l’événement
+                  </button>
+                </form>
+              </div>
+
             </div>
           </div>
         </div>

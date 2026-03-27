@@ -4,6 +4,8 @@ import { getAgencyEvents } from "@/server/queries/agency";
 import { getSession } from "@/lib/auth/session";
 import { canManageAgency } from "@/lib/permissions";
 import { formatEventDate, formatXof } from "@/lib/formatters";
+import { requestEventDeletionAction } from "@/server/actions/event-deletion";
+import { MinLengthTextarea } from "@/components/forms/min-length-textarea";
 
 function getStatusLabel(status: string) {
   switch (status) {
@@ -72,6 +74,8 @@ export default async function AgencyEventsPage() {
             const firstOccurrence = event.occurrences[0] ?? null;
             const firstTicket = firstOccurrence?.ticketTypes[0] ?? null;
 
+            const latestDeletionRequest = event.deletionRequests[0] ?? null;
+
             return (
               <div
                 key={event.id}
@@ -80,12 +84,12 @@ export default async function AgencyEventsPage() {
                 <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
                   <div className="max-w-3xl">
                     <div className="flex flex-wrap gap-2">
-                        <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
+                      <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
                         {getStatusLabel(event.status)}
                       </span>
 
                       {event.category ? (
-                          <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
+                        <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
                           {event.category.name}
                         </span>
                       ) : null}
@@ -107,6 +111,38 @@ export default async function AgencyEventsPage() {
                         </p>
                       </div>
                     ) : null}
+
+                    {/* --- Bloc suppression ajouté ici --- */}
+                    <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-4">
+                      <p className="text-sm text-white/50">Suppression</p>
+
+                      {event.isDeleted ? (
+                        <p className="mt-3 text-sm text-red-200">
+                          Cet événement a été retiré de la plateforme.
+                        </p>
+                      ) : latestDeletionRequest?.status === "PENDING" ? (
+                        <p className="mt-3 text-sm text-orange-200">
+                          Une demande de suppression est en attente de validation admin.
+                        </p>
+                      ) : (
+                        <form action={requestEventDeletionAction} className="mt-4 space-y-3">
+                          <input type="hidden" name="eventId" value={event.id} />
+                          <MinLengthTextarea
+                            name="reason"
+                            rows={3}
+                            minChars={10}
+                            placeholder="Explique pourquoi tu demandes la suppression de cet événement"
+                          />
+                          <button
+                            type="submit"
+                            className="rounded-2xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm font-medium text-red-200 transition hover:bg-red-500/20"
+                          >
+                            Demander la suppression
+                          </button>
+                        </form>
+                      )}
+                    </div>
+                    {/* --- Fin du bloc suppression --- */}
                   </div>
 
                   <div className="min-w-[220px] rounded-2xl border border-white/10 bg-gradient-to-br from-[#8B5CF6]/10 to-[#FF6B00]/5 p-4 backdrop-blur-xl">

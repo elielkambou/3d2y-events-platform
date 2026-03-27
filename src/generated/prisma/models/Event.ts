@@ -41,6 +41,10 @@ export type EventMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   publishedAt: Date | null
+  isDeleted: boolean | null
+  deletedAt: Date | null
+  deletedByUserId: string | null
+  deletionReason: string | null
 }
 
 export type EventMaxAggregateOutputType = {
@@ -60,6 +64,10 @@ export type EventMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   publishedAt: Date | null
+  isDeleted: boolean | null
+  deletedAt: Date | null
+  deletedByUserId: string | null
+  deletionReason: string | null
 }
 
 export type EventCountAggregateOutputType = {
@@ -79,6 +87,10 @@ export type EventCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   publishedAt: number
+  isDeleted: number
+  deletedAt: number
+  deletedByUserId: number
+  deletionReason: number
   _all: number
 }
 
@@ -100,6 +112,10 @@ export type EventMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   publishedAt?: true
+  isDeleted?: true
+  deletedAt?: true
+  deletedByUserId?: true
+  deletionReason?: true
 }
 
 export type EventMaxAggregateInputType = {
@@ -119,6 +135,10 @@ export type EventMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   publishedAt?: true
+  isDeleted?: true
+  deletedAt?: true
+  deletedByUserId?: true
+  deletionReason?: true
 }
 
 export type EventCountAggregateInputType = {
@@ -138,6 +158,10 @@ export type EventCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   publishedAt?: true
+  isDeleted?: true
+  deletedAt?: true
+  deletedByUserId?: true
+  deletionReason?: true
   _all?: true
 }
 
@@ -230,6 +254,10 @@ export type EventGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   publishedAt: Date | null
+  isDeleted: boolean
+  deletedAt: Date | null
+  deletedByUserId: string | null
+  deletionReason: string | null
   _count: EventCountAggregateOutputType | null
   _min: EventMinAggregateOutputType | null
   _max: EventMaxAggregateOutputType | null
@@ -270,6 +298,11 @@ export type EventWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   publishedAt?: Prisma.DateTimeNullableFilter<"Event"> | Date | string | null
+  isDeleted?: Prisma.BoolFilter<"Event"> | boolean
+  deletedAt?: Prisma.DateTimeNullableFilter<"Event"> | Date | string | null
+  deletedByUserId?: Prisma.StringNullableFilter<"Event"> | string | null
+  deletionReason?: Prisma.StringNullableFilter<"Event"> | string | null
+  deletionRequests?: Prisma.EventDeletionRequestListRelationFilter
   agency?: Prisma.XOR<Prisma.AgencyScalarRelationFilter, Prisma.AgencyWhereInput>
   category?: Prisma.XOR<Prisma.CategoryNullableScalarRelationFilter, Prisma.CategoryWhereInput> | null
   occurrences?: Prisma.EventOccurrenceListRelationFilter
@@ -295,6 +328,11 @@ export type EventOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedByUserId?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletionReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletionRequests?: Prisma.EventDeletionRequestOrderByRelationAggregateInput
   agency?: Prisma.AgencyOrderByWithRelationInput
   category?: Prisma.CategoryOrderByWithRelationInput
   occurrences?: Prisma.EventOccurrenceOrderByRelationAggregateInput
@@ -323,6 +361,11 @@ export type EventWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   publishedAt?: Prisma.DateTimeNullableFilter<"Event"> | Date | string | null
+  isDeleted?: Prisma.BoolFilter<"Event"> | boolean
+  deletedAt?: Prisma.DateTimeNullableFilter<"Event"> | Date | string | null
+  deletedByUserId?: Prisma.StringNullableFilter<"Event"> | string | null
+  deletionReason?: Prisma.StringNullableFilter<"Event"> | string | null
+  deletionRequests?: Prisma.EventDeletionRequestListRelationFilter
   agency?: Prisma.XOR<Prisma.AgencyScalarRelationFilter, Prisma.AgencyWhereInput>
   category?: Prisma.XOR<Prisma.CategoryNullableScalarRelationFilter, Prisma.CategoryWhereInput> | null
   occurrences?: Prisma.EventOccurrenceListRelationFilter
@@ -348,6 +391,10 @@ export type EventOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedByUserId?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletionReason?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.EventCountOrderByAggregateInput
   _max?: Prisma.EventMaxOrderByAggregateInput
   _min?: Prisma.EventMinOrderByAggregateInput
@@ -373,6 +420,10 @@ export type EventScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Event"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Event"> | Date | string
   publishedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Event"> | Date | string | null
+  isDeleted?: Prisma.BoolWithAggregatesFilter<"Event"> | boolean
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Event"> | Date | string | null
+  deletedByUserId?: Prisma.StringNullableWithAggregatesFilter<"Event"> | string | null
+  deletionReason?: Prisma.StringNullableWithAggregatesFilter<"Event"> | string | null
 }
 
 export type EventCreateInput = {
@@ -390,6 +441,11 @@ export type EventCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
+  deletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutEventInput
   agency: Prisma.AgencyCreateNestedOneWithoutEventsInput
   category?: Prisma.CategoryCreateNestedOneWithoutEventsInput
   occurrences?: Prisma.EventOccurrenceCreateNestedManyWithoutEventInput
@@ -415,6 +471,11 @@ export type EventUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutEventInput
   occurrences?: Prisma.EventOccurrenceUncheckedCreateNestedManyWithoutEventInput
   mediaAssets?: Prisma.EventMediaUncheckedCreateNestedManyWithoutEventInput
   approvals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutEventInput
@@ -436,6 +497,11 @@ export type EventUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutEventNestedInput
   agency?: Prisma.AgencyUpdateOneRequiredWithoutEventsNestedInput
   category?: Prisma.CategoryUpdateOneWithoutEventsNestedInput
   occurrences?: Prisma.EventOccurrenceUpdateManyWithoutEventNestedInput
@@ -461,6 +527,11 @@ export type EventUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutEventNestedInput
   occurrences?: Prisma.EventOccurrenceUncheckedUpdateManyWithoutEventNestedInput
   mediaAssets?: Prisma.EventMediaUncheckedUpdateManyWithoutEventNestedInput
   approvals?: Prisma.EventApprovalUncheckedUpdateManyWithoutEventNestedInput
@@ -484,6 +555,10 @@ export type EventCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
 }
 
 export type EventUpdateManyMutationInput = {
@@ -501,6 +576,10 @@ export type EventUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type EventUncheckedUpdateManyInput = {
@@ -520,6 +599,10 @@ export type EventUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type EventListRelationFilter = {
@@ -549,6 +632,10 @@ export type EventCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
+  deletedByUserId?: Prisma.SortOrder
+  deletionReason?: Prisma.SortOrder
 }
 
 export type EventMaxOrderByAggregateInput = {
@@ -568,6 +655,10 @@ export type EventMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
+  deletedByUserId?: Prisma.SortOrder
+  deletionReason?: Prisma.SortOrder
 }
 
 export type EventMinOrderByAggregateInput = {
@@ -587,6 +678,10 @@ export type EventMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
+  deletedByUserId?: Prisma.SortOrder
+  deletionReason?: Prisma.SortOrder
 }
 
 export type EventScalarRelationFilter = {
@@ -749,6 +844,20 @@ export type EventUpdateOneWithoutServiceOrdersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EventUpdateToOneWithWhereWithoutServiceOrdersInput, Prisma.EventUpdateWithoutServiceOrdersInput>, Prisma.EventUncheckedUpdateWithoutServiceOrdersInput>
 }
 
+export type EventCreateNestedOneWithoutDeletionRequestsInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutDeletionRequestsInput, Prisma.EventUncheckedCreateWithoutDeletionRequestsInput>
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutDeletionRequestsInput
+  connect?: Prisma.EventWhereUniqueInput
+}
+
+export type EventUpdateOneRequiredWithoutDeletionRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutDeletionRequestsInput, Prisma.EventUncheckedCreateWithoutDeletionRequestsInput>
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutDeletionRequestsInput
+  upsert?: Prisma.EventUpsertWithoutDeletionRequestsInput
+  connect?: Prisma.EventWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EventUpdateToOneWithWhereWithoutDeletionRequestsInput, Prisma.EventUpdateWithoutDeletionRequestsInput>, Prisma.EventUncheckedUpdateWithoutDeletionRequestsInput>
+}
+
 export type EventCreateWithoutAgencyInput = {
   id?: string
   title: string
@@ -764,6 +873,11 @@ export type EventCreateWithoutAgencyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
+  deletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutEventInput
   category?: Prisma.CategoryCreateNestedOneWithoutEventsInput
   occurrences?: Prisma.EventOccurrenceCreateNestedManyWithoutEventInput
   mediaAssets?: Prisma.EventMediaCreateNestedManyWithoutEventInput
@@ -787,6 +901,11 @@ export type EventUncheckedCreateWithoutAgencyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutEventInput
   occurrences?: Prisma.EventOccurrenceUncheckedCreateNestedManyWithoutEventInput
   mediaAssets?: Prisma.EventMediaUncheckedCreateNestedManyWithoutEventInput
   approvals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutEventInput
@@ -839,6 +958,10 @@ export type EventScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   publishedAt?: Prisma.DateTimeNullableFilter<"Event"> | Date | string | null
+  isDeleted?: Prisma.BoolFilter<"Event"> | boolean
+  deletedAt?: Prisma.DateTimeNullableFilter<"Event"> | Date | string | null
+  deletedByUserId?: Prisma.StringNullableFilter<"Event"> | string | null
+  deletionReason?: Prisma.StringNullableFilter<"Event"> | string | null
 }
 
 export type EventCreateWithoutCategoryInput = {
@@ -856,6 +979,11 @@ export type EventCreateWithoutCategoryInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
+  deletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutEventInput
   agency: Prisma.AgencyCreateNestedOneWithoutEventsInput
   occurrences?: Prisma.EventOccurrenceCreateNestedManyWithoutEventInput
   mediaAssets?: Prisma.EventMediaCreateNestedManyWithoutEventInput
@@ -879,6 +1007,11 @@ export type EventUncheckedCreateWithoutCategoryInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutEventInput
   occurrences?: Prisma.EventOccurrenceUncheckedCreateNestedManyWithoutEventInput
   mediaAssets?: Prisma.EventMediaUncheckedCreateNestedManyWithoutEventInput
   approvals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutEventInput
@@ -926,6 +1059,11 @@ export type EventCreateWithoutMediaAssetsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
+  deletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutEventInput
   agency: Prisma.AgencyCreateNestedOneWithoutEventsInput
   category?: Prisma.CategoryCreateNestedOneWithoutEventsInput
   occurrences?: Prisma.EventOccurrenceCreateNestedManyWithoutEventInput
@@ -950,6 +1088,11 @@ export type EventUncheckedCreateWithoutMediaAssetsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutEventInput
   occurrences?: Prisma.EventOccurrenceUncheckedCreateNestedManyWithoutEventInput
   approvals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutEventInput
   serviceOrders?: Prisma.AgencyServiceOrderUncheckedCreateNestedManyWithoutEventInput
@@ -986,6 +1129,11 @@ export type EventUpdateWithoutMediaAssetsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutEventNestedInput
   agency?: Prisma.AgencyUpdateOneRequiredWithoutEventsNestedInput
   category?: Prisma.CategoryUpdateOneWithoutEventsNestedInput
   occurrences?: Prisma.EventOccurrenceUpdateManyWithoutEventNestedInput
@@ -1010,6 +1158,11 @@ export type EventUncheckedUpdateWithoutMediaAssetsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutEventNestedInput
   occurrences?: Prisma.EventOccurrenceUncheckedUpdateManyWithoutEventNestedInput
   approvals?: Prisma.EventApprovalUncheckedUpdateManyWithoutEventNestedInput
   serviceOrders?: Prisma.AgencyServiceOrderUncheckedUpdateManyWithoutEventNestedInput
@@ -1030,6 +1183,11 @@ export type EventCreateWithoutOccurrencesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
+  deletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutEventInput
   agency: Prisma.AgencyCreateNestedOneWithoutEventsInput
   category?: Prisma.CategoryCreateNestedOneWithoutEventsInput
   mediaAssets?: Prisma.EventMediaCreateNestedManyWithoutEventInput
@@ -1054,6 +1212,11 @@ export type EventUncheckedCreateWithoutOccurrencesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutEventInput
   mediaAssets?: Prisma.EventMediaUncheckedCreateNestedManyWithoutEventInput
   approvals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutEventInput
   serviceOrders?: Prisma.AgencyServiceOrderUncheckedCreateNestedManyWithoutEventInput
@@ -1090,6 +1253,11 @@ export type EventUpdateWithoutOccurrencesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutEventNestedInput
   agency?: Prisma.AgencyUpdateOneRequiredWithoutEventsNestedInput
   category?: Prisma.CategoryUpdateOneWithoutEventsNestedInput
   mediaAssets?: Prisma.EventMediaUpdateManyWithoutEventNestedInput
@@ -1114,6 +1282,11 @@ export type EventUncheckedUpdateWithoutOccurrencesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutEventNestedInput
   mediaAssets?: Prisma.EventMediaUncheckedUpdateManyWithoutEventNestedInput
   approvals?: Prisma.EventApprovalUncheckedUpdateManyWithoutEventNestedInput
   serviceOrders?: Prisma.AgencyServiceOrderUncheckedUpdateManyWithoutEventNestedInput
@@ -1134,6 +1307,11 @@ export type EventCreateWithoutApprovalsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
+  deletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutEventInput
   agency: Prisma.AgencyCreateNestedOneWithoutEventsInput
   category?: Prisma.CategoryCreateNestedOneWithoutEventsInput
   occurrences?: Prisma.EventOccurrenceCreateNestedManyWithoutEventInput
@@ -1158,6 +1336,11 @@ export type EventUncheckedCreateWithoutApprovalsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutEventInput
   occurrences?: Prisma.EventOccurrenceUncheckedCreateNestedManyWithoutEventInput
   mediaAssets?: Prisma.EventMediaUncheckedCreateNestedManyWithoutEventInput
   serviceOrders?: Prisma.AgencyServiceOrderUncheckedCreateNestedManyWithoutEventInput
@@ -1194,6 +1377,11 @@ export type EventUpdateWithoutApprovalsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutEventNestedInput
   agency?: Prisma.AgencyUpdateOneRequiredWithoutEventsNestedInput
   category?: Prisma.CategoryUpdateOneWithoutEventsNestedInput
   occurrences?: Prisma.EventOccurrenceUpdateManyWithoutEventNestedInput
@@ -1218,6 +1406,11 @@ export type EventUncheckedUpdateWithoutApprovalsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutEventNestedInput
   occurrences?: Prisma.EventOccurrenceUncheckedUpdateManyWithoutEventNestedInput
   mediaAssets?: Prisma.EventMediaUncheckedUpdateManyWithoutEventNestedInput
   serviceOrders?: Prisma.AgencyServiceOrderUncheckedUpdateManyWithoutEventNestedInput
@@ -1238,6 +1431,11 @@ export type EventCreateWithoutServiceOrdersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
+  deletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutEventInput
   agency: Prisma.AgencyCreateNestedOneWithoutEventsInput
   category?: Prisma.CategoryCreateNestedOneWithoutEventsInput
   occurrences?: Prisma.EventOccurrenceCreateNestedManyWithoutEventInput
@@ -1262,6 +1460,11 @@ export type EventUncheckedCreateWithoutServiceOrdersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutEventInput
   occurrences?: Prisma.EventOccurrenceUncheckedCreateNestedManyWithoutEventInput
   mediaAssets?: Prisma.EventMediaUncheckedCreateNestedManyWithoutEventInput
   approvals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutEventInput
@@ -1298,6 +1501,11 @@ export type EventUpdateWithoutServiceOrdersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutEventNestedInput
   agency?: Prisma.AgencyUpdateOneRequiredWithoutEventsNestedInput
   category?: Prisma.CategoryUpdateOneWithoutEventsNestedInput
   occurrences?: Prisma.EventOccurrenceUpdateManyWithoutEventNestedInput
@@ -1322,9 +1530,138 @@ export type EventUncheckedUpdateWithoutServiceOrdersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutEventNestedInput
   occurrences?: Prisma.EventOccurrenceUncheckedUpdateManyWithoutEventNestedInput
   mediaAssets?: Prisma.EventMediaUncheckedUpdateManyWithoutEventNestedInput
   approvals?: Prisma.EventApprovalUncheckedUpdateManyWithoutEventNestedInput
+}
+
+export type EventCreateWithoutDeletionRequestsInput = {
+  id?: string
+  title: string
+  slug: string
+  shortDescription?: string | null
+  fullDescription?: string | null
+  coverImageUrl?: string | null
+  status?: $Enums.EventStatus
+  isFeatured?: boolean
+  isPublished?: boolean
+  defaultCurrency?: string
+  termsAndConditions?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
+  agency: Prisma.AgencyCreateNestedOneWithoutEventsInput
+  category?: Prisma.CategoryCreateNestedOneWithoutEventsInput
+  occurrences?: Prisma.EventOccurrenceCreateNestedManyWithoutEventInput
+  mediaAssets?: Prisma.EventMediaCreateNestedManyWithoutEventInput
+  approvals?: Prisma.EventApprovalCreateNestedManyWithoutEventInput
+  serviceOrders?: Prisma.AgencyServiceOrderCreateNestedManyWithoutEventInput
+}
+
+export type EventUncheckedCreateWithoutDeletionRequestsInput = {
+  id?: string
+  agencyId: string
+  categoryId?: string | null
+  title: string
+  slug: string
+  shortDescription?: string | null
+  fullDescription?: string | null
+  coverImageUrl?: string | null
+  status?: $Enums.EventStatus
+  isFeatured?: boolean
+  isPublished?: boolean
+  defaultCurrency?: string
+  termsAndConditions?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
+  occurrences?: Prisma.EventOccurrenceUncheckedCreateNestedManyWithoutEventInput
+  mediaAssets?: Prisma.EventMediaUncheckedCreateNestedManyWithoutEventInput
+  approvals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutEventInput
+  serviceOrders?: Prisma.AgencyServiceOrderUncheckedCreateNestedManyWithoutEventInput
+}
+
+export type EventCreateOrConnectWithoutDeletionRequestsInput = {
+  where: Prisma.EventWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventCreateWithoutDeletionRequestsInput, Prisma.EventUncheckedCreateWithoutDeletionRequestsInput>
+}
+
+export type EventUpsertWithoutDeletionRequestsInput = {
+  update: Prisma.XOR<Prisma.EventUpdateWithoutDeletionRequestsInput, Prisma.EventUncheckedUpdateWithoutDeletionRequestsInput>
+  create: Prisma.XOR<Prisma.EventCreateWithoutDeletionRequestsInput, Prisma.EventUncheckedCreateWithoutDeletionRequestsInput>
+  where?: Prisma.EventWhereInput
+}
+
+export type EventUpdateToOneWithWhereWithoutDeletionRequestsInput = {
+  where?: Prisma.EventWhereInput
+  data: Prisma.XOR<Prisma.EventUpdateWithoutDeletionRequestsInput, Prisma.EventUncheckedUpdateWithoutDeletionRequestsInput>
+}
+
+export type EventUpdateWithoutDeletionRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  defaultCurrency?: Prisma.StringFieldUpdateOperationsInput | string
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agency?: Prisma.AgencyUpdateOneRequiredWithoutEventsNestedInput
+  category?: Prisma.CategoryUpdateOneWithoutEventsNestedInput
+  occurrences?: Prisma.EventOccurrenceUpdateManyWithoutEventNestedInput
+  mediaAssets?: Prisma.EventMediaUpdateManyWithoutEventNestedInput
+  approvals?: Prisma.EventApprovalUpdateManyWithoutEventNestedInput
+  serviceOrders?: Prisma.AgencyServiceOrderUpdateManyWithoutEventNestedInput
+}
+
+export type EventUncheckedUpdateWithoutDeletionRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  agencyId?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  defaultCurrency?: Prisma.StringFieldUpdateOperationsInput | string
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occurrences?: Prisma.EventOccurrenceUncheckedUpdateManyWithoutEventNestedInput
+  mediaAssets?: Prisma.EventMediaUncheckedUpdateManyWithoutEventNestedInput
+  approvals?: Prisma.EventApprovalUncheckedUpdateManyWithoutEventNestedInput
+  serviceOrders?: Prisma.AgencyServiceOrderUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateManyAgencyInput = {
@@ -1343,6 +1680,10 @@ export type EventCreateManyAgencyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
 }
 
 export type EventUpdateWithoutAgencyInput = {
@@ -1360,6 +1701,11 @@ export type EventUpdateWithoutAgencyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutEventNestedInput
   category?: Prisma.CategoryUpdateOneWithoutEventsNestedInput
   occurrences?: Prisma.EventOccurrenceUpdateManyWithoutEventNestedInput
   mediaAssets?: Prisma.EventMediaUpdateManyWithoutEventNestedInput
@@ -1383,6 +1729,11 @@ export type EventUncheckedUpdateWithoutAgencyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutEventNestedInput
   occurrences?: Prisma.EventOccurrenceUncheckedUpdateManyWithoutEventNestedInput
   mediaAssets?: Prisma.EventMediaUncheckedUpdateManyWithoutEventNestedInput
   approvals?: Prisma.EventApprovalUncheckedUpdateManyWithoutEventNestedInput
@@ -1405,6 +1756,10 @@ export type EventUncheckedUpdateManyWithoutAgencyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type EventCreateManyCategoryInput = {
@@ -1423,6 +1778,10 @@ export type EventCreateManyCategoryInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  deletedByUserId?: string | null
+  deletionReason?: string | null
 }
 
 export type EventUpdateWithoutCategoryInput = {
@@ -1440,6 +1799,11 @@ export type EventUpdateWithoutCategoryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutEventNestedInput
   agency?: Prisma.AgencyUpdateOneRequiredWithoutEventsNestedInput
   occurrences?: Prisma.EventOccurrenceUpdateManyWithoutEventNestedInput
   mediaAssets?: Prisma.EventMediaUpdateManyWithoutEventNestedInput
@@ -1463,6 +1827,11 @@ export type EventUncheckedUpdateWithoutCategoryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutEventNestedInput
   occurrences?: Prisma.EventOccurrenceUncheckedUpdateManyWithoutEventNestedInput
   mediaAssets?: Prisma.EventMediaUncheckedUpdateManyWithoutEventNestedInput
   approvals?: Prisma.EventApprovalUncheckedUpdateManyWithoutEventNestedInput
@@ -1485,6 +1854,10 @@ export type EventUncheckedUpdateManyWithoutCategoryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -1493,6 +1866,7 @@ export type EventUncheckedUpdateManyWithoutCategoryInput = {
  */
 
 export type EventCountOutputType = {
+  deletionRequests: number
   occurrences: number
   mediaAssets: number
   approvals: number
@@ -1500,6 +1874,7 @@ export type EventCountOutputType = {
 }
 
 export type EventCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  deletionRequests?: boolean | EventCountOutputTypeCountDeletionRequestsArgs
   occurrences?: boolean | EventCountOutputTypeCountOccurrencesArgs
   mediaAssets?: boolean | EventCountOutputTypeCountMediaAssetsArgs
   approvals?: boolean | EventCountOutputTypeCountApprovalsArgs
@@ -1514,6 +1889,13 @@ export type EventCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
    * Select specific fields to fetch from the EventCountOutputType
    */
   select?: Prisma.EventCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * EventCountOutputType without action
+ */
+export type EventCountOutputTypeCountDeletionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EventDeletionRequestWhereInput
 }
 
 /**
@@ -1562,6 +1944,11 @@ export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   createdAt?: boolean
   updatedAt?: boolean
   publishedAt?: boolean
+  isDeleted?: boolean
+  deletedAt?: boolean
+  deletedByUserId?: boolean
+  deletionReason?: boolean
+  deletionRequests?: boolean | Prisma.Event$deletionRequestsArgs<ExtArgs>
   agency?: boolean | Prisma.AgencyDefaultArgs<ExtArgs>
   category?: boolean | Prisma.Event$categoryArgs<ExtArgs>
   occurrences?: boolean | Prisma.Event$occurrencesArgs<ExtArgs>
@@ -1588,6 +1975,10 @@ export type EventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   createdAt?: boolean
   updatedAt?: boolean
   publishedAt?: boolean
+  isDeleted?: boolean
+  deletedAt?: boolean
+  deletedByUserId?: boolean
+  deletionReason?: boolean
   agency?: boolean | Prisma.AgencyDefaultArgs<ExtArgs>
   category?: boolean | Prisma.Event$categoryArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
@@ -1609,6 +2000,10 @@ export type EventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   createdAt?: boolean
   updatedAt?: boolean
   publishedAt?: boolean
+  isDeleted?: boolean
+  deletedAt?: boolean
+  deletedByUserId?: boolean
+  deletionReason?: boolean
   agency?: boolean | Prisma.AgencyDefaultArgs<ExtArgs>
   category?: boolean | Prisma.Event$categoryArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
@@ -1630,10 +2025,15 @@ export type EventSelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   publishedAt?: boolean
+  isDeleted?: boolean
+  deletedAt?: boolean
+  deletedByUserId?: boolean
+  deletionReason?: boolean
 }
 
-export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "agencyId" | "categoryId" | "title" | "slug" | "shortDescription" | "fullDescription" | "coverImageUrl" | "status" | "isFeatured" | "isPublished" | "defaultCurrency" | "termsAndConditions" | "createdAt" | "updatedAt" | "publishedAt", ExtArgs["result"]["event"]>
+export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "agencyId" | "categoryId" | "title" | "slug" | "shortDescription" | "fullDescription" | "coverImageUrl" | "status" | "isFeatured" | "isPublished" | "defaultCurrency" | "termsAndConditions" | "createdAt" | "updatedAt" | "publishedAt" | "isDeleted" | "deletedAt" | "deletedByUserId" | "deletionReason", ExtArgs["result"]["event"]>
 export type EventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  deletionRequests?: boolean | Prisma.Event$deletionRequestsArgs<ExtArgs>
   agency?: boolean | Prisma.AgencyDefaultArgs<ExtArgs>
   category?: boolean | Prisma.Event$categoryArgs<ExtArgs>
   occurrences?: boolean | Prisma.Event$occurrencesArgs<ExtArgs>
@@ -1654,6 +2054,7 @@ export type EventIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Event"
   objects: {
+    deletionRequests: Prisma.$EventDeletionRequestPayload<ExtArgs>[]
     agency: Prisma.$AgencyPayload<ExtArgs>
     category: Prisma.$CategoryPayload<ExtArgs> | null
     occurrences: Prisma.$EventOccurrencePayload<ExtArgs>[]
@@ -1678,6 +2079,10 @@ export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     createdAt: Date
     updatedAt: Date
     publishedAt: Date | null
+    isDeleted: boolean
+    deletedAt: Date | null
+    deletedByUserId: string | null
+    deletionReason: string | null
   }, ExtArgs["result"]["event"]>
   composites: {}
 }
@@ -2072,6 +2477,7 @@ readonly fields: EventFieldRefs;
  */
 export interface Prisma__EventClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  deletionRequests<T extends Prisma.Event$deletionRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$deletionRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventDeletionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   agency<T extends Prisma.AgencyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AgencyDefaultArgs<ExtArgs>>): Prisma.Prisma__AgencyClient<runtime.Types.Result.GetResult<Prisma.$AgencyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   category<T extends Prisma.Event$categoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$categoryArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   occurrences<T extends Prisma.Event$occurrencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$occurrencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventOccurrencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2123,6 +2529,10 @@ export interface EventFieldRefs {
   readonly createdAt: Prisma.FieldRef<"Event", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Event", 'DateTime'>
   readonly publishedAt: Prisma.FieldRef<"Event", 'DateTime'>
+  readonly isDeleted: Prisma.FieldRef<"Event", 'Boolean'>
+  readonly deletedAt: Prisma.FieldRef<"Event", 'DateTime'>
+  readonly deletedByUserId: Prisma.FieldRef<"Event", 'String'>
+  readonly deletionReason: Prisma.FieldRef<"Event", 'String'>
 }
     
 
@@ -2521,6 +2931,30 @@ export type EventDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Events to delete.
    */
   limit?: number
+}
+
+/**
+ * Event.deletionRequests
+ */
+export type Event$deletionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EventDeletionRequest
+   */
+  select?: Prisma.EventDeletionRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EventDeletionRequest
+   */
+  omit?: Prisma.EventDeletionRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventDeletionRequestInclude<ExtArgs> | null
+  where?: Prisma.EventDeletionRequestWhereInput
+  orderBy?: Prisma.EventDeletionRequestOrderByWithRelationInput | Prisma.EventDeletionRequestOrderByWithRelationInput[]
+  cursor?: Prisma.EventDeletionRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EventDeletionRequestScalarFieldEnum | Prisma.EventDeletionRequestScalarFieldEnum[]
 }
 
 /**

@@ -167,3 +167,13 @@ export const ServiceOrderStatus = {
 } as const
 
 export type ServiceOrderStatus = (typeof ServiceOrderStatus)[keyof typeof ServiceOrderStatus]
+
+
+export const EventDeletionRequestStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  CANCELED: 'CANCELED'
+} as const
+
+export type EventDeletionRequestStatus = (typeof EventDeletionRequestStatus)[keyof typeof EventDeletionRequestStatus]

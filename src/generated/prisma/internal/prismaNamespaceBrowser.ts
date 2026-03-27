@@ -70,7 +70,8 @@ export const ModelName = {
   EventApproval: 'EventApproval',
   CommissionLedger: 'CommissionLedger',
   AgencyServiceOrder: 'AgencyServiceOrder',
-  AuthSession: 'AuthSession'
+  AuthSession: 'AuthSession',
+  EventDeletionRequest: 'EventDeletionRequest'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -181,7 +182,11 @@ export const EventScalarFieldEnum = {
   termsAndConditions: 'termsAndConditions',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  publishedAt: 'publishedAt'
+  publishedAt: 'publishedAt',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
+  deletedByUserId: 'deletedByUserId',
+  deletionReason: 'deletionReason'
 } as const
 
 export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
@@ -409,6 +414,23 @@ export const AuthSessionScalarFieldEnum = {
 } as const
 
 export type AuthSessionScalarFieldEnum = (typeof AuthSessionScalarFieldEnum)[keyof typeof AuthSessionScalarFieldEnum]
+
+
+export const EventDeletionRequestScalarFieldEnum = {
+  id: 'id',
+  eventId: 'eventId',
+  agencyId: 'agencyId',
+  requestedByUserId: 'requestedByUserId',
+  reviewedByUserId: 'reviewedByUserId',
+  reason: 'reason',
+  adminComment: 'adminComment',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  reviewedAt: 'reviewedAt'
+} as const
+
+export type EventDeletionRequestScalarFieldEnum = (typeof EventDeletionRequestScalarFieldEnum)[keyof typeof EventDeletionRequestScalarFieldEnum]
 
 
 export const SortOrder = {

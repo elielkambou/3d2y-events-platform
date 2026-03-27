@@ -293,6 +293,7 @@ export type AgencyWhereInput = {
   orders?: Prisma.OrderListRelationFilter
   commissionEntries?: Prisma.CommissionLedgerListRelationFilter
   serviceOrders?: Prisma.AgencyServiceOrderListRelationFilter
+  deletionRequests?: Prisma.EventDeletionRequestListRelationFilter
 }
 
 export type AgencyOrderByWithRelationInput = {
@@ -315,6 +316,7 @@ export type AgencyOrderByWithRelationInput = {
   orders?: Prisma.OrderOrderByRelationAggregateInput
   commissionEntries?: Prisma.CommissionLedgerOrderByRelationAggregateInput
   serviceOrders?: Prisma.AgencyServiceOrderOrderByRelationAggregateInput
+  deletionRequests?: Prisma.EventDeletionRequestOrderByRelationAggregateInput
 }
 
 export type AgencyWhereUniqueInput = Prisma.AtLeast<{
@@ -340,6 +342,7 @@ export type AgencyWhereUniqueInput = Prisma.AtLeast<{
   orders?: Prisma.OrderListRelationFilter
   commissionEntries?: Prisma.CommissionLedgerListRelationFilter
   serviceOrders?: Prisma.AgencyServiceOrderListRelationFilter
+  deletionRequests?: Prisma.EventDeletionRequestListRelationFilter
 }, "id" | "ownerUserId" | "slug">
 
 export type AgencyOrderByWithAggregationInput = {
@@ -403,6 +406,7 @@ export type AgencyCreateInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutAgencyInput
   commissionEntries?: Prisma.CommissionLedgerCreateNestedManyWithoutAgencyInput
   serviceOrders?: Prisma.AgencyServiceOrderCreateNestedManyWithoutAgencyInput
+  deletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyUncheckedCreateInput = {
@@ -424,6 +428,7 @@ export type AgencyUncheckedCreateInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutAgencyInput
   commissionEntries?: Prisma.CommissionLedgerUncheckedCreateNestedManyWithoutAgencyInput
   serviceOrders?: Prisma.AgencyServiceOrderUncheckedCreateNestedManyWithoutAgencyInput
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyUpdateInput = {
@@ -445,6 +450,7 @@ export type AgencyUpdateInput = {
   orders?: Prisma.OrderUpdateManyWithoutAgencyNestedInput
   commissionEntries?: Prisma.CommissionLedgerUpdateManyWithoutAgencyNestedInput
   serviceOrders?: Prisma.AgencyServiceOrderUpdateManyWithoutAgencyNestedInput
+  deletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyUncheckedUpdateInput = {
@@ -466,6 +472,7 @@ export type AgencyUncheckedUpdateInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutAgencyNestedInput
   commissionEntries?: Prisma.CommissionLedgerUncheckedUpdateManyWithoutAgencyNestedInput
   serviceOrders?: Prisma.AgencyServiceOrderUncheckedUpdateManyWithoutAgencyNestedInput
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyCreateManyInput = {
@@ -687,6 +694,20 @@ export type AgencyUpdateOneRequiredWithoutServiceOrdersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.AgencyUpdateToOneWithWhereWithoutServiceOrdersInput, Prisma.AgencyUpdateWithoutServiceOrdersInput>, Prisma.AgencyUncheckedUpdateWithoutServiceOrdersInput>
 }
 
+export type AgencyCreateNestedOneWithoutDeletionRequestsInput = {
+  create?: Prisma.XOR<Prisma.AgencyCreateWithoutDeletionRequestsInput, Prisma.AgencyUncheckedCreateWithoutDeletionRequestsInput>
+  connectOrCreate?: Prisma.AgencyCreateOrConnectWithoutDeletionRequestsInput
+  connect?: Prisma.AgencyWhereUniqueInput
+}
+
+export type AgencyUpdateOneRequiredWithoutDeletionRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.AgencyCreateWithoutDeletionRequestsInput, Prisma.AgencyUncheckedCreateWithoutDeletionRequestsInput>
+  connectOrCreate?: Prisma.AgencyCreateOrConnectWithoutDeletionRequestsInput
+  upsert?: Prisma.AgencyUpsertWithoutDeletionRequestsInput
+  connect?: Prisma.AgencyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AgencyUpdateToOneWithWhereWithoutDeletionRequestsInput, Prisma.AgencyUpdateWithoutDeletionRequestsInput>, Prisma.AgencyUncheckedUpdateWithoutDeletionRequestsInput>
+}
+
 export type AgencyCreateWithoutOwnerInput = {
   id?: string
   name: string
@@ -705,6 +726,7 @@ export type AgencyCreateWithoutOwnerInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutAgencyInput
   commissionEntries?: Prisma.CommissionLedgerCreateNestedManyWithoutAgencyInput
   serviceOrders?: Prisma.AgencyServiceOrderCreateNestedManyWithoutAgencyInput
+  deletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyUncheckedCreateWithoutOwnerInput = {
@@ -725,6 +747,7 @@ export type AgencyUncheckedCreateWithoutOwnerInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutAgencyInput
   commissionEntries?: Prisma.CommissionLedgerUncheckedCreateNestedManyWithoutAgencyInput
   serviceOrders?: Prisma.AgencyServiceOrderUncheckedCreateNestedManyWithoutAgencyInput
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyCreateOrConnectWithoutOwnerInput = {
@@ -761,6 +784,7 @@ export type AgencyUpdateWithoutOwnerInput = {
   orders?: Prisma.OrderUpdateManyWithoutAgencyNestedInput
   commissionEntries?: Prisma.CommissionLedgerUpdateManyWithoutAgencyNestedInput
   serviceOrders?: Prisma.AgencyServiceOrderUpdateManyWithoutAgencyNestedInput
+  deletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyUncheckedUpdateWithoutOwnerInput = {
@@ -781,6 +805,7 @@ export type AgencyUncheckedUpdateWithoutOwnerInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutAgencyNestedInput
   commissionEntries?: Prisma.CommissionLedgerUncheckedUpdateManyWithoutAgencyNestedInput
   serviceOrders?: Prisma.AgencyServiceOrderUncheckedUpdateManyWithoutAgencyNestedInput
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyCreateWithoutEventsInput = {
@@ -801,6 +826,7 @@ export type AgencyCreateWithoutEventsInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutAgencyInput
   commissionEntries?: Prisma.CommissionLedgerCreateNestedManyWithoutAgencyInput
   serviceOrders?: Prisma.AgencyServiceOrderCreateNestedManyWithoutAgencyInput
+  deletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyUncheckedCreateWithoutEventsInput = {
@@ -821,6 +847,7 @@ export type AgencyUncheckedCreateWithoutEventsInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutAgencyInput
   commissionEntries?: Prisma.CommissionLedgerUncheckedCreateNestedManyWithoutAgencyInput
   serviceOrders?: Prisma.AgencyServiceOrderUncheckedCreateNestedManyWithoutAgencyInput
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyCreateOrConnectWithoutEventsInput = {
@@ -857,6 +884,7 @@ export type AgencyUpdateWithoutEventsInput = {
   orders?: Prisma.OrderUpdateManyWithoutAgencyNestedInput
   commissionEntries?: Prisma.CommissionLedgerUpdateManyWithoutAgencyNestedInput
   serviceOrders?: Prisma.AgencyServiceOrderUpdateManyWithoutAgencyNestedInput
+  deletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyUncheckedUpdateWithoutEventsInput = {
@@ -877,6 +905,7 @@ export type AgencyUncheckedUpdateWithoutEventsInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutAgencyNestedInput
   commissionEntries?: Prisma.CommissionLedgerUncheckedUpdateManyWithoutAgencyNestedInput
   serviceOrders?: Prisma.AgencyServiceOrderUncheckedUpdateManyWithoutAgencyNestedInput
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyCreateWithoutOrdersInput = {
@@ -897,6 +926,7 @@ export type AgencyCreateWithoutOrdersInput = {
   events?: Prisma.EventCreateNestedManyWithoutAgencyInput
   commissionEntries?: Prisma.CommissionLedgerCreateNestedManyWithoutAgencyInput
   serviceOrders?: Prisma.AgencyServiceOrderCreateNestedManyWithoutAgencyInput
+  deletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyUncheckedCreateWithoutOrdersInput = {
@@ -917,6 +947,7 @@ export type AgencyUncheckedCreateWithoutOrdersInput = {
   events?: Prisma.EventUncheckedCreateNestedManyWithoutAgencyInput
   commissionEntries?: Prisma.CommissionLedgerUncheckedCreateNestedManyWithoutAgencyInput
   serviceOrders?: Prisma.AgencyServiceOrderUncheckedCreateNestedManyWithoutAgencyInput
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyCreateOrConnectWithoutOrdersInput = {
@@ -953,6 +984,7 @@ export type AgencyUpdateWithoutOrdersInput = {
   events?: Prisma.EventUpdateManyWithoutAgencyNestedInput
   commissionEntries?: Prisma.CommissionLedgerUpdateManyWithoutAgencyNestedInput
   serviceOrders?: Prisma.AgencyServiceOrderUpdateManyWithoutAgencyNestedInput
+  deletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyUncheckedUpdateWithoutOrdersInput = {
@@ -973,6 +1005,7 @@ export type AgencyUncheckedUpdateWithoutOrdersInput = {
   events?: Prisma.EventUncheckedUpdateManyWithoutAgencyNestedInput
   commissionEntries?: Prisma.CommissionLedgerUncheckedUpdateManyWithoutAgencyNestedInput
   serviceOrders?: Prisma.AgencyServiceOrderUncheckedUpdateManyWithoutAgencyNestedInput
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyCreateWithoutCommissionEntriesInput = {
@@ -993,6 +1026,7 @@ export type AgencyCreateWithoutCommissionEntriesInput = {
   events?: Prisma.EventCreateNestedManyWithoutAgencyInput
   orders?: Prisma.OrderCreateNestedManyWithoutAgencyInput
   serviceOrders?: Prisma.AgencyServiceOrderCreateNestedManyWithoutAgencyInput
+  deletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyUncheckedCreateWithoutCommissionEntriesInput = {
@@ -1013,6 +1047,7 @@ export type AgencyUncheckedCreateWithoutCommissionEntriesInput = {
   events?: Prisma.EventUncheckedCreateNestedManyWithoutAgencyInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutAgencyInput
   serviceOrders?: Prisma.AgencyServiceOrderUncheckedCreateNestedManyWithoutAgencyInput
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyCreateOrConnectWithoutCommissionEntriesInput = {
@@ -1049,6 +1084,7 @@ export type AgencyUpdateWithoutCommissionEntriesInput = {
   events?: Prisma.EventUpdateManyWithoutAgencyNestedInput
   orders?: Prisma.OrderUpdateManyWithoutAgencyNestedInput
   serviceOrders?: Prisma.AgencyServiceOrderUpdateManyWithoutAgencyNestedInput
+  deletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyUncheckedUpdateWithoutCommissionEntriesInput = {
@@ -1069,6 +1105,7 @@ export type AgencyUncheckedUpdateWithoutCommissionEntriesInput = {
   events?: Prisma.EventUncheckedUpdateManyWithoutAgencyNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutAgencyNestedInput
   serviceOrders?: Prisma.AgencyServiceOrderUncheckedUpdateManyWithoutAgencyNestedInput
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyCreateWithoutServiceOrdersInput = {
@@ -1089,6 +1126,7 @@ export type AgencyCreateWithoutServiceOrdersInput = {
   events?: Prisma.EventCreateNestedManyWithoutAgencyInput
   orders?: Prisma.OrderCreateNestedManyWithoutAgencyInput
   commissionEntries?: Prisma.CommissionLedgerCreateNestedManyWithoutAgencyInput
+  deletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyUncheckedCreateWithoutServiceOrdersInput = {
@@ -1109,6 +1147,7 @@ export type AgencyUncheckedCreateWithoutServiceOrdersInput = {
   events?: Prisma.EventUncheckedCreateNestedManyWithoutAgencyInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutAgencyInput
   commissionEntries?: Prisma.CommissionLedgerUncheckedCreateNestedManyWithoutAgencyInput
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyCreateOrConnectWithoutServiceOrdersInput = {
@@ -1145,6 +1184,7 @@ export type AgencyUpdateWithoutServiceOrdersInput = {
   events?: Prisma.EventUpdateManyWithoutAgencyNestedInput
   orders?: Prisma.OrderUpdateManyWithoutAgencyNestedInput
   commissionEntries?: Prisma.CommissionLedgerUpdateManyWithoutAgencyNestedInput
+  deletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyUncheckedUpdateWithoutServiceOrdersInput = {
@@ -1165,6 +1205,107 @@ export type AgencyUncheckedUpdateWithoutServiceOrdersInput = {
   events?: Prisma.EventUncheckedUpdateManyWithoutAgencyNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutAgencyNestedInput
   commissionEntries?: Prisma.CommissionLedgerUncheckedUpdateManyWithoutAgencyNestedInput
+  deletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutAgencyNestedInput
+}
+
+export type AgencyCreateWithoutDeletionRequestsInput = {
+  id?: string
+  name: string
+  slug: string
+  email: string
+  phone?: string | null
+  description?: string | null
+  logoUrl?: string | null
+  coverImageUrl?: string | null
+  status?: $Enums.AgencyStatus
+  commissionRateBps?: number
+  isVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owner: Prisma.UserCreateNestedOneWithoutAgencyInput
+  events?: Prisma.EventCreateNestedManyWithoutAgencyInput
+  orders?: Prisma.OrderCreateNestedManyWithoutAgencyInput
+  commissionEntries?: Prisma.CommissionLedgerCreateNestedManyWithoutAgencyInput
+  serviceOrders?: Prisma.AgencyServiceOrderCreateNestedManyWithoutAgencyInput
+}
+
+export type AgencyUncheckedCreateWithoutDeletionRequestsInput = {
+  id?: string
+  ownerUserId: string
+  name: string
+  slug: string
+  email: string
+  phone?: string | null
+  description?: string | null
+  logoUrl?: string | null
+  coverImageUrl?: string | null
+  status?: $Enums.AgencyStatus
+  commissionRateBps?: number
+  isVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutAgencyInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutAgencyInput
+  commissionEntries?: Prisma.CommissionLedgerUncheckedCreateNestedManyWithoutAgencyInput
+  serviceOrders?: Prisma.AgencyServiceOrderUncheckedCreateNestedManyWithoutAgencyInput
+}
+
+export type AgencyCreateOrConnectWithoutDeletionRequestsInput = {
+  where: Prisma.AgencyWhereUniqueInput
+  create: Prisma.XOR<Prisma.AgencyCreateWithoutDeletionRequestsInput, Prisma.AgencyUncheckedCreateWithoutDeletionRequestsInput>
+}
+
+export type AgencyUpsertWithoutDeletionRequestsInput = {
+  update: Prisma.XOR<Prisma.AgencyUpdateWithoutDeletionRequestsInput, Prisma.AgencyUncheckedUpdateWithoutDeletionRequestsInput>
+  create: Prisma.XOR<Prisma.AgencyCreateWithoutDeletionRequestsInput, Prisma.AgencyUncheckedCreateWithoutDeletionRequestsInput>
+  where?: Prisma.AgencyWhereInput
+}
+
+export type AgencyUpdateToOneWithWhereWithoutDeletionRequestsInput = {
+  where?: Prisma.AgencyWhereInput
+  data: Prisma.XOR<Prisma.AgencyUpdateWithoutDeletionRequestsInput, Prisma.AgencyUncheckedUpdateWithoutDeletionRequestsInput>
+}
+
+export type AgencyUpdateWithoutDeletionRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumAgencyStatusFieldUpdateOperationsInput | $Enums.AgencyStatus
+  commissionRateBps?: Prisma.IntFieldUpdateOperationsInput | number
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneRequiredWithoutAgencyNestedInput
+  events?: Prisma.EventUpdateManyWithoutAgencyNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutAgencyNestedInput
+  commissionEntries?: Prisma.CommissionLedgerUpdateManyWithoutAgencyNestedInput
+  serviceOrders?: Prisma.AgencyServiceOrderUpdateManyWithoutAgencyNestedInput
+}
+
+export type AgencyUncheckedUpdateWithoutDeletionRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumAgencyStatusFieldUpdateOperationsInput | $Enums.AgencyStatus
+  commissionRateBps?: Prisma.IntFieldUpdateOperationsInput | number
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  events?: Prisma.EventUncheckedUpdateManyWithoutAgencyNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutAgencyNestedInput
+  commissionEntries?: Prisma.CommissionLedgerUncheckedUpdateManyWithoutAgencyNestedInput
+  serviceOrders?: Prisma.AgencyServiceOrderUncheckedUpdateManyWithoutAgencyNestedInput
 }
 
 
@@ -1177,6 +1318,7 @@ export type AgencyCountOutputType = {
   orders: number
   commissionEntries: number
   serviceOrders: number
+  deletionRequests: number
 }
 
 export type AgencyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1184,6 +1326,7 @@ export type AgencyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   orders?: boolean | AgencyCountOutputTypeCountOrdersArgs
   commissionEntries?: boolean | AgencyCountOutputTypeCountCommissionEntriesArgs
   serviceOrders?: boolean | AgencyCountOutputTypeCountServiceOrdersArgs
+  deletionRequests?: boolean | AgencyCountOutputTypeCountDeletionRequestsArgs
 }
 
 /**
@@ -1224,6 +1367,13 @@ export type AgencyCountOutputTypeCountServiceOrdersArgs<ExtArgs extends runtime.
   where?: Prisma.AgencyServiceOrderWhereInput
 }
 
+/**
+ * AgencyCountOutputType without action
+ */
+export type AgencyCountOutputTypeCountDeletionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EventDeletionRequestWhereInput
+}
+
 
 export type AgencySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1245,6 +1395,7 @@ export type AgencySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   orders?: boolean | Prisma.Agency$ordersArgs<ExtArgs>
   commissionEntries?: boolean | Prisma.Agency$commissionEntriesArgs<ExtArgs>
   serviceOrders?: boolean | Prisma.Agency$serviceOrdersArgs<ExtArgs>
+  deletionRequests?: boolean | Prisma.Agency$deletionRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.AgencyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["agency"]>
 
@@ -1308,6 +1459,7 @@ export type AgencyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   orders?: boolean | Prisma.Agency$ordersArgs<ExtArgs>
   commissionEntries?: boolean | Prisma.Agency$commissionEntriesArgs<ExtArgs>
   serviceOrders?: boolean | Prisma.Agency$serviceOrdersArgs<ExtArgs>
+  deletionRequests?: boolean | Prisma.Agency$deletionRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.AgencyCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type AgencyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1325,6 +1477,7 @@ export type $AgencyPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     orders: Prisma.$OrderPayload<ExtArgs>[]
     commissionEntries: Prisma.$CommissionLedgerPayload<ExtArgs>[]
     serviceOrders: Prisma.$AgencyServiceOrderPayload<ExtArgs>[]
+    deletionRequests: Prisma.$EventDeletionRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1740,6 +1893,7 @@ export interface Prisma__AgencyClient<T, Null = never, ExtArgs extends runtime.T
   orders<T extends Prisma.Agency$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agency$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   commissionEntries<T extends Prisma.Agency$commissionEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agency$commissionEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommissionLedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   serviceOrders<T extends Prisma.Agency$serviceOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agency$serviceOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AgencyServiceOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  deletionRequests<T extends Prisma.Agency$deletionRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agency$deletionRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventDeletionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2277,6 +2431,30 @@ export type Agency$serviceOrdersArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.AgencyServiceOrderScalarFieldEnum | Prisma.AgencyServiceOrderScalarFieldEnum[]
+}
+
+/**
+ * Agency.deletionRequests
+ */
+export type Agency$deletionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EventDeletionRequest
+   */
+  select?: Prisma.EventDeletionRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EventDeletionRequest
+   */
+  omit?: Prisma.EventDeletionRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventDeletionRequestInclude<ExtArgs> | null
+  where?: Prisma.EventDeletionRequestWhereInput
+  orderBy?: Prisma.EventDeletionRequestOrderByWithRelationInput | Prisma.EventDeletionRequestOrderByWithRelationInput[]
+  cursor?: Prisma.EventDeletionRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EventDeletionRequestScalarFieldEnum | Prisma.EventDeletionRequestScalarFieldEnum[]
 }
 
 /**

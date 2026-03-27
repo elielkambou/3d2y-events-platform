@@ -545,6 +545,23 @@ export type EnumServiceOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumServiceOrderStatusFilter<$PrismaModel>
 }
 
+export type EnumEventDeletionRequestStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.EventDeletionRequestStatus | Prisma.EnumEventDeletionRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.EventDeletionRequestStatus[] | Prisma.ListEnumEventDeletionRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EventDeletionRequestStatus[] | Prisma.ListEnumEventDeletionRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEventDeletionRequestStatusFilter<$PrismaModel> | $Enums.EventDeletionRequestStatus
+}
+
+export type EnumEventDeletionRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.EventDeletionRequestStatus | Prisma.EnumEventDeletionRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.EventDeletionRequestStatus[] | Prisma.ListEnumEventDeletionRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EventDeletionRequestStatus[] | Prisma.ListEnumEventDeletionRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEventDeletionRequestStatusWithAggregatesFilter<$PrismaModel> | $Enums.EventDeletionRequestStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumEventDeletionRequestStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumEventDeletionRequestStatusFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -1060,6 +1077,23 @@ export type NestedEnumServiceOrderStatusWithAggregatesFilter<$PrismaModel = neve
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumServiceOrderStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumServiceOrderStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumEventDeletionRequestStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.EventDeletionRequestStatus | Prisma.EnumEventDeletionRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.EventDeletionRequestStatus[] | Prisma.ListEnumEventDeletionRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EventDeletionRequestStatus[] | Prisma.ListEnumEventDeletionRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEventDeletionRequestStatusFilter<$PrismaModel> | $Enums.EventDeletionRequestStatus
+}
+
+export type NestedEnumEventDeletionRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.EventDeletionRequestStatus | Prisma.EnumEventDeletionRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.EventDeletionRequestStatus[] | Prisma.ListEnumEventDeletionRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EventDeletionRequestStatus[] | Prisma.ListEnumEventDeletionRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEventDeletionRequestStatusWithAggregatesFilter<$PrismaModel> | $Enums.EventDeletionRequestStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumEventDeletionRequestStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumEventDeletionRequestStatusFilter<$PrismaModel>
 }
 
 

@@ -117,3 +117,8 @@ export type AgencyServiceOrder = Prisma.AgencyServiceOrderModel
  * 
  */
 export type AuthSession = Prisma.AuthSessionModel
+/**
+ * Model EventDeletionRequest
+ * 
+ */
+export type EventDeletionRequest = Prisma.EventDeletionRequestModel

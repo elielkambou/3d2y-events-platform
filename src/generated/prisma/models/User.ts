@@ -230,6 +230,8 @@ export type UserWhereInput = {
   reviewedRefunds?: Prisma.RefundRequestListRelationFilter
   eventApprovals?: Prisma.EventApprovalListRelationFilter
   sessions?: Prisma.AuthSessionListRelationFilter
+  eventDeletionRequests?: Prisma.EventDeletionRequestListRelationFilter
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -251,6 +253,8 @@ export type UserOrderByWithRelationInput = {
   reviewedRefunds?: Prisma.RefundRequestOrderByRelationAggregateInput
   eventApprovals?: Prisma.EventApprovalOrderByRelationAggregateInput
   sessions?: Prisma.AuthSessionOrderByRelationAggregateInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestOrderByRelationAggregateInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -275,6 +279,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   reviewedRefunds?: Prisma.RefundRequestListRelationFilter
   eventApprovals?: Prisma.EventApprovalListRelationFilter
   sessions?: Prisma.AuthSessionListRelationFilter
+  eventDeletionRequests?: Prisma.EventDeletionRequestListRelationFilter
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -328,6 +334,8 @@ export type UserCreateInput = {
   reviewedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalCreateNestedManyWithoutReviewedByInput
   sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -349,6 +357,8 @@ export type UserUncheckedCreateInput = {
   reviewedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUpdateInput = {
@@ -370,6 +380,8 @@ export type UserUpdateInput = {
   reviewedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUpdateManyWithoutReviewedByNestedInput
   sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -391,6 +403,8 @@ export type UserUncheckedUpdateInput = {
   reviewedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -619,6 +633,36 @@ export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSessionsInput, Prisma.UserUpdateWithoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutSessionsInput>
 }
 
+export type UserCreateNestedOneWithoutEventDeletionRequestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEventDeletionRequestsInput, Prisma.UserUncheckedCreateWithoutEventDeletionRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEventDeletionRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutReviewedEventDeletionRequestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewedEventDeletionRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedEventDeletionRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewedEventDeletionRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutEventDeletionRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEventDeletionRequestsInput, Prisma.UserUncheckedCreateWithoutEventDeletionRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEventDeletionRequestsInput
+  upsert?: Prisma.UserUpsertWithoutEventDeletionRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEventDeletionRequestsInput, Prisma.UserUpdateWithoutEventDeletionRequestsInput>, Prisma.UserUncheckedUpdateWithoutEventDeletionRequestsInput>
+}
+
+export type UserUpdateOneWithoutReviewedEventDeletionRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewedEventDeletionRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedEventDeletionRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewedEventDeletionRequestsInput
+  upsert?: Prisma.UserUpsertWithoutReviewedEventDeletionRequestsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReviewedEventDeletionRequestsInput, Prisma.UserUpdateWithoutReviewedEventDeletionRequestsInput>, Prisma.UserUncheckedUpdateWithoutReviewedEventDeletionRequestsInput>
+}
+
 export type UserCreateWithoutRolesInput = {
   id?: string
   email: string
@@ -637,6 +681,8 @@ export type UserCreateWithoutRolesInput = {
   reviewedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalCreateNestedManyWithoutReviewedByInput
   sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutRolesInput = {
@@ -657,6 +703,8 @@ export type UserUncheckedCreateWithoutRolesInput = {
   reviewedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutRolesInput = {
@@ -693,6 +741,8 @@ export type UserUpdateWithoutRolesInput = {
   reviewedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUpdateManyWithoutReviewedByNestedInput
   sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRolesInput = {
@@ -713,6 +763,8 @@ export type UserUncheckedUpdateWithoutRolesInput = {
   reviewedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutAgencyInput = {
@@ -733,6 +785,8 @@ export type UserCreateWithoutAgencyInput = {
   reviewedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalCreateNestedManyWithoutReviewedByInput
   sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutAgencyInput = {
@@ -753,6 +807,8 @@ export type UserUncheckedCreateWithoutAgencyInput = {
   reviewedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutAgencyInput = {
@@ -789,6 +845,8 @@ export type UserUpdateWithoutAgencyInput = {
   reviewedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUpdateManyWithoutReviewedByNestedInput
   sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAgencyInput = {
@@ -809,6 +867,8 @@ export type UserUncheckedUpdateWithoutAgencyInput = {
   reviewedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutCustomerOrdersInput = {
@@ -829,6 +889,8 @@ export type UserCreateWithoutCustomerOrdersInput = {
   reviewedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalCreateNestedManyWithoutReviewedByInput
   sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutCustomerOrdersInput = {
@@ -849,6 +911,8 @@ export type UserUncheckedCreateWithoutCustomerOrdersInput = {
   reviewedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutCustomerOrdersInput = {
@@ -885,6 +949,8 @@ export type UserUpdateWithoutCustomerOrdersInput = {
   reviewedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUpdateManyWithoutReviewedByNestedInput
   sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCustomerOrdersInput = {
@@ -905,6 +971,8 @@ export type UserUncheckedUpdateWithoutCustomerOrdersInput = {
   reviewedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutScannedCheckInsInput = {
@@ -925,6 +993,8 @@ export type UserCreateWithoutScannedCheckInsInput = {
   reviewedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalCreateNestedManyWithoutReviewedByInput
   sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutScannedCheckInsInput = {
@@ -945,6 +1015,8 @@ export type UserUncheckedCreateWithoutScannedCheckInsInput = {
   reviewedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutScannedCheckInsInput = {
@@ -981,6 +1053,8 @@ export type UserUpdateWithoutScannedCheckInsInput = {
   reviewedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUpdateManyWithoutReviewedByNestedInput
   sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutScannedCheckInsInput = {
@@ -1001,6 +1075,8 @@ export type UserUncheckedUpdateWithoutScannedCheckInsInput = {
   reviewedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutRefundRequestsInput = {
@@ -1021,6 +1097,8 @@ export type UserCreateWithoutRefundRequestsInput = {
   reviewedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalCreateNestedManyWithoutReviewedByInput
   sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutRefundRequestsInput = {
@@ -1041,6 +1119,8 @@ export type UserUncheckedCreateWithoutRefundRequestsInput = {
   reviewedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutRefundRequestsInput = {
@@ -1066,6 +1146,8 @@ export type UserCreateWithoutReviewedRefundsInput = {
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutRequestedByInput
   eventApprovals?: Prisma.EventApprovalCreateNestedManyWithoutReviewedByInput
   sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutReviewedRefundsInput = {
@@ -1086,6 +1168,8 @@ export type UserUncheckedCreateWithoutReviewedRefundsInput = {
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutRequestedByInput
   eventApprovals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutReviewedRefundsInput = {
@@ -1122,6 +1206,8 @@ export type UserUpdateWithoutRefundRequestsInput = {
   reviewedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUpdateManyWithoutReviewedByNestedInput
   sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRefundRequestsInput = {
@@ -1142,6 +1228,8 @@ export type UserUncheckedUpdateWithoutRefundRequestsInput = {
   reviewedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutReviewedRefundsInput = {
@@ -1173,6 +1261,8 @@ export type UserUpdateWithoutReviewedRefundsInput = {
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutRequestedByNestedInput
   eventApprovals?: Prisma.EventApprovalUpdateManyWithoutReviewedByNestedInput
   sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewedRefundsInput = {
@@ -1193,6 +1283,8 @@ export type UserUncheckedUpdateWithoutReviewedRefundsInput = {
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   eventApprovals?: Prisma.EventApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutEventApprovalsInput = {
@@ -1213,6 +1305,8 @@ export type UserCreateWithoutEventApprovalsInput = {
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutRequestedByInput
   reviewedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
   sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutEventApprovalsInput = {
@@ -1233,6 +1327,8 @@ export type UserUncheckedCreateWithoutEventApprovalsInput = {
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutRequestedByInput
   reviewedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
   sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutEventApprovalsInput = {
@@ -1269,6 +1365,8 @@ export type UserUpdateWithoutEventApprovalsInput = {
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutRequestedByNestedInput
   reviewedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
   sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEventApprovalsInput = {
@@ -1289,6 +1387,8 @@ export type UserUncheckedUpdateWithoutEventApprovalsInput = {
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   reviewedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
   sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -1309,6 +1409,8 @@ export type UserCreateWithoutSessionsInput = {
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutRequestedByInput
   reviewedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalCreateNestedManyWithoutReviewedByInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1329,6 +1431,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutRequestedByInput
   reviewedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
   eventApprovals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutReviewedByInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1365,6 +1469,8 @@ export type UserUpdateWithoutSessionsInput = {
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutRequestedByNestedInput
   reviewedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUpdateManyWithoutReviewedByNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1385,6 +1491,216 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   reviewedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
   eventApprovals?: Prisma.EventApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserCreateWithoutEventDeletionRequestsInput = {
+  id?: string
+  email: string
+  fullName?: string | null
+  phone?: string | null
+  avatarUrl?: string | null
+  passwordHash?: string | null
+  isEmailVerified?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+  agency?: Prisma.AgencyCreateNestedOneWithoutOwnerInput
+  customerOrders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  scannedCheckIns?: Prisma.TicketCheckInCreateNestedManyWithoutCheckedInByInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutRequestedByInput
+  reviewedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
+  eventApprovals?: Prisma.EventApprovalCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserUncheckedCreateWithoutEventDeletionRequestsInput = {
+  id?: string
+  email: string
+  fullName?: string | null
+  phone?: string | null
+  avatarUrl?: string | null
+  passwordHash?: string | null
+  isEmailVerified?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+  agency?: Prisma.AgencyUncheckedCreateNestedOneWithoutOwnerInput
+  customerOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  scannedCheckIns?: Prisma.TicketCheckInUncheckedCreateNestedManyWithoutCheckedInByInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  eventApprovals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserCreateOrConnectWithoutEventDeletionRequestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutEventDeletionRequestsInput, Prisma.UserUncheckedCreateWithoutEventDeletionRequestsInput>
+}
+
+export type UserCreateWithoutReviewedEventDeletionRequestsInput = {
+  id?: string
+  email: string
+  fullName?: string | null
+  phone?: string | null
+  avatarUrl?: string | null
+  passwordHash?: string | null
+  isEmailVerified?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+  agency?: Prisma.AgencyCreateNestedOneWithoutOwnerInput
+  customerOrders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  scannedCheckIns?: Prisma.TicketCheckInCreateNestedManyWithoutCheckedInByInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutRequestedByInput
+  reviewedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
+  eventApprovals?: Prisma.EventApprovalCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestCreateNestedManyWithoutRequestedByInput
+}
+
+export type UserUncheckedCreateWithoutReviewedEventDeletionRequestsInput = {
+  id?: string
+  email: string
+  fullName?: string | null
+  phone?: string | null
+  avatarUrl?: string | null
+  passwordHash?: string | null
+  isEmailVerified?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+  agency?: Prisma.AgencyUncheckedCreateNestedOneWithoutOwnerInput
+  customerOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  scannedCheckIns?: Prisma.TicketCheckInUncheckedCreateNestedManyWithoutCheckedInByInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  eventApprovals?: Prisma.EventApprovalUncheckedCreateNestedManyWithoutReviewedByInput
+  sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedCreateNestedManyWithoutRequestedByInput
+}
+
+export type UserCreateOrConnectWithoutReviewedEventDeletionRequestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewedEventDeletionRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedEventDeletionRequestsInput>
+}
+
+export type UserUpsertWithoutEventDeletionRequestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutEventDeletionRequestsInput, Prisma.UserUncheckedUpdateWithoutEventDeletionRequestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutEventDeletionRequestsInput, Prisma.UserUncheckedCreateWithoutEventDeletionRequestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutEventDeletionRequestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutEventDeletionRequestsInput, Prisma.UserUncheckedUpdateWithoutEventDeletionRequestsInput>
+}
+
+export type UserUpdateWithoutEventDeletionRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+  agency?: Prisma.AgencyUpdateOneWithoutOwnerNestedInput
+  customerOrders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  scannedCheckIns?: Prisma.TicketCheckInUpdateManyWithoutCheckedInByNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
+  eventApprovals?: Prisma.EventApprovalUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutEventDeletionRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  agency?: Prisma.AgencyUncheckedUpdateOneWithoutOwnerNestedInput
+  customerOrders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  scannedCheckIns?: Prisma.TicketCheckInUncheckedUpdateManyWithoutCheckedInByNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  eventApprovals?: Prisma.EventApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  reviewedEventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUpsertWithoutReviewedEventDeletionRequestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReviewedEventDeletionRequestsInput, Prisma.UserUncheckedUpdateWithoutReviewedEventDeletionRequestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewedEventDeletionRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedEventDeletionRequestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReviewedEventDeletionRequestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReviewedEventDeletionRequestsInput, Prisma.UserUncheckedUpdateWithoutReviewedEventDeletionRequestsInput>
+}
+
+export type UserUpdateWithoutReviewedEventDeletionRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+  agency?: Prisma.AgencyUpdateOneWithoutOwnerNestedInput
+  customerOrders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  scannedCheckIns?: Prisma.TicketCheckInUpdateManyWithoutCheckedInByNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
+  eventApprovals?: Prisma.EventApprovalUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUpdateManyWithoutRequestedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReviewedEventDeletionRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  agency?: Prisma.AgencyUncheckedUpdateOneWithoutOwnerNestedInput
+  customerOrders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  scannedCheckIns?: Prisma.TicketCheckInUncheckedUpdateManyWithoutCheckedInByNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  eventApprovals?: Prisma.EventApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
+  sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  eventDeletionRequests?: Prisma.EventDeletionRequestUncheckedUpdateManyWithoutRequestedByNestedInput
 }
 
 
@@ -1400,6 +1716,8 @@ export type UserCountOutputType = {
   reviewedRefunds: number
   eventApprovals: number
   sessions: number
+  eventDeletionRequests: number
+  reviewedEventDeletionRequests: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1410,6 +1728,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   reviewedRefunds?: boolean | UserCountOutputTypeCountReviewedRefundsArgs
   eventApprovals?: boolean | UserCountOutputTypeCountEventApprovalsArgs
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+  eventDeletionRequests?: boolean | UserCountOutputTypeCountEventDeletionRequestsArgs
+  reviewedEventDeletionRequests?: boolean | UserCountOutputTypeCountReviewedEventDeletionRequestsArgs
 }
 
 /**
@@ -1471,6 +1791,20 @@ export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.AuthSessionWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountEventDeletionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EventDeletionRequestWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReviewedEventDeletionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EventDeletionRequestWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1491,6 +1825,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   reviewedRefunds?: boolean | Prisma.User$reviewedRefundsArgs<ExtArgs>
   eventApprovals?: boolean | Prisma.User$eventApprovalsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  eventDeletionRequests?: boolean | Prisma.User$eventDeletionRequestsArgs<ExtArgs>
+  reviewedEventDeletionRequests?: boolean | Prisma.User$reviewedEventDeletionRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1543,6 +1879,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   reviewedRefunds?: boolean | Prisma.User$reviewedRefundsArgs<ExtArgs>
   eventApprovals?: boolean | Prisma.User$eventApprovalsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  eventDeletionRequests?: boolean | Prisma.User$eventDeletionRequestsArgs<ExtArgs>
+  reviewedEventDeletionRequests?: boolean | Prisma.User$reviewedEventDeletionRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1559,6 +1897,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     reviewedRefunds: Prisma.$RefundRequestPayload<ExtArgs>[]
     eventApprovals: Prisma.$EventApprovalPayload<ExtArgs>[]
     sessions: Prisma.$AuthSessionPayload<ExtArgs>[]
+    eventDeletionRequests: Prisma.$EventDeletionRequestPayload<ExtArgs>[]
+    reviewedEventDeletionRequests: Prisma.$EventDeletionRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1973,6 +2313,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   reviewedRefunds<T extends Prisma.User$reviewedRefundsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewedRefundsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   eventApprovals<T extends Prisma.User$eventApprovalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$eventApprovalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventApprovalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuthSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  eventDeletionRequests<T extends Prisma.User$eventDeletionRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$eventDeletionRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventDeletionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reviewedEventDeletionRequests<T extends Prisma.User$reviewedEventDeletionRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewedEventDeletionRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventDeletionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2589,6 +2931,54 @@ export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.AuthSessionScalarFieldEnum | Prisma.AuthSessionScalarFieldEnum[]
+}
+
+/**
+ * User.eventDeletionRequests
+ */
+export type User$eventDeletionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EventDeletionRequest
+   */
+  select?: Prisma.EventDeletionRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EventDeletionRequest
+   */
+  omit?: Prisma.EventDeletionRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventDeletionRequestInclude<ExtArgs> | null
+  where?: Prisma.EventDeletionRequestWhereInput
+  orderBy?: Prisma.EventDeletionRequestOrderByWithRelationInput | Prisma.EventDeletionRequestOrderByWithRelationInput[]
+  cursor?: Prisma.EventDeletionRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EventDeletionRequestScalarFieldEnum | Prisma.EventDeletionRequestScalarFieldEnum[]
+}
+
+/**
+ * User.reviewedEventDeletionRequests
+ */
+export type User$reviewedEventDeletionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EventDeletionRequest
+   */
+  select?: Prisma.EventDeletionRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EventDeletionRequest
+   */
+  omit?: Prisma.EventDeletionRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventDeletionRequestInclude<ExtArgs> | null
+  where?: Prisma.EventDeletionRequestWhereInput
+  orderBy?: Prisma.EventDeletionRequestOrderByWithRelationInput | Prisma.EventDeletionRequestOrderByWithRelationInput[]
+  cursor?: Prisma.EventDeletionRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EventDeletionRequestScalarFieldEnum | Prisma.EventDeletionRequestScalarFieldEnum[]
 }
 
 /**

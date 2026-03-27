@@ -403,7 +403,8 @@ export const ModelName = {
   EventApproval: 'EventApproval',
   CommissionLedger: 'CommissionLedger',
   AgencyServiceOrder: 'AgencyServiceOrder',
-  AuthSession: 'AuthSession'
+  AuthSession: 'AuthSession',
+  EventDeletionRequest: 'EventDeletionRequest'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -419,7 +420,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userRoleAssignment" | "agency" | "category" | "venue" | "event" | "eventMedia" | "eventOccurrence" | "reservationPolicy" | "ticketType" | "order" | "orderItem" | "payment" | "ticket" | "ticketCheckIn" | "refundRequest" | "eventApproval" | "commissionLedger" | "agencyServiceOrder" | "authSession"
+    modelProps: "user" | "userRoleAssignment" | "agency" | "category" | "venue" | "event" | "eventMedia" | "eventOccurrence" | "reservationPolicy" | "ticketType" | "order" | "orderItem" | "payment" | "ticket" | "ticketCheckIn" | "refundRequest" | "eventApproval" | "commissionLedger" | "agencyServiceOrder" | "authSession" | "eventDeletionRequest"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1903,6 +1904,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    EventDeletionRequest: {
+      payload: Prisma.$EventDeletionRequestPayload<ExtArgs>
+      fields: Prisma.EventDeletionRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EventDeletionRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventDeletionRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EventDeletionRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventDeletionRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.EventDeletionRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventDeletionRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EventDeletionRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventDeletionRequestPayload>
+        }
+        findMany: {
+          args: Prisma.EventDeletionRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventDeletionRequestPayload>[]
+        }
+        create: {
+          args: Prisma.EventDeletionRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventDeletionRequestPayload>
+        }
+        createMany: {
+          args: Prisma.EventDeletionRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EventDeletionRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventDeletionRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.EventDeletionRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventDeletionRequestPayload>
+        }
+        update: {
+          args: Prisma.EventDeletionRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventDeletionRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.EventDeletionRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EventDeletionRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EventDeletionRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventDeletionRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.EventDeletionRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventDeletionRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.EventDeletionRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEventDeletionRequest>
+        }
+        groupBy: {
+          args: Prisma.EventDeletionRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EventDeletionRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EventDeletionRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EventDeletionRequestCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2034,7 +2109,11 @@ export const EventScalarFieldEnum = {
   termsAndConditions: 'termsAndConditions',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  publishedAt: 'publishedAt'
+  publishedAt: 'publishedAt',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
+  deletedByUserId: 'deletedByUserId',
+  deletionReason: 'deletionReason'
 } as const
 
 export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
@@ -2262,6 +2341,23 @@ export const AuthSessionScalarFieldEnum = {
 } as const
 
 export type AuthSessionScalarFieldEnum = (typeof AuthSessionScalarFieldEnum)[keyof typeof AuthSessionScalarFieldEnum]
+
+
+export const EventDeletionRequestScalarFieldEnum = {
+  id: 'id',
+  eventId: 'eventId',
+  agencyId: 'agencyId',
+  requestedByUserId: 'requestedByUserId',
+  reviewedByUserId: 'reviewedByUserId',
+  reason: 'reason',
+  adminComment: 'adminComment',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  reviewedAt: 'reviewedAt'
+} as const
+
+export type EventDeletionRequestScalarFieldEnum = (typeof EventDeletionRequestScalarFieldEnum)[keyof typeof EventDeletionRequestScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2585,6 +2681,20 @@ export type ListEnumServiceOrderStatusFieldRefInput<$PrismaModel> = FieldRefInpu
 
 
 /**
+ * Reference to a field of type 'EventDeletionRequestStatus'
+ */
+export type EnumEventDeletionRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EventDeletionRequestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'EventDeletionRequestStatus[]'
+ */
+export type ListEnumEventDeletionRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EventDeletionRequestStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2712,6 +2822,7 @@ export type GlobalOmitConfig = {
   commissionLedger?: Prisma.CommissionLedgerOmit
   agencyServiceOrder?: Prisma.AgencyServiceOrderOmit
   authSession?: Prisma.AuthSessionOmit
+  eventDeletionRequest?: Prisma.EventDeletionRequestOmit
 }
 
 /* Types for Logging */

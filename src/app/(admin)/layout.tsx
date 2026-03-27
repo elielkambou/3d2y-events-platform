@@ -26,6 +26,11 @@ const adminNav = [
     label: "Remboursements",
     description: "Historique des remboursements",
   },
+  {
+  href: "/admin/deletion-requests",
+  label: "Demandes suppression",
+  description: "Validation des retraits d’événements",
+  },
 ];
 
 export default async function AdminLayout({
