@@ -25,29 +25,34 @@ type EventCardProps = {
       district: string | null;
       city: string;
     } | null;
+    firstTicketType: {
+      id: string;
+      isReservable: boolean;
+    } | null;
     minPrice: number | null;
     currency: string;
   };
 };
 
 export function EventCard({ event }: EventCardProps) {
+  const quickBuyHref = `/events/${event.slug}`;
+
   return (
-    <Link
-      href={`/events/${event.slug}`}
-      className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-white/20 hover:bg-white/[0.07] hover:shadow-[0_0_25px_rgba(255,107,0,0.12)]"
-    >
+    <article className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-white/20 hover:bg-white/[0.07] hover:shadow-[0_0_25px_rgba(255,107,0,0.12)]">
       <div className="relative aspect-[16/10] overflow-hidden bg-white/5">
-        {event.coverImageUrl ? (
-          <img
-            src={event.coverImageUrl}
-            alt={event.title}
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center text-white/40">
-            Image à venir
-          </div>
-        )}
+        <Link href={`/events/${event.slug}`} className="block h-full w-full">
+          {event.coverImageUrl ? (
+            <img
+              src={event.coverImageUrl}
+              alt={event.title}
+              className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center text-white/40">
+              Image à venir
+            </div>
+          )}
+        </Link>
 
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C]/90 via-[#0A0A0C]/35 to-transparent" />
 
@@ -69,9 +74,7 @@ export function EventCard({ event }: EventCardProps) {
           <p className="text-xs uppercase tracking-[0.2em] text-white/60">
             {event.agency.name}
           </p>
-          <h3 className="mt-2 text-2xl font-semibold text-white">
-            {event.title}
-          </h3>
+          <h3 className="mt-2 text-2xl font-semibold text-white">{event.title}</h3>
         </div>
       </div>
 
@@ -100,7 +103,22 @@ export function EventCard({ event }: EventCardProps) {
             {formatXof(event.minPrice)}
           </span>
         </div>
+
+        <div className="flex gap-2 pt-2">
+          <Link
+            href={quickBuyHref}
+            className="flex-1 rounded-xl bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] px-4 py-2 text-center text-sm font-medium text-black transition hover:shadow-[0_0_20px_rgba(139,92,246,0.25)]"
+          >
+            Acheter
+          </Link>
+          <Link
+            href={`/events/${event.slug}`}
+            className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10"
+          >
+            Détails
+          </Link>
+        </div>
       </div>
-    </Link>
+    </article>
   );
 }

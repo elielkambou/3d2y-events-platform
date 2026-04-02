@@ -8,6 +8,7 @@ import {
   generateTicketSerialNumber,
   hashTicketQrToken,
 } from "@/lib/ticketing";
+import { sendGuestTicketsEmail } from "@/server/services/ticket-delivery";
 
 function addHours(date: Date, hours: number) {
   return new Date(date.getTime() + hours * 60 * 60 * 1000);
@@ -16,27 +17,28 @@ function addHours(date: Date, hours: number) {
 export async function completeCheckoutAction(formData: FormData) {
   const session = await getSession();
 
-  if (!session) {
-    redirect("/login");
-  }
-
   const ticketTypeId = String(formData.get("ticketTypeId") ?? "");
   const quantity = Number(formData.get("quantity") ?? 1);
   const paymentMethod = String(formData.get("paymentMethod") ?? "OTHER");
   const paymentLabel = String(formData.get("paymentLabel") ?? "Paiement simulé");
+  const customerName = String(formData.get("customerName") ?? "").trim();
+  const customerEmail = String(formData.get("customerEmail") ?? "").trim().toLowerCase();
+  const customerPhoneRaw = String(formData.get("customerPhone") ?? "").trim();
+  const customerPhone = customerPhoneRaw.length > 0 ? customerPhoneRaw : null;
 
   if (!ticketTypeId || !quantity || quantity < 1) {
     throw new Error("Données de paiement invalides.");
   }
+  if (!customerName || !customerEmail) {
+    throw new Error("Nom et email sont requis pour finaliser l'achat.");
+  }
 
   const result = await prisma.$transaction(async (tx) => {
-    const user = await tx.user.findUnique({
-      where: { id: session.userId },
-    });
-
-    if (!user) {
-      throw new Error("Utilisateur introuvable.");
-    }
+    const user = session
+      ? await tx.user.findUnique({
+          where: { id: session.userId },
+        })
+      : null;
 
     const ticketType = await tx.ticketType.findUnique({
       where: { id: ticketTypeId },
@@ -96,13 +98,17 @@ export async function completeCheckoutAction(formData: FormData) {
       (subtotal * agency.commissionRateBps) / 10000,
     );
 
+    const effectiveEmail = user?.email ?? customerEmail;
+    const effectiveName = user?.fullName ?? customerName;
+    const effectivePhone = user?.phone ?? customerPhone;
+
     const order = await tx.order.create({
       data: {
-        userId: user.id,
+        userId: user?.id ?? null,
         agencyId: agency.id,
-        customerEmail: user.email,
-        customerName: user.fullName,
-        customerPhone: user.phone,
+        customerEmail: effectiveEmail,
+        customerName: effectiveName,
+        customerPhone: effectivePhone,
         status: "PAID",
         subtotalAmount: subtotal,
         feesAmount: 0,
@@ -168,8 +174,8 @@ export async function completeCheckoutAction(formData: FormData) {
           orderItemId: orderItem.id,
           ticketTypeId: ticketType.id,
           occurrenceId: occurrence.id,
-          holderName: user.fullName,
-          holderEmail: user.email,
+          holderName: effectiveName,
+          holderEmail: effectiveEmail,
           serialNumber,
           qrTokenHash: "temp",
           status: "ISSUED",
@@ -188,36 +194,43 @@ export async function completeCheckoutAction(formData: FormData) {
       });
     }
 
-    return order.id;
+    return {
+      orderId: order.id,
+      customerEmail: effectiveEmail,
+    };
   });
 
-  redirect(`/checkout/success?mode=buy`);
+  const emailSent = await sendGuestTicketsEmail(result.orderId, result.customerEmail);
+  redirect(
+    `/checkout/success?mode=buy&orderId=${encodeURIComponent(result.orderId)}&email=${encodeURIComponent(result.customerEmail)}&emailSent=${emailSent ? "1" : "0"}`,
+  );
 }
 
 export async function completeReservationCheckoutAction(formData: FormData) {
   const session = await getSession();
 
-  if (!session) {
-    redirect("/login");
-  }
-
   const ticketTypeId = String(formData.get("ticketTypeId") ?? "");
   const quantity = Number(formData.get("quantity") ?? 1);
   const paymentMethod = String(formData.get("paymentMethod") ?? "OTHER");
   const paymentLabel = String(formData.get("paymentLabel") ?? "Paiement simulé");
+  const customerName = String(formData.get("customerName") ?? "").trim();
+  const customerEmail = String(formData.get("customerEmail") ?? "").trim().toLowerCase();
+  const customerPhoneRaw = String(formData.get("customerPhone") ?? "").trim();
+  const customerPhone = customerPhoneRaw.length > 0 ? customerPhoneRaw : null;
 
   if (!ticketTypeId || !quantity || quantity < 1) {
     throw new Error("Données de réservation invalides.");
   }
+  if (!customerName || !customerEmail) {
+    throw new Error("Nom et email sont requis pour finaliser la réservation.");
+  }
 
   const result = await prisma.$transaction(async (tx) => {
-    const user = await tx.user.findUnique({
-      where: { id: session.userId },
-    });
-
-    if (!user) {
-      throw new Error("Utilisateur introuvable.");
-    }
+    const user = session
+      ? await tx.user.findUnique({
+          where: { id: session.userId },
+        })
+      : null;
 
     const ticketType = await tx.ticketType.findUnique({
       where: { id: ticketTypeId },
@@ -281,13 +294,17 @@ export async function completeReservationCheckoutAction(formData: FormData) {
     const gracePeriodHours = ticketType.reservationPolicy.gracePeriodHours ?? 72;
     const expiresAt = addHours(new Date(), gracePeriodHours);
 
+    const effectiveEmail = user?.email ?? customerEmail;
+    const effectiveName = user?.fullName ?? customerName;
+    const effectivePhone = user?.phone ?? customerPhone;
+
     const order = await tx.order.create({
       data: {
-        userId: user.id,
+        userId: user?.id ?? null,
         agencyId: agency.id,
-        customerEmail: user.email,
-        customerName: user.fullName,
-        customerPhone: user.phone,
+        customerEmail: effectiveEmail,
+        customerName: effectiveName,
+        customerPhone: effectivePhone,
         status: "PARTIALLY_PAID",
         subtotalAmount: subtotal,
         feesAmount: 0,
@@ -354,8 +371,8 @@ export async function completeReservationCheckoutAction(formData: FormData) {
           orderItemId: orderItem.id,
           ticketTypeId: ticketType.id,
           occurrenceId: occurrence.id,
-          holderName: user.fullName,
-          holderEmail: user.email,
+          holderName: effectiveName,
+          holderEmail: effectiveEmail,
           serialNumber,
           qrTokenHash: "temp",
           status: "RESERVED",
@@ -371,8 +388,14 @@ export async function completeReservationCheckoutAction(formData: FormData) {
       });
     }
 
-    return order.id;
+    return {
+      orderId: order.id,
+      customerEmail: effectiveEmail,
+    };
   });
 
-  redirect(`/checkout/success?mode=reserve`);
+  const emailSent = await sendGuestTicketsEmail(result.orderId, result.customerEmail);
+  redirect(
+    `/checkout/success?mode=reserve&orderId=${encodeURIComponent(result.orderId)}&email=${encodeURIComponent(result.customerEmail)}&emailSent=${emailSent ? "1" : "0"}`,
+  );
 }

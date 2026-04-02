@@ -237,9 +237,18 @@ async function main() {
         mediaAssets: {
           create: [
             {
+              mediaType: "IMAGE",
               url: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f",
               altText: "Concert premium",
               sortOrder: 0,
+            },
+            {
+              mediaType: "VIDEO",
+              url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+              provider: "YOUTUBE",
+              posterUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f",
+              altText: "Bande-annonce vidéo",
+              sortOrder: 1,
             },
           ],
         },

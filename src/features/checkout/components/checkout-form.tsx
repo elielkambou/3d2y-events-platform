@@ -10,6 +10,9 @@ type CheckoutFormProps = {
   amountDueNow: number;
   remainingAmount: number;
   depositPercent: number;
+  defaultCustomerName?: string;
+  defaultCustomerEmail?: string;
+  defaultCustomerPhone?: string;
   action: (formData: FormData) => void | Promise<void>;
 };
 
@@ -71,9 +74,13 @@ export function CheckoutForm({
   amountDueNow,
   remainingAmount,
   depositPercent,
+  defaultCustomerName,
+  defaultCustomerEmail,
+  defaultCustomerPhone,
   action,
 }: CheckoutFormProps) {
   const [selectedMethod, setSelectedMethod] = useState<string>("ORANGE_MONEY");
+  const [showAdvancedMethods, setShowAdvancedMethods] = useState(false);
 
   const [mobileNumber, setMobileNumber] = useState("");
   const [mobileHolder, setMobileHolder] = useState("");
@@ -85,15 +92,18 @@ export function CheckoutForm({
 
   const [cashFullName, setCashFullName] = useState("");
   const [cashPhone, setCashPhone] = useState("");
+  const [customerName, setCustomerName] = useState(defaultCustomerName ?? "");
+  const [customerEmail, setCustomerEmail] = useState(defaultCustomerEmail ?? "");
+  const [customerPhone, setCustomerPhone] = useState(defaultCustomerPhone ?? "");
 
   const [acceptOrder, setAcceptOrder] = useState(false);
-  const [acceptTerms, setAcceptTerms] = useState(false);
-  const [acceptDemo, setAcceptDemo] = useState(false);
 
   const selected = useMemo(
     () => paymentMethods.find((method) => method.id === selectedMethod),
     [selectedMethod],
   );
+  const primaryMethod = paymentMethods[0];
+  const advancedMethods = paymentMethods.slice(1);
 
   const isMobileValid =
     mobileNumber.trim().length >= 8 && mobileHolder.trim().length >= 2;
@@ -117,7 +127,10 @@ export function CheckoutForm({
           : false;
 
   const isFormValid =
-    isPaymentDetailsValid && acceptOrder && acceptTerms && acceptDemo;
+    isPaymentDetailsValid &&
+    customerName.trim().length >= 2 &&
+    customerEmail.trim().length >= 5 &&
+    acceptOrder;
 
   return (
     <form action={action} className="space-y-6">
@@ -126,37 +139,13 @@ export function CheckoutForm({
       <input type="hidden" name="paymentMethod" value={selectedMethod} />
       <input type="hidden" name="paymentLabel" value={selected?.label ?? ""} />
 
-      <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/10 to-white/5 shadow-2xl">
-        <div className="border-b border-white/10 px-6 py-5">
-          <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
-            Progression
-          </p>
-
-          <div className="mt-5 grid grid-cols-3 gap-3">
-            <div className="rounded-2xl bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] px-4 py-3 text-center text-sm font-medium text-black shadow-[0_0_20px_rgba(255,107,0,0.18)]">
-              1. Paiement
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-center text-sm text-white/60">
-              2. Validation
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-center text-sm text-white/60">
-              3. Confirmation
-            </div>
-          </div>
-        </div>
-
-        <div className="px-6 py-6">
-          <div className="flex items-start gap-4 rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-4">
-            <ShieldCheck className="mt-0.5 h-5 w-5 text-emerald-300" />
-            <div>
-              <p className="font-medium text-emerald-200">Transaction simulée sécurisée</p>
-              <p className="mt-1 text-sm text-emerald-100/70">
-                Cette interface imite un tunnel de paiement réaliste pour la démo,
-                sans encaissement réel.
-              </p>
-            </div>
-          </div>
-        </div>
+      <section className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6 shadow-xl">
+        <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
+          Paiement express
+        </p>
+        <p className="mt-3 text-white/70">
+          Choisis ton moyen de paiement et valide en quelques secondes.
+        </p>
       </section>
 
       <section className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-xl">
@@ -164,8 +153,9 @@ export function CheckoutForm({
           Méthode de paiement
         </p>
 
-        <div className="mt-6 grid gap-4">
-          {paymentMethods.map((method) => {
+        <div className="mt-6 space-y-4">
+          {(() => {
+            const method = primaryMethod;
             const active = method.id === selectedMethod;
             const Icon = method.icon;
 
@@ -174,45 +164,131 @@ export function CheckoutForm({
                 key={method.id}
                 type="button"
                 onClick={() => setSelectedMethod(method.id)}
-                className={`rounded-[1.5rem] border p-4 text-left transition ${
+                className={`w-full rounded-[1.5rem] border p-4 text-left transition ${
                   active
                     ? "border-[#FF6B00]/50 bg-gradient-to-br from-[#FF6B00]/10 to-[#8B5CF6]/10"
                     : "border-white/10 bg-black/25 hover:bg-white/10"
                 }`}
               >
-                <div
-                  className={`rounded-[1.25rem] bg-gradient-to-br p-4 ${method.accent}`}
-                >
+                <div className={`rounded-[1.25rem] bg-gradient-to-br p-4 ${method.accent}`}>
                   <div className="flex items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
                       <div
                         className={`flex h-12 w-12 items-center justify-center rounded-2xl ${
-                        active
-                          ? "bg-gradient-to-br from-[#FF6B00] to-[#8B5CF6] text-black"
-                          : "bg-white/10 text-white"
+                          active
+                            ? "bg-gradient-to-br from-[#FF6B00] to-[#8B5CF6] text-black"
+                            : "bg-white/10 text-white"
                         }`}
                       >
                         <Icon className="h-5 w-5" />
                       </div>
-
                       <div>
                         <p className="text-base font-medium text-white">{method.label}</p>
                         <p className="mt-1 text-sm text-white/60">{method.hint}</p>
                       </div>
                     </div>
-
                     <div
                       className={`h-5 w-5 rounded-full border ${
-                        active
-                          ? "border-[#8B5CF6] bg-[#8B5CF6]"
-                          : "border-white/20"
+                        active ? "border-[#8B5CF6] bg-[#8B5CF6]" : "border-white/20"
                       }`}
                     />
                   </div>
                 </div>
               </button>
             );
-          })}
+          })()}
+
+          <button
+            type="button"
+            onClick={() => setShowAdvancedMethods((prev) => !prev)}
+            className="text-sm text-white/70 underline-offset-4 transition hover:text-white hover:underline"
+          >
+            {showAdvancedMethods
+              ? "Masquer les autres moyens"
+              : "Afficher d'autres moyens de paiement"}
+          </button>
+
+          {showAdvancedMethods ? (
+            <div className="grid gap-3">
+              {advancedMethods.map((method) => {
+                const active = method.id === selectedMethod;
+                const Icon = method.icon;
+
+                return (
+                  <button
+                    key={method.id}
+                    type="button"
+                    onClick={() => setSelectedMethod(method.id)}
+                    className={`rounded-2xl border p-4 text-left transition ${
+                      active
+                        ? "border-[#FF6B00]/50 bg-gradient-to-br from-[#FF6B00]/10 to-[#8B5CF6]/10"
+                        : "border-white/10 bg-black/25 hover:bg-white/10"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="rounded-xl bg-white/10 p-2 text-white">
+                          <Icon className="h-4 w-4" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-white">{method.label}</p>
+                          <p className="text-xs text-white/60">{method.hint}</p>
+                        </div>
+                      </div>
+                      <div
+                        className={`h-4 w-4 rounded-full border ${
+                          active ? "border-[#8B5CF6] bg-[#8B5CF6]" : "border-white/20"
+                        }`}
+                      />
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          ) : null}
+        </div>
+      </section>
+
+      <section className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-xl">
+        <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
+          Coordonnées
+        </p>
+        <div className="mt-6 grid gap-5 md:grid-cols-2">
+          <div>
+            <label className="mb-2 block text-sm text-white/70">Nom complet</label>
+            <input
+              name="customerName"
+              type="text"
+              required
+              value={customerName}
+              onChange={(e) => setCustomerName(e.target.value)}
+              placeholder="Ton nom"
+              className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+            />
+          </div>
+          <div>
+            <label className="mb-2 block text-sm text-white/70">Email</label>
+            <input
+              name="customerEmail"
+              type="email"
+              required
+              value={customerEmail}
+              onChange={(e) => setCustomerEmail(e.target.value)}
+              placeholder="email@exemple.com"
+              className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+            />
+          </div>
+          <div className="md:col-span-2">
+            <label className="mb-2 block text-sm text-white/70">Téléphone (optionnel)</label>
+            <input
+              name="customerPhone"
+              type="tel"
+              value={customerPhone}
+              onChange={(e) => setCustomerPhone(e.target.value)}
+              placeholder="+225 07 00 00 00 00"
+              className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+            />
+          </div>
         </div>
       </section>
 
@@ -348,24 +424,15 @@ export function CheckoutForm({
             </div>
 
             <div className="md:col-span-2 rounded-2xl border border-white/10 bg-black/30 p-4 text-white/70">
-              Cette option simule un paiement physique validé ensuite par l’agence.
-              Dans la version finale, ce flux sera traité séparément.
+              Ce mode crée une réservation/paiement simulé puis validation côté agence.
             </div>
           </div>
         ) : null}
-
-        <div className="mt-6 rounded-2xl border border-white/10 bg-black/30 p-4 text-sm text-white/60">
-          Cette interface est volontairement réaliste, mais reste en mode démonstration.
-          Aucun débit réel n’est effectué.
-        </div>
       </section>
 
       <section className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-xl">
-        <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
-          Validation
-        </p>
-
-        <div className="mt-6 space-y-3 text-white/70">
+        <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">Validation</p>
+        <div className="mt-4 space-y-3 text-white/70">
           <label className="flex items-start gap-3">
             <input
               type="checkbox"
@@ -373,27 +440,7 @@ export function CheckoutForm({
               onChange={(e) => setAcceptOrder(e.target.checked)}
               className="mt-1"
             />
-            <span>Je confirme les informations de ma commande.</span>
-          </label>
-
-          <label className="flex items-start gap-3">
-            <input
-              type="checkbox"
-              checked={acceptTerms}
-              onChange={(e) => setAcceptTerms(e.target.checked)}
-              className="mt-1"
-            />
-            <span>J’accepte les conditions générales et la politique de remboursement.</span>
-          </label>
-
-          <label className="flex items-start gap-3">
-            <input
-              type="checkbox"
-              checked={acceptDemo}
-              onChange={(e) => setAcceptDemo(e.target.checked)}
-              className="mt-1"
-            />
-            <span>Je comprends qu’il s’agit d’un paiement simulé dans cette version.</span>
+            <span>Je confirme les informations et je valide mon paiement.</span>
           </label>
         </div>
 
@@ -419,9 +466,15 @@ export function CheckoutForm({
           </p>
         ) : null}
 
-        <div className="mt-6 flex items-center gap-3 rounded-2xl border border-white/10 bg-black/30 p-4 text-sm text-white/60">
-          <LockKeyhole className="h-4 w-4 text-[#FF6B00]/80" />
-          <span>Les informations sont utilisées uniquement pour la simulation de paiement.</span>
+        <div className="mt-6 flex items-start gap-3 rounded-2xl border border-white/10 bg-black/30 p-4 text-sm text-white/60">
+          <ShieldCheck className="mt-0.5 h-4 w-4 text-[#FF6B00]/80" />
+          <span>
+            Paiement sécurisé (mode démo): aucun débit réel n’est effectué à ce stade.
+          </span>
+        </div>
+        <div className="mt-3 flex items-start gap-3 rounded-2xl border border-white/10 bg-black/30 p-4 text-sm text-white/60">
+          <LockKeyhole className="mt-0.5 h-4 w-4 text-[#FF6B00]/80" />
+          <span>Tes données restent utilisées uniquement pour simuler la transaction.</span>
         </div>
       </section>
     </form>

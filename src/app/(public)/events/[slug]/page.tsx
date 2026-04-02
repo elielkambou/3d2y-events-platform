@@ -1,10 +1,33 @@
 import { notFound } from "next/navigation";
 import { formatEventDate, formatXof } from "@/lib/formatters";
 import { getPublishedEventBySlug } from "@/server/queries/catalog";
-import { getSession } from "@/lib/auth/session";
-import { createCheckoutOrderAction } from "@/server/actions/checkout";
-import { createReservationAction } from "@/server/actions/reservations";
 import { CheckoutLinkActions } from "@/features/checkout/components/checkout-link-actions";
+
+function buildVideoEmbedUrl(url: string) {
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.toLowerCase();
+
+    if (host.includes("youtu.be")) {
+      const videoId = parsed.pathname.replace("/", "");
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+    }
+
+    if (host.includes("youtube.com")) {
+      const videoId = parsed.searchParams.get("v");
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+    }
+
+    if (host.includes("vimeo.com")) {
+      const videoId = parsed.pathname.split("/").filter(Boolean).pop();
+      return videoId ? `https://player.vimeo.com/video/${videoId}` : null;
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+}
 type EventDetailPageProps = {
   params: Promise<{
     slug: string;
@@ -16,11 +39,14 @@ export default async function EventDetailPage({
 }: EventDetailPageProps) {
   const { slug } = await params;
   const event = await getPublishedEventBySlug(slug);
-  const session = await getSession();
 
   if (!event) {
     notFound();
   }
+
+  const mediaAssets = event.mediaAssets ?? [];
+  const imageAssets = mediaAssets.filter((asset) => asset.mediaType === "IMAGE");
+  const videoAssets = mediaAssets.filter((asset) => asset.mediaType === "VIDEO");
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0A0A0C] text-white">
@@ -99,6 +125,63 @@ export default async function EventDetailPage({
       <section className="relative mx-auto max-w-7xl px-6 py-12">
         <div className="relative z-10 grid gap-10 lg:grid-cols-[1fr_0.9fr]">
           <div>
+            {mediaAssets.length > 0 ? (
+              <section className="mb-10">
+                <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
+                  Médias
+                </p>
+                <h2 className="mt-3 text-2xl font-semibold">Galerie événement</h2>
+
+                <div className="mt-5 grid gap-4">
+                  {videoAssets.map((asset) => {
+                    const embedUrl = buildVideoEmbedUrl(asset.url);
+
+                    return (
+                      <div
+                        key={asset.id}
+                        className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl"
+                      >
+                        {embedUrl ? (
+                          <iframe
+                            src={embedUrl}
+                            title={asset.altText ?? `Video ${asset.id}`}
+                            className="aspect-video w-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        ) : (
+                          <video
+                            className="aspect-video w-full object-cover"
+                            controls
+                            preload="metadata"
+                            poster={asset.posterUrl ?? undefined}
+                            src={asset.url}
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
+
+                  {imageAssets.length > 0 ? (
+                    <div className="grid gap-4 md:grid-cols-2">
+                      {imageAssets.map((asset) => (
+                        <div
+                          key={asset.id}
+                          className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl"
+                        >
+                          <img
+                            src={asset.url}
+                            alt={asset.altText ?? event.title}
+                            className="aspect-[16/10] w-full object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              </section>
+            ) : null}
+
             <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
               À propos
             </p>
@@ -170,25 +253,17 @@ export default async function EventDetailPage({
                             </div>
 
                             <div className="mt-4 border-t border-white/10 pt-4">
-                              {session ? (
-                                <CheckoutLinkActions
-                                  ticketTypeId={ticketType.id}
-                                  maxPerOrder={ticketType.maxPerOrder ?? 10}
-                                  isReservable={ticketType.isReservable}
-                                />
-                              ) : (
-                                <div className="flex items-center justify-between gap-4">
-                                  <p className="text-sm text-white/60">
-                                    Connecte-toi pour acheter ou réserver ce billet.
-                                  </p>
-                                  <a
-                                    href="/login"
-                                    className="rounded-xl bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] px-4 py-2 text-sm font-medium text-black transition hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]"
-                                  >
-                                    Se connecter
-                                  </a>
-                                </div>
-                              )}
+                              <CheckoutLinkActions
+                                ticketTypeId={ticketType.id}
+                                maxPerOrder={ticketType.maxPerOrder ?? 10}
+                                canReserve={
+                                  ticketType.isReservable &&
+                                  ticketType.reservationPolicy?.isEnabled === true
+                                }
+                              />
+                              <p className="mt-3 text-xs text-white/55">
+                                Achat express sans compte obligatoire.
+                              </p>
                             </div>
                         </div>
                         ))}

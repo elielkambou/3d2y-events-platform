@@ -14,6 +14,13 @@ function slugify(value: string) {
     .replace(/^-+|-+$/g, "");
 }
 
+function detectVideoProvider(url: string) {
+  const lower = url.toLowerCase();
+  if (lower.includes("youtube.com") || lower.includes("youtu.be")) return "YOUTUBE";
+  if (lower.includes("vimeo.com")) return "VIMEO";
+  return "DIRECT";
+}
+
 async function createVenueIfNeeded(data: {
   venueId?: string;
   newVenueName?: string;
@@ -66,6 +73,8 @@ export async function createAgencyEventAction(formData: FormData) {
     fullDescription: formData.get("fullDescription"),
     categoryId: formData.get("categoryId"),
     coverImageUrl: formData.get("coverImageUrl"),
+    promoVideoUrl: formData.get("promoVideoUrl") || undefined,
+    promoVideoPosterUrl: formData.get("promoVideoPosterUrl") || undefined,
     venueId: formData.get("venueId") || undefined,
     newVenueName: formData.get("newVenueName") || undefined,
     newVenueDistrict: formData.get("newVenueDistrict") || undefined,
@@ -116,6 +125,9 @@ export async function createAgencyEventAction(formData: FormData) {
     newVenueAddressLine: data.newVenueAddressLine,
   });
 
+  const promoVideoUrl = data.promoVideoUrl?.trim();
+  const promoVideoPosterUrl = data.promoVideoPosterUrl?.trim();
+
   await prisma.event.create({
     data: {
       agencyId: context.agency.id,
@@ -129,6 +141,28 @@ export async function createAgencyEventAction(formData: FormData) {
       isPublished: false,
       isFeatured: false,
       defaultCurrency: "XOF",
+      mediaAssets: {
+        create: [
+          {
+            mediaType: "IMAGE",
+            url: data.coverImageUrl,
+            altText: `Affiche de ${data.title}`,
+            sortOrder: 0,
+          },
+          ...(promoVideoUrl
+            ? [
+                {
+                  mediaType: "VIDEO" as const,
+                  url: promoVideoUrl,
+                  provider: detectVideoProvider(promoVideoUrl),
+                  posterUrl: promoVideoPosterUrl || data.coverImageUrl,
+                  altText: `Vidéo promotionnelle de ${data.title}`,
+                  sortOrder: 1,
+                },
+              ]
+            : []),
+        ],
+      },
       occurrences: {
         create: [
           {

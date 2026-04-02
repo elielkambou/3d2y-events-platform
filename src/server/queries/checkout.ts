@@ -7,14 +7,11 @@ export async function getCheckoutPreview(params: {
   mode: "buy" | "reserve";
 }) {
   const session = await getSession();
-
-  if (!session) return null;
-
-  const user = await prisma.user.findUnique({
-    where: { id: session.userId },
-  });
-
-  if (!user) return null;
+  const user = session
+    ? await prisma.user.findUnique({
+        where: { id: session.userId },
+      })
+    : null;
 
   const ticketType = await prisma.ticketType.findUnique({
     where: { id: params.ticketTypeId },
@@ -63,12 +60,14 @@ export async function getCheckoutPreview(params: {
 
   return {
     session,
-    user: {
-      id: user.id,
-      fullName: user.fullName,
-      email: user.email,
-      phone: user.phone,
-    },
+    user: user
+      ? {
+          id: user.id,
+          fullName: user.fullName,
+          email: user.email,
+          phone: user.phone,
+        }
+      : null,
     mode: params.mode,
     ticketType: {
       id: ticketType.id,

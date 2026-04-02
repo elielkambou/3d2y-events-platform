@@ -154,8 +154,11 @@ export async function getPublishedEventBySlug(slug: string) {
     },
     mediaAssets: event.mediaAssets.map((asset) => ({
       id: asset.id,
+      mediaType: asset.mediaType,
       url: asset.url,
       altText: asset.altText,
+      provider: asset.provider,
+      posterUrl: asset.posterUrl,
       sortOrder: asset.sortOrder,
     })),
     occurrences: event.occurrences.map((occurrence) => ({
@@ -214,6 +217,7 @@ type EventCardEvent = Prisma.EventGetPayload<{
 
 function mapEventCardData(event: EventCardEvent) {
   const firstOccurrence = event.occurrences[0] ?? null;
+  const firstTicketType = firstOccurrence?.ticketTypes[0] ?? null;
 
   const minPrice =
     firstOccurrence && firstOccurrence.ticketTypes.length > 0
@@ -249,6 +253,12 @@ function mapEventCardData(event: EventCardEvent) {
           venueName: firstOccurrence.venue.name,
           district: firstOccurrence.venue.district,
           city: firstOccurrence.venue.city,
+        }
+      : null,
+    firstTicketType: firstTicketType
+      ? {
+          id: firstTicketType.id,
+          isReservable: firstTicketType.isReservable,
         }
       : null,
     minPrice,

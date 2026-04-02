@@ -39,6 +39,16 @@ export const createAgencyEventSchema = z
     }),
     categoryId: z.string().min(1, "La catégorie est obligatoire."),
     coverImageUrl: z.string().url("L’URL de l’image de couverture est invalide."),
+    promoVideoUrl: z
+      .string()
+      .url("L’URL de la vidéo promotionnelle est invalide.")
+      .optional()
+      .or(z.literal("")),
+    promoVideoPosterUrl: z
+      .string()
+      .url("L’URL de l’image d’aperçu vidéo est invalide.")
+      .optional()
+      .or(z.literal("")),
 
     venueId: z.string().optional(),
     newVenueName: z.string().optional(),
@@ -88,6 +98,14 @@ export const createAgencyEventSchema = z
     gracePeriodHours: z.coerce.number().int().min(0).optional(),
   })
   .superRefine((data, ctx) => {
+    if (data.promoVideoPosterUrl && !data.promoVideoUrl) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["promoVideoPosterUrl"],
+        message: "Ajoute d’abord une URL vidéo avant de renseigner une image d’aperçu.",
+      });
+    }
+
     if (!data.venueId && !data.newVenueName?.trim()) {
       ctx.addIssue({
         code: "custom",

@@ -1,8 +1,13 @@
 import Link from "next/link";
+import { formatEventDate } from "@/lib/formatters";
+import { getGuestOrderTickets } from "@/server/queries/guest-tickets";
 
 type CheckoutSuccessPageProps = {
   searchParams: Promise<{
     mode?: string;
+    orderId?: string;
+    email?: string;
+    emailSent?: string;
   }>;
 };
 
@@ -11,6 +16,10 @@ export default async function CheckoutSuccessPage({
 }: CheckoutSuccessPageProps) {
   const params = await searchParams;
   const mode = params.mode === "reserve" ? "reserve" : "buy";
+  const orderId = params.orderId ?? "";
+  const email = params.email ?? "";
+  const emailSent = params.emailSent === "1";
+  const guestOrder = orderId && email ? await getGuestOrderTickets(orderId, email) : null;
 
   return (
     <main className="min-h-screen bg-[#0A0A0C] px-6 py-16 text-white">
@@ -34,8 +43,8 @@ export default async function CheckoutSuccessPage({
 
           <p className="mt-4 text-white/70">
             {mode === "buy"
-              ? "Votre commande a été enregistrée et vos billets sont disponibles dans votre espace client."
-              : "Votre réservation a bien été enregistrée. Le solde pourra être réglé plus tard depuis votre espace client."}
+              ? "Votre commande a été enregistrée. Vous pouvez récupérer vos billets immédiatement."
+              : "Votre réservation a bien été enregistrée. Vous pouvez récupérer vos justificatifs immédiatement."}
           </p>
 
           <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -53,6 +62,51 @@ export default async function CheckoutSuccessPage({
               Retour à l’explore
             </Link>
           </div>
+
+          {guestOrder ? (
+            <section className="mt-8 rounded-2xl border border-white/10 bg-black/30 p-4 text-left">
+              <p className="text-sm uppercase tracking-[0.2em] text-[#FF6B00]">
+                Billets invités
+              </p>
+              <p className="mt-2 text-sm text-white/70">
+                Commande {guestOrder.id} · {guestOrder.customerEmail}
+              </p>
+              <p className="mt-2 text-xs text-white/60">
+                {emailSent
+                  ? "Un email contenant vos billets vient d’être envoyé."
+                  : "Email non envoyé (SMTP non configuré). Utilisez les téléchargements ci-dessous."}
+              </p>
+
+              <div className="mt-4 space-y-3">
+                {guestOrder.items.flatMap((item) =>
+                  item.tickets.map((ticket) => (
+                    <div
+                      key={ticket.id}
+                      className="rounded-xl border border-white/10 bg-white/5 p-3"
+                    >
+                      <p className="font-medium text-white">
+                        {item.occurrence.event.title} · {item.ticketType.name}
+                      </p>
+                      <p className="mt-1 text-xs text-white/60">
+                        {formatEventDate(item.occurrence.startsAt)} · {item.occurrence.venue.name}
+                      </p>
+                      <p className="mt-1 text-xs text-white/60">
+                        N° billet: {ticket.serialNumber}
+                      </p>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        <a
+                          href={`/api/tickets/download?ticketId=${encodeURIComponent(ticket.id)}&orderId=${encodeURIComponent(guestOrder.id)}&email=${encodeURIComponent(guestOrder.customerEmail)}`}
+                          className="rounded-lg bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] px-3 py-2 text-xs font-medium text-black transition hover:shadow-[0_0_20px_rgba(139,92,246,0.25)]"
+                        >
+                          Télécharger billet
+                        </a>
+                      </div>
+                    </div>
+                  )),
+                )}
+              </div>
+            </section>
+          ) : null}
 
           <div className="mt-8 rounded-2xl border border-white/10 bg-black/30 p-4 text-left text-sm text-white/60">
             <p className="font-medium text-white/80">Mode démonstration</p>

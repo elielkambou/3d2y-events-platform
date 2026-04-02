@@ -84,6 +84,30 @@ export default async function NewAgencyEventPage() {
                 />
               </div>
 
+              <div>
+                <label className="mb-2 block text-sm text-white/70">
+                  URL vidéo promo (optionnel)
+                </label>
+                <input
+                  name="promoVideoUrl"
+                  type="url"
+                  placeholder="https://youtu.be/... ou https://vimeo.com/..."
+                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="mb-2 block text-sm text-white/70">
+                  URL image aperçu vidéo (optionnel)
+                </label>
+                <input
+                  name="promoVideoPosterUrl"
+                  type="url"
+                  placeholder="https://..."
+                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                />
+              </div>
+
               <div className="md:col-span-2">
                 <WordCountTextarea
                   name="shortDescription"
@@ -310,13 +334,16 @@ export default async function NewAgencyEventPage() {
               <div className="md:col-span-2">
                 <label className="flex items-center gap-3 text-sm text-white/80">
                   <input type="checkbox" name="isReservable" />
-                  Autoriser la réservation avec acompte
+                  Activer la réservation avec acompte (optionnel)
                 </label>
+                <p className="mt-2 text-xs text-white/50">
+                  Si cette option n'est pas cochée, seul le bouton "Acheter" sera affiché côté client.
+                </p>
               </div>
 
               <div>
                 <label className="mb-2 block text-sm text-white/70">
-                  Acompte %
+                  Acompte % (si réservation activée)
                 </label>
                 <input
                   name="depositPercent"
@@ -329,7 +356,7 @@ export default async function NewAgencyEventPage() {
 
               <div>
                 <label className="mb-2 block text-sm text-white/70">
-                  Grâce (heures)
+                  Délai de grâce (heures, si réservation activée)
                 </label>
                 <input
                   name="gracePeriodHours"

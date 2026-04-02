@@ -11,6 +11,32 @@ import { formatEventDate, formatXof } from "@/lib/formatters";
 import { ConfirmActionForm } from "@/components/forms/ConfirmActionForm";
 import { MinLengthTextarea } from "@/components/forms/min-length-textarea";
 
+function buildVideoEmbedUrl(url: string) {
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.toLowerCase();
+
+    if (host.includes("youtu.be")) {
+      const videoId = parsed.pathname.replace("/", "");
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+    }
+
+    if (host.includes("youtube.com")) {
+      const videoId = parsed.searchParams.get("v");
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+    }
+
+    if (host.includes("vimeo.com")) {
+      const videoId = parsed.pathname.split("/").filter(Boolean).pop();
+      return videoId ? `https://player.vimeo.com/video/${videoId}` : null;
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 type AdminEventDetailPageProps = {
   params: Promise<{
     eventId: string;
@@ -51,6 +77,8 @@ export default async function AdminEventDetailPage({
   const event = data.event;
   const canDecide = event.status === "SUBMITTED" || event.status === "UNDER_REVIEW";
   const isPublished = event.status === "PUBLISHED";
+  const imageAssets = event.mediaAssets.filter((asset) => asset.mediaType === "IMAGE");
+  const videoAssets = event.mediaAssets.filter((asset) => asset.mediaType === "VIDEO");
 
   return (
     <main className="min-h-screen bg-[#0A0A0C] px-6 py-16 text-white">
@@ -97,6 +125,66 @@ export default async function AdminEventDetailPage({
                 </div>
               )}
             </div>
+
+            {event.mediaAssets.length > 0 ? (
+              <section className="mt-10">
+                <h2 className="text-2xl font-semibold">Médias agence</h2>
+
+                <div className="mt-6 grid gap-4">
+                  {videoAssets.map((asset) => {
+                    const embedUrl = buildVideoEmbedUrl(asset.url);
+
+                    return (
+                      <div
+                        key={asset.id}
+                        className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl"
+                      >
+                        {embedUrl ? (
+                          <iframe
+                            src={embedUrl}
+                            title={asset.altText ?? `Video ${asset.id}`}
+                            className="aspect-video w-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        ) : (
+                          <video
+                            className="aspect-video w-full object-cover"
+                            controls
+                            preload="metadata"
+                            poster={asset.posterUrl ?? undefined}
+                            src={asset.url}
+                          />
+                        )}
+                        <div className="border-t border-white/10 px-4 py-3 text-xs text-white/60">
+                          VIDEO · {asset.provider ?? "DIRECT"}
+                        </div>
+                      </div>
+                    );
+                  })}
+
+                  {imageAssets.length > 0 ? (
+                    <div className="grid gap-4 md:grid-cols-2">
+                      {imageAssets.map((asset) => (
+                        <div
+                          key={asset.id}
+                          className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl"
+                        >
+                          <img
+                            src={asset.url}
+                            alt={asset.altText ?? event.title}
+                            className="aspect-[16/10] w-full object-cover"
+                          />
+                          <div className="border-t border-white/10 px-4 py-3 text-xs text-white/60">
+                            IMAGE
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              </section>
+            ) : null}
 
             <section className="mt-10">
               <h2 className="text-2xl font-semibold">Description complète</h2>

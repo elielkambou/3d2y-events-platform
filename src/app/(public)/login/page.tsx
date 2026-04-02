@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -14,8 +14,10 @@ const DEMO_USERS = [
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [loadingDemoEmail, setLoadingDemoEmail] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const nextUrl = searchParams.get("next");
 
   async function loginDemo(email: string, redirectTo: string) {
     try {
@@ -35,7 +37,7 @@ export default function LoginPage() {
       }
 
       toast.success("Connexion démo réussie");
-      router.push(redirectTo);
+      router.push(nextUrl || redirectTo);
       router.refresh();
     } catch (error) {
       toast.error(
@@ -72,7 +74,7 @@ export default function LoginPage() {
       }
 
       toast.success("Connexion réussie");
-      router.push(data.redirectTo ?? "/account");
+      router.push(nextUrl || data.redirectTo || "/account");
       router.refresh();
     } catch (error) {
       toast.error(
@@ -135,7 +137,7 @@ export default function LoginPage() {
           <p className="mt-6 text-sm text-white/60">
             Pas encore de compte ?{" "}
             <Link
-              href="/register"
+              href={nextUrl ? `/register?next=${encodeURIComponent(nextUrl)}` : "/register"}
               className="text-[#FF6B00]/80 hover:text-[#FF6B00]"
             >
               Créer un compte

@@ -1,4 +1,3 @@
-import { LockKeyhole, ShieldCheck, Ticket } from "lucide-react";
 import { redirect } from "next/navigation";
 import { getCheckoutPreview } from "@/server/queries/checkout";
 import {
@@ -34,7 +33,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
   });
 
   if (!preview) {
-    redirect("/login");
+    redirect("/explore");
   }
 
   const action =
@@ -44,7 +43,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
 
   return (
     <main className="min-h-screen bg-[#0A0A0C] px-6 py-16 text-white">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-6xl">
         <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
           Checkout
         </p>
@@ -65,16 +64,15 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
 
         <h1 className="mt-4 text-4xl font-semibold tracking-tight">
           {preview.mode === "buy"
-            ? "Finaliser votre paiement"
-            : "Finaliser votre acompte"}
+            ? "Valider l'achat"
+            : "Valider la réservation"}
         </h1>
 
         <p className="mt-4 max-w-2xl text-white/70">
-          Une interface de paiement premium et réaliste, conçue pour préparer
-          l’intégration future d’un opérateur de paiement externe.
+          Vérifie le montant, complète ton moyen de paiement, puis confirme.
         </p>
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_390px]">
+        <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_360px]">
           <div>
             <CheckoutForm
               mode={preview.mode}
@@ -83,6 +81,9 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
               amountDueNow={preview.pricing.amountDueNow}
               remainingAmount={preview.pricing.remainingAmount}
               depositPercent={preview.pricing.depositPercent}
+              defaultCustomerName={preview.user?.fullName ?? ""}
+              defaultCustomerEmail={preview.user?.email ?? ""}
+              defaultCustomerPhone={preview.user?.phone ?? ""}
               action={action}
             />
           </div>
@@ -129,7 +130,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
 
             <section className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-xl">
               <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
-                Détail montant
+                Montant
               </p>
 
               <div className="mt-5 space-y-3 text-white/75">
@@ -167,45 +168,6 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
                     <span>À payer maintenant</span>
                     <span>{formatXof(preview.pricing.amountDueNow)}</span>
                   </div>
-                </div>
-              </div>
-            </section>
-
-            <section className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-xl">
-              <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
-                Client
-              </p>
-
-              <div className="mt-5 space-y-2 text-white/70">
-                <p>{preview.user.fullName ?? "Nom à compléter"}</p>
-                <p>{preview.user.email}</p>
-                <p>{preview.user.phone ?? "Téléphone non renseigné"}</p>
-              </div>
-            </section>
-
-            <section className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-xl">
-              <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
-                Réassurance
-              </p>
-
-              <div className="mt-5 space-y-4 text-sm text-white/70">
-                <div className="flex items-start gap-3">
-                  <LockKeyhole className="mt-0.5 h-4 w-4 text-[#FF6B00]/70" />
-                  <span>Données de paiement présentées dans une interface sécurisée.</span>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <ShieldCheck className="mt-0.5 h-4 w-4 text-[#FF6B00]/70" />
-                  <span>Vérification simulée de la transaction pour la démonstration.</span>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Ticket className="mt-0.5 h-4 w-4 text-[#FF6B00]/70" />
-                  <span>
-                    {preview.mode === "buy"
-                      ? "Billets disponibles immédiatement après validation."
-                      : "Billets émis après règlement complet du solde."}
-                  </span>
                 </div>
               </div>
             </section>
