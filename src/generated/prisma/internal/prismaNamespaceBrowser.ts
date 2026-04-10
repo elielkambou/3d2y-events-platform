@@ -175,6 +175,7 @@ export const EventScalarFieldEnum = {
   shortDescription: 'shortDescription',
   fullDescription: 'fullDescription',
   coverImageUrl: 'coverImageUrl',
+  promoVideoUrl: 'promoVideoUrl',
   status: 'status',
   isFeatured: 'isFeatured',
   isPublished: 'isPublished',
@@ -195,8 +196,11 @@ export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof Ev
 export const EventMediaScalarFieldEnum = {
   id: 'id',
   eventId: 'eventId',
+  mediaType: 'mediaType',
   url: 'url',
   altText: 'altText',
+  provider: 'provider',
+  posterUrl: 'posterUrl',
   sortOrder: 'sortOrder',
   createdAt: 'createdAt'
 } as const

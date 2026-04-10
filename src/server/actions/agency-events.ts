@@ -137,6 +137,7 @@ export async function createAgencyEventAction(formData: FormData) {
       shortDescription: data.shortDescription,
       fullDescription: data.fullDescription,
       coverImageUrl: data.coverImageUrl,
+      promoVideoUrl: data.promoVideoUrl || null,
       status: "SUBMITTED",
       isPublished: false,
       isFeatured: false,

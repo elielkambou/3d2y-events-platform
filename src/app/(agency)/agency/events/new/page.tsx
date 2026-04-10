@@ -4,6 +4,8 @@ import { getSession } from "@/lib/auth/session";
 import { canAccessAgency } from "@/lib/permissions";
 import { prisma } from "@/lib/prisma/client";
 import { WordCountTextarea } from "@/components/forms/WordCountTextarea";
+import { EventVideoUpload } from "@/features/events/components/event-video-upload";
+import { EventVideoField } from "@/features/events/components/event-video-field";
 
 export default async function NewAgencyEventPage() {
   const session = await getSession();
@@ -33,6 +35,7 @@ export default async function NewAgencyEventPage() {
         </p>
 
         <form action={createAgencyEventAction} className="mt-10 space-y-8">
+          {/* INFORMATIONS PRINCIPALES */}
           <section className="rounded-3xl border border-white/10 bg-white/5 p-6">
             <h2 className="text-xl font-semibold">Informations principales</h2>
 
@@ -84,17 +87,8 @@ export default async function NewAgencyEventPage() {
                 />
               </div>
 
-              <div>
-                <label className="mb-2 block text-sm text-white/70">
-                  URL vidéo promo (optionnel)
-                </label>
-                <input
-                  name="promoVideoUrl"
-                  type="url"
-                  placeholder="https://youtu.be/... ou https://vimeo.com/..."
-                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-                />
-              </div>
+              {/* Remplacement par le nouveau composant interactif */}
+              <EventVideoField />
 
               <div>
                 <label className="mb-2 block text-sm text-white/70">
@@ -135,139 +129,140 @@ export default async function NewAgencyEventPage() {
             </div>
           </section>
 
+          {/* OCCURRENCE PRINCIPALE */}
           <section className="rounded-3xl border border-white/10 bg-white/5 p-6">
-          <h2 className="text-xl font-semibold">Occurrence principale</h2>
+            <h2 className="text-xl font-semibold">Occurrence principale</h2>
 
-          <div className="mt-6 grid gap-5 md:grid-cols-2">
-            <div className="md:col-span-2">
-              <label className="mb-2 block text-sm text-white/70">Lieu existant</label>
-              <select
-                name="venueId"
-                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-              >
-                <option value="">Choisir un lieu existant</option>
-                {venues.map((venue) => (
-                  <option key={venue.id} value={venue.id}>
-                    {venue.name}
-                  </option>
-                ))}
-              </select>
-              <p className="mt-2 text-xs text-white/50">
-                Si le lieu n’existe pas encore, laisse vide et complète les champs ci-dessous.
-              </p>
-            </div>
+            <div className="mt-6 grid gap-5 md:grid-cols-2">
+              <div className="md:col-span-2">
+                <label className="mb-2 block text-sm text-white/70">Lieu existant</label>
+                <select
+                  name="venueId"
+                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                >
+                  <option value="">Choisir un lieu existant</option>
+                  {venues.map((venue) => (
+                    <option key={venue.id} value={venue.id}>
+                      {venue.name}
+                    </option>
+                  ))}
+                </select>
+                <p className="mt-2 text-xs text-white/50">
+                  Si le lieu n’existe pas encore, laisse vide et complète les champs ci-dessous.
+                </p>
+              </div>
 
-            <div className="md:col-span-2 rounded-2xl border border-white/10 bg-gradient-to-br from-[#8B5CF6]/10 to-[#FF6B00]/5 p-4 backdrop-blur-xl">
-              <p className="text-sm font-medium text-white">Ajouter un nouveau lieu</p>
+              <div className="md:col-span-2 rounded-2xl border border-white/10 bg-gradient-to-br from-[#8B5CF6]/10 to-[#FF6B00]/5 p-4 backdrop-blur-xl">
+                <p className="text-sm font-medium text-white">Ajouter un nouveau lieu</p>
 
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
-                <div className="md:col-span-2">
-                  <label className="mb-2 block text-sm text-white/70">Nom du lieu</label>
-                  <input
-                    name="newVenueName"
-                    placeholder="Ex: Rooftop Cocody"
-                    className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-                  />
-                </div>
+                <div className="mt-4 grid gap-4 md:grid-cols-2">
+                  <div className="md:col-span-2">
+                    <label className="mb-2 block text-sm text-white/70">Nom du lieu</label>
+                    <input
+                      name="newVenueName"
+                      placeholder="Ex: Rooftop Cocody"
+                      className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                    />
+                  </div>
 
-                <div>
-                  <label className="mb-2 block text-sm text-white/70">Quartier</label>
-                  <input
-                    name="newVenueDistrict"
-                    placeholder="Ex: Cocody"
-                    className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-                  />
-                </div>
+                  <div>
+                    <label className="mb-2 block text-sm text-white/70">Quartier</label>
+                    <input
+                      name="newVenueDistrict"
+                      placeholder="Ex: Cocody"
+                      className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                    />
+                  </div>
 
-                <div>
-                  <label className="mb-2 block text-sm text-white/70">Commune</label>
-                  <input
-                    name="newVenueMunicipality"
-                    placeholder="Ex: Cocody"
-                    className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-                  />
-                </div>
+                  <div>
+                    <label className="mb-2 block text-sm text-white/70">Commune</label>
+                    <input
+                      name="newVenueMunicipality"
+                      placeholder="Ex: Cocody"
+                      className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                    />
+                  </div>
 
-                <div className="md:col-span-2">
-                  <label className="mb-2 block text-sm text-white/70">Adresse</label>
-                  <input
-                    name="newVenueAddressLine"
-                    placeholder="Ex: Riviera 3, Rue des Jardins"
-                    className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-                  />
+                  <div className="md:col-span-2">
+                    <label className="mb-2 block text-sm text-white/70">Adresse</label>
+                    <input
+                      name="newVenueAddressLine"
+                      placeholder="Ex: Riviera 3, Rue des Jardins"
+                      className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div>
-              <label className="mb-2 block text-sm text-white/70">Début</label>
-              <input
-                name="startsAt"
-                type="datetime-local"
-                required
-                step={60}
-                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-              />
-            </div>
+              <div>
+                <label className="mb-2 block text-sm text-white/70">Début</label>
+                <input
+                  name="startsAt"
+                  type="datetime-local"
+                  required
+                  step={60}
+                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                />
+              </div>
 
-            <div>
-              <label className="mb-2 block text-sm text-white/70">Fin</label>
-              <input
-                name="endsAt"
-                type="datetime-local"
-                required
-                step={60}
-                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-              />
-            </div>
+              <div>
+                <label className="mb-2 block text-sm text-white/70">Fin</label>
+                <input
+                  name="endsAt"
+                  type="datetime-local"
+                  required
+                  step={60}
+                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                />
+              </div>
 
-            <div>
-              <label className="mb-2 block text-sm text-white/70">Début ventes</label>
-              <input
-                name="salesStartAt"
-                type="datetime-local"
-                required
-                step={60}
-                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-              />
-            </div>
+              <div>
+                <label className="mb-2 block text-sm text-white/70">Début ventes</label>
+                <input
+                  name="salesStartAt"
+                  type="datetime-local"
+                  required
+                  step={60}
+                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                />
+              </div>
 
-            <div>
-              <label className="mb-2 block text-sm text-white/70">Fin ventes</label>
-              <input
-                name="salesEndAt"
-                type="datetime-local"
-                required
-                step={60}
-                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-              />
-            </div>
+              <div>
+                <label className="mb-2 block text-sm text-white/70">Fin ventes</label>
+                <input
+                  name="salesEndAt"
+                  type="datetime-local"
+                  required
+                  step={60}
+                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                />
+              </div>
 
-            <div>
-              <label className="mb-2 block text-sm text-white/70">Fin réservation</label>
-              <input
-                name="reservationEndAt"
-                type="datetime-local"
-                required
-                step={60}
-                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-              />
-            </div>
+              <div>
+                <label className="mb-2 block text-sm text-white/70">Fin réservation</label>
+                <input
+                  name="reservationEndAt"
+                  type="datetime-local"
+                  required
+                  step={60}
+                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                />
+              </div>
 
-            <div>
-              <label className="mb-2 block text-sm text-white/70">Capacité</label>
-              <input
-                name="capacity"
-                type="number"
-                min={1}
-                required
-                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
-              />
+              <div>
+                <label className="mb-2 block text-sm text-white/70">Capacité</label>
+                <input
+                  name="capacity"
+                  type="number"
+                  min={1}
+                  required
+                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
+                />
+              </div>
             </div>
-          </div>
-        </section>
-            
+          </section>
 
+          {/* BILLET PRINCIPAL */}
           <section className="rounded-3xl border border-white/10 bg-white/5 p-6">
             <h2 className="text-xl font-semibold">Billet principal</h2>
 

@@ -177,3 +177,11 @@ export const EventDeletionRequestStatus = {
 } as const
 
 export type EventDeletionRequestStatus = (typeof EventDeletionRequestStatus)[keyof typeof EventDeletionRequestStatus]
+
+
+export const EventMediaType = {
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO'
+} as const
+
+export type EventMediaType = (typeof EventMediaType)[keyof typeof EventMediaType]

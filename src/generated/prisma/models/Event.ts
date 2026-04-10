@@ -33,6 +33,7 @@ export type EventMinAggregateOutputType = {
   shortDescription: string | null
   fullDescription: string | null
   coverImageUrl: string | null
+  promoVideoUrl: string | null
   status: $Enums.EventStatus | null
   isFeatured: boolean | null
   isPublished: boolean | null
@@ -56,6 +57,7 @@ export type EventMaxAggregateOutputType = {
   shortDescription: string | null
   fullDescription: string | null
   coverImageUrl: string | null
+  promoVideoUrl: string | null
   status: $Enums.EventStatus | null
   isFeatured: boolean | null
   isPublished: boolean | null
@@ -79,6 +81,7 @@ export type EventCountAggregateOutputType = {
   shortDescription: number
   fullDescription: number
   coverImageUrl: number
+  promoVideoUrl: number
   status: number
   isFeatured: number
   isPublished: number
@@ -104,6 +107,7 @@ export type EventMinAggregateInputType = {
   shortDescription?: true
   fullDescription?: true
   coverImageUrl?: true
+  promoVideoUrl?: true
   status?: true
   isFeatured?: true
   isPublished?: true
@@ -127,6 +131,7 @@ export type EventMaxAggregateInputType = {
   shortDescription?: true
   fullDescription?: true
   coverImageUrl?: true
+  promoVideoUrl?: true
   status?: true
   isFeatured?: true
   isPublished?: true
@@ -150,6 +155,7 @@ export type EventCountAggregateInputType = {
   shortDescription?: true
   fullDescription?: true
   coverImageUrl?: true
+  promoVideoUrl?: true
   status?: true
   isFeatured?: true
   isPublished?: true
@@ -246,6 +252,7 @@ export type EventGroupByOutputType = {
   shortDescription: string | null
   fullDescription: string | null
   coverImageUrl: string | null
+  promoVideoUrl: string | null
   status: $Enums.EventStatus
   isFeatured: boolean
   isPublished: boolean
@@ -290,6 +297,7 @@ export type EventWhereInput = {
   shortDescription?: Prisma.StringNullableFilter<"Event"> | string | null
   fullDescription?: Prisma.StringNullableFilter<"Event"> | string | null
   coverImageUrl?: Prisma.StringNullableFilter<"Event"> | string | null
+  promoVideoUrl?: Prisma.StringNullableFilter<"Event"> | string | null
   status?: Prisma.EnumEventStatusFilter<"Event"> | $Enums.EventStatus
   isFeatured?: Prisma.BoolFilter<"Event"> | boolean
   isPublished?: Prisma.BoolFilter<"Event"> | boolean
@@ -320,6 +328,7 @@ export type EventOrderByWithRelationInput = {
   shortDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   fullDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   coverImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  promoVideoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
@@ -353,6 +362,7 @@ export type EventWhereUniqueInput = Prisma.AtLeast<{
   shortDescription?: Prisma.StringNullableFilter<"Event"> | string | null
   fullDescription?: Prisma.StringNullableFilter<"Event"> | string | null
   coverImageUrl?: Prisma.StringNullableFilter<"Event"> | string | null
+  promoVideoUrl?: Prisma.StringNullableFilter<"Event"> | string | null
   status?: Prisma.EnumEventStatusFilter<"Event"> | $Enums.EventStatus
   isFeatured?: Prisma.BoolFilter<"Event"> | boolean
   isPublished?: Prisma.BoolFilter<"Event"> | boolean
@@ -383,6 +393,7 @@ export type EventOrderByWithAggregationInput = {
   shortDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   fullDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   coverImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  promoVideoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
@@ -412,6 +423,7 @@ export type EventScalarWhereWithAggregatesInput = {
   shortDescription?: Prisma.StringNullableWithAggregatesFilter<"Event"> | string | null
   fullDescription?: Prisma.StringNullableWithAggregatesFilter<"Event"> | string | null
   coverImageUrl?: Prisma.StringNullableWithAggregatesFilter<"Event"> | string | null
+  promoVideoUrl?: Prisma.StringNullableWithAggregatesFilter<"Event"> | string | null
   status?: Prisma.EnumEventStatusWithAggregatesFilter<"Event"> | $Enums.EventStatus
   isFeatured?: Prisma.BoolWithAggregatesFilter<"Event"> | boolean
   isPublished?: Prisma.BoolWithAggregatesFilter<"Event"> | boolean
@@ -433,6 +445,7 @@ export type EventCreateInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -463,6 +476,7 @@ export type EventUncheckedCreateInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -489,6 +503,7 @@ export type EventUpdateInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -519,6 +534,7 @@ export type EventUncheckedUpdateInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -547,6 +563,7 @@ export type EventCreateManyInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -568,6 +585,7 @@ export type EventUpdateManyMutationInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -591,6 +609,7 @@ export type EventUncheckedUpdateManyInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -624,6 +643,7 @@ export type EventCountOrderByAggregateInput = {
   shortDescription?: Prisma.SortOrder
   fullDescription?: Prisma.SortOrder
   coverImageUrl?: Prisma.SortOrder
+  promoVideoUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
@@ -647,6 +667,7 @@ export type EventMaxOrderByAggregateInput = {
   shortDescription?: Prisma.SortOrder
   fullDescription?: Prisma.SortOrder
   coverImageUrl?: Prisma.SortOrder
+  promoVideoUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
@@ -670,6 +691,7 @@ export type EventMinOrderByAggregateInput = {
   shortDescription?: Prisma.SortOrder
   fullDescription?: Prisma.SortOrder
   coverImageUrl?: Prisma.SortOrder
+  promoVideoUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
@@ -865,6 +887,7 @@ export type EventCreateWithoutAgencyInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -893,6 +916,7 @@ export type EventUncheckedCreateWithoutAgencyInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -950,6 +974,7 @@ export type EventScalarWhereInput = {
   shortDescription?: Prisma.StringNullableFilter<"Event"> | string | null
   fullDescription?: Prisma.StringNullableFilter<"Event"> | string | null
   coverImageUrl?: Prisma.StringNullableFilter<"Event"> | string | null
+  promoVideoUrl?: Prisma.StringNullableFilter<"Event"> | string | null
   status?: Prisma.EnumEventStatusFilter<"Event"> | $Enums.EventStatus
   isFeatured?: Prisma.BoolFilter<"Event"> | boolean
   isPublished?: Prisma.BoolFilter<"Event"> | boolean
@@ -971,6 +996,7 @@ export type EventCreateWithoutCategoryInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -999,6 +1025,7 @@ export type EventUncheckedCreateWithoutCategoryInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -1051,6 +1078,7 @@ export type EventCreateWithoutMediaAssetsInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -1080,6 +1108,7 @@ export type EventUncheckedCreateWithoutMediaAssetsInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -1121,6 +1150,7 @@ export type EventUpdateWithoutMediaAssetsInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1150,6 +1180,7 @@ export type EventUncheckedUpdateWithoutMediaAssetsInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1175,6 +1206,7 @@ export type EventCreateWithoutOccurrencesInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -1204,6 +1236,7 @@ export type EventUncheckedCreateWithoutOccurrencesInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -1245,6 +1278,7 @@ export type EventUpdateWithoutOccurrencesInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1274,6 +1308,7 @@ export type EventUncheckedUpdateWithoutOccurrencesInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1299,6 +1334,7 @@ export type EventCreateWithoutApprovalsInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -1328,6 +1364,7 @@ export type EventUncheckedCreateWithoutApprovalsInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -1369,6 +1406,7 @@ export type EventUpdateWithoutApprovalsInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1398,6 +1436,7 @@ export type EventUncheckedUpdateWithoutApprovalsInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1423,6 +1462,7 @@ export type EventCreateWithoutServiceOrdersInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -1452,6 +1492,7 @@ export type EventUncheckedCreateWithoutServiceOrdersInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -1493,6 +1534,7 @@ export type EventUpdateWithoutServiceOrdersInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1522,6 +1564,7 @@ export type EventUncheckedUpdateWithoutServiceOrdersInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1547,6 +1590,7 @@ export type EventCreateWithoutDeletionRequestsInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -1576,6 +1620,7 @@ export type EventUncheckedCreateWithoutDeletionRequestsInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -1617,6 +1662,7 @@ export type EventUpdateWithoutDeletionRequestsInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1646,6 +1692,7 @@ export type EventUncheckedUpdateWithoutDeletionRequestsInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1672,6 +1719,7 @@ export type EventCreateManyAgencyInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -1693,6 +1741,7 @@ export type EventUpdateWithoutAgencyInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1721,6 +1770,7 @@ export type EventUncheckedUpdateWithoutAgencyInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1748,6 +1798,7 @@ export type EventUncheckedUpdateManyWithoutAgencyInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1770,6 +1821,7 @@ export type EventCreateManyCategoryInput = {
   shortDescription?: string | null
   fullDescription?: string | null
   coverImageUrl?: string | null
+  promoVideoUrl?: string | null
   status?: $Enums.EventStatus
   isFeatured?: boolean
   isPublished?: boolean
@@ -1791,6 +1843,7 @@ export type EventUpdateWithoutCategoryInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1819,6 +1872,7 @@ export type EventUncheckedUpdateWithoutCategoryInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1846,6 +1900,7 @@ export type EventUncheckedUpdateManyWithoutCategoryInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoVideoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1936,6 +1991,7 @@ export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   shortDescription?: boolean
   fullDescription?: boolean
   coverImageUrl?: boolean
+  promoVideoUrl?: boolean
   status?: boolean
   isFeatured?: boolean
   isPublished?: boolean
@@ -1967,6 +2023,7 @@ export type EventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   shortDescription?: boolean
   fullDescription?: boolean
   coverImageUrl?: boolean
+  promoVideoUrl?: boolean
   status?: boolean
   isFeatured?: boolean
   isPublished?: boolean
@@ -1992,6 +2049,7 @@ export type EventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   shortDescription?: boolean
   fullDescription?: boolean
   coverImageUrl?: boolean
+  promoVideoUrl?: boolean
   status?: boolean
   isFeatured?: boolean
   isPublished?: boolean
@@ -2017,6 +2075,7 @@ export type EventSelectScalar = {
   shortDescription?: boolean
   fullDescription?: boolean
   coverImageUrl?: boolean
+  promoVideoUrl?: boolean
   status?: boolean
   isFeatured?: boolean
   isPublished?: boolean
@@ -2031,7 +2090,7 @@ export type EventSelectScalar = {
   deletionReason?: boolean
 }
 
-export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "agencyId" | "categoryId" | "title" | "slug" | "shortDescription" | "fullDescription" | "coverImageUrl" | "status" | "isFeatured" | "isPublished" | "defaultCurrency" | "termsAndConditions" | "createdAt" | "updatedAt" | "publishedAt" | "isDeleted" | "deletedAt" | "deletedByUserId" | "deletionReason", ExtArgs["result"]["event"]>
+export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "agencyId" | "categoryId" | "title" | "slug" | "shortDescription" | "fullDescription" | "coverImageUrl" | "promoVideoUrl" | "status" | "isFeatured" | "isPublished" | "defaultCurrency" | "termsAndConditions" | "createdAt" | "updatedAt" | "publishedAt" | "isDeleted" | "deletedAt" | "deletedByUserId" | "deletionReason", ExtArgs["result"]["event"]>
 export type EventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   deletionRequests?: boolean | Prisma.Event$deletionRequestsArgs<ExtArgs>
   agency?: boolean | Prisma.AgencyDefaultArgs<ExtArgs>
@@ -2071,6 +2130,7 @@ export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     shortDescription: string | null
     fullDescription: string | null
     coverImageUrl: string | null
+    promoVideoUrl: string | null
     status: $Enums.EventStatus
     isFeatured: boolean
     isPublished: boolean
@@ -2521,6 +2581,7 @@ export interface EventFieldRefs {
   readonly shortDescription: Prisma.FieldRef<"Event", 'String'>
   readonly fullDescription: Prisma.FieldRef<"Event", 'String'>
   readonly coverImageUrl: Prisma.FieldRef<"Event", 'String'>
+  readonly promoVideoUrl: Prisma.FieldRef<"Event", 'String'>
   readonly status: Prisma.FieldRef<"Event", 'EventStatus'>
   readonly isFeatured: Prisma.FieldRef<"Event", 'Boolean'>
   readonly isPublished: Prisma.FieldRef<"Event", 'Boolean'>

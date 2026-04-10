@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { formatEventDate, formatXof } from "@/lib/formatters";
 import { getPublishedEventBySlug } from "@/server/queries/catalog";
 import { CheckoutLinkActions } from "@/features/checkout/components/checkout-link-actions";
+import { EventPromoVideo } from "@/features/events/components/event-promo-video";
 
 function buildVideoEmbedUrl(url: string) {
   try {
@@ -28,6 +29,7 @@ function buildVideoEmbedUrl(url: string) {
     return null;
   }
 }
+
 type EventDetailPageProps = {
   params: Promise<{
     slug: string;
@@ -189,6 +191,16 @@ export default async function EventDetailPage({
             <p className="mt-5 whitespace-pre-line text-white/75">
               {event.fullDescription ?? event.shortDescription ?? "Description à venir."}
             </p>
+
+            {/* Nouveau bloc Vidéo Promo */}
+            {event.promoVideoUrl ? (
+              <div className="mt-10">
+                <EventPromoVideo
+                  url={event.promoVideoUrl}
+                  title={event.title}
+                />
+              </div>
+            ) : null}
           </div>
 
           <div>

@@ -15,11 +15,37 @@ function hasSmtpConfig() {
   );
 }
 
-export async function sendGuestTicketsEmail(orderId: string, email: string) {
-  if (!hasSmtpConfig()) return false;
+export async function sendGuestTicketsEmail(
+  orderId: string,
+  email?: string | null,
+) {
+  const normalizedEmail = email?.trim() || null;
 
-  const order = await getGuestOrderTickets(orderId, email);
-  if (!order) return false;
+  if (!normalizedEmail) {
+    return {
+      ok: false,
+      skipped: true,
+      reason: "NO_EMAIL",
+    };
+  }
+
+  if (!hasSmtpConfig()) {
+    return {
+      ok: false,
+      skipped: true,
+      reason: "NO_SMTP_CONFIG",
+    };
+  }
+
+  const order = await getGuestOrderTickets(orderId, normalizedEmail);
+
+  if (!order || !order.customerEmail) {
+    return {
+      ok: false,
+      skipped: true,
+      reason: "ORDER_NOT_FOUND",
+    };
+  }
 
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST!,
@@ -33,9 +59,11 @@ export async function sendGuestTicketsEmail(orderId: string, email: string) {
 
   const baseUrl = buildBaseUrl().replace(/\/$/, "");
   const lines: string[] = [];
+
   for (const item of order.items) {
     for (const ticket of item.tickets) {
       const downloadUrl = `${baseUrl}/api/tickets/download?ticketId=${encodeURIComponent(ticket.id)}&orderId=${encodeURIComponent(order.id)}&email=${encodeURIComponent(order.customerEmail)}`;
+
       lines.push(
         `- ${item.occurrence.event.title} | ${item.ticketType.name} | ${ticket.serialNumber}`,
       );
@@ -45,7 +73,10 @@ export async function sendGuestTicketsEmail(orderId: string, email: string) {
   }
 
   const htmlList = lines
-    .map((line) => `<div style="margin:6px 0;font-family:Arial,sans-serif;">${line}</div>`)
+    .map(
+      (line) =>
+        `<div style="margin:6px 0;font-family:Arial,sans-serif;">${line}</div>`,
+    )
     .join("");
 
   await transporter.sendMail({
@@ -64,5 +95,8 @@ export async function sendGuestTicketsEmail(orderId: string, email: string) {
     `,
   });
 
-  return true;
+  return {
+    ok: true,
+    skipped: false,
+  };
 }

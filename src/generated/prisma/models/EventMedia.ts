@@ -37,8 +37,11 @@ export type EventMediaSumAggregateOutputType = {
 export type EventMediaMinAggregateOutputType = {
   id: string | null
   eventId: string | null
+  mediaType: $Enums.EventMediaType | null
   url: string | null
   altText: string | null
+  provider: string | null
+  posterUrl: string | null
   sortOrder: number | null
   createdAt: Date | null
 }
@@ -46,8 +49,11 @@ export type EventMediaMinAggregateOutputType = {
 export type EventMediaMaxAggregateOutputType = {
   id: string | null
   eventId: string | null
+  mediaType: $Enums.EventMediaType | null
   url: string | null
   altText: string | null
+  provider: string | null
+  posterUrl: string | null
   sortOrder: number | null
   createdAt: Date | null
 }
@@ -55,8 +61,11 @@ export type EventMediaMaxAggregateOutputType = {
 export type EventMediaCountAggregateOutputType = {
   id: number
   eventId: number
+  mediaType: number
   url: number
   altText: number
+  provider: number
+  posterUrl: number
   sortOrder: number
   createdAt: number
   _all: number
@@ -74,8 +83,11 @@ export type EventMediaSumAggregateInputType = {
 export type EventMediaMinAggregateInputType = {
   id?: true
   eventId?: true
+  mediaType?: true
   url?: true
   altText?: true
+  provider?: true
+  posterUrl?: true
   sortOrder?: true
   createdAt?: true
 }
@@ -83,8 +95,11 @@ export type EventMediaMinAggregateInputType = {
 export type EventMediaMaxAggregateInputType = {
   id?: true
   eventId?: true
+  mediaType?: true
   url?: true
   altText?: true
+  provider?: true
+  posterUrl?: true
   sortOrder?: true
   createdAt?: true
 }
@@ -92,8 +107,11 @@ export type EventMediaMaxAggregateInputType = {
 export type EventMediaCountAggregateInputType = {
   id?: true
   eventId?: true
+  mediaType?: true
   url?: true
   altText?: true
+  provider?: true
+  posterUrl?: true
   sortOrder?: true
   createdAt?: true
   _all?: true
@@ -188,8 +206,11 @@ export type EventMediaGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 export type EventMediaGroupByOutputType = {
   id: string
   eventId: string
+  mediaType: $Enums.EventMediaType
   url: string
   altText: string | null
+  provider: string | null
+  posterUrl: string | null
   sortOrder: number
   createdAt: Date
   _count: EventMediaCountAggregateOutputType | null
@@ -220,8 +241,11 @@ export type EventMediaWhereInput = {
   NOT?: Prisma.EventMediaWhereInput | Prisma.EventMediaWhereInput[]
   id?: Prisma.StringFilter<"EventMedia"> | string
   eventId?: Prisma.StringFilter<"EventMedia"> | string
+  mediaType?: Prisma.EnumEventMediaTypeFilter<"EventMedia"> | $Enums.EventMediaType
   url?: Prisma.StringFilter<"EventMedia"> | string
   altText?: Prisma.StringNullableFilter<"EventMedia"> | string | null
+  provider?: Prisma.StringNullableFilter<"EventMedia"> | string | null
+  posterUrl?: Prisma.StringNullableFilter<"EventMedia"> | string | null
   sortOrder?: Prisma.IntFilter<"EventMedia"> | number
   createdAt?: Prisma.DateTimeFilter<"EventMedia"> | Date | string
   event?: Prisma.XOR<Prisma.EventScalarRelationFilter, Prisma.EventWhereInput>
@@ -230,8 +254,11 @@ export type EventMediaWhereInput = {
 export type EventMediaOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
+  mediaType?: Prisma.SortOrder
   url?: Prisma.SortOrder
   altText?: Prisma.SortOrderInput | Prisma.SortOrder
+  provider?: Prisma.SortOrderInput | Prisma.SortOrder
+  posterUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   event?: Prisma.EventOrderByWithRelationInput
@@ -243,8 +270,11 @@ export type EventMediaWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.EventMediaWhereInput[]
   NOT?: Prisma.EventMediaWhereInput | Prisma.EventMediaWhereInput[]
   eventId?: Prisma.StringFilter<"EventMedia"> | string
+  mediaType?: Prisma.EnumEventMediaTypeFilter<"EventMedia"> | $Enums.EventMediaType
   url?: Prisma.StringFilter<"EventMedia"> | string
   altText?: Prisma.StringNullableFilter<"EventMedia"> | string | null
+  provider?: Prisma.StringNullableFilter<"EventMedia"> | string | null
+  posterUrl?: Prisma.StringNullableFilter<"EventMedia"> | string | null
   sortOrder?: Prisma.IntFilter<"EventMedia"> | number
   createdAt?: Prisma.DateTimeFilter<"EventMedia"> | Date | string
   event?: Prisma.XOR<Prisma.EventScalarRelationFilter, Prisma.EventWhereInput>
@@ -253,8 +283,11 @@ export type EventMediaWhereUniqueInput = Prisma.AtLeast<{
 export type EventMediaOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
+  mediaType?: Prisma.SortOrder
   url?: Prisma.SortOrder
   altText?: Prisma.SortOrderInput | Prisma.SortOrder
+  provider?: Prisma.SortOrderInput | Prisma.SortOrder
+  posterUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.EventMediaCountOrderByAggregateInput
@@ -270,16 +303,22 @@ export type EventMediaScalarWhereWithAggregatesInput = {
   NOT?: Prisma.EventMediaScalarWhereWithAggregatesInput | Prisma.EventMediaScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"EventMedia"> | string
   eventId?: Prisma.StringWithAggregatesFilter<"EventMedia"> | string
+  mediaType?: Prisma.EnumEventMediaTypeWithAggregatesFilter<"EventMedia"> | $Enums.EventMediaType
   url?: Prisma.StringWithAggregatesFilter<"EventMedia"> | string
   altText?: Prisma.StringNullableWithAggregatesFilter<"EventMedia"> | string | null
+  provider?: Prisma.StringNullableWithAggregatesFilter<"EventMedia"> | string | null
+  posterUrl?: Prisma.StringNullableWithAggregatesFilter<"EventMedia"> | string | null
   sortOrder?: Prisma.IntWithAggregatesFilter<"EventMedia"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"EventMedia"> | Date | string
 }
 
 export type EventMediaCreateInput = {
   id?: string
+  mediaType?: $Enums.EventMediaType
   url: string
   altText?: string | null
+  provider?: string | null
+  posterUrl?: string | null
   sortOrder?: number
   createdAt?: Date | string
   event: Prisma.EventCreateNestedOneWithoutMediaAssetsInput
@@ -288,16 +327,22 @@ export type EventMediaCreateInput = {
 export type EventMediaUncheckedCreateInput = {
   id?: string
   eventId: string
+  mediaType?: $Enums.EventMediaType
   url: string
   altText?: string | null
+  provider?: string | null
+  posterUrl?: string | null
   sortOrder?: number
   createdAt?: Date | string
 }
 
 export type EventMediaUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumEventMediaTypeFieldUpdateOperationsInput | $Enums.EventMediaType
   url?: Prisma.StringFieldUpdateOperationsInput | string
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   event?: Prisma.EventUpdateOneRequiredWithoutMediaAssetsNestedInput
@@ -306,8 +351,11 @@ export type EventMediaUpdateInput = {
 export type EventMediaUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eventId?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumEventMediaTypeFieldUpdateOperationsInput | $Enums.EventMediaType
   url?: Prisma.StringFieldUpdateOperationsInput | string
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -315,16 +363,22 @@ export type EventMediaUncheckedUpdateInput = {
 export type EventMediaCreateManyInput = {
   id?: string
   eventId: string
+  mediaType?: $Enums.EventMediaType
   url: string
   altText?: string | null
+  provider?: string | null
+  posterUrl?: string | null
   sortOrder?: number
   createdAt?: Date | string
 }
 
 export type EventMediaUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumEventMediaTypeFieldUpdateOperationsInput | $Enums.EventMediaType
   url?: Prisma.StringFieldUpdateOperationsInput | string
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -332,8 +386,11 @@ export type EventMediaUpdateManyMutationInput = {
 export type EventMediaUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eventId?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumEventMediaTypeFieldUpdateOperationsInput | $Enums.EventMediaType
   url?: Prisma.StringFieldUpdateOperationsInput | string
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -351,8 +408,11 @@ export type EventMediaOrderByRelationAggregateInput = {
 export type EventMediaCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
+  mediaType?: Prisma.SortOrder
   url?: Prisma.SortOrder
   altText?: Prisma.SortOrder
+  provider?: Prisma.SortOrder
+  posterUrl?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -364,8 +424,11 @@ export type EventMediaAvgOrderByAggregateInput = {
 export type EventMediaMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
+  mediaType?: Prisma.SortOrder
   url?: Prisma.SortOrder
   altText?: Prisma.SortOrder
+  provider?: Prisma.SortOrder
+  posterUrl?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -373,8 +436,11 @@ export type EventMediaMaxOrderByAggregateInput = {
 export type EventMediaMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
+  mediaType?: Prisma.SortOrder
   url?: Prisma.SortOrder
   altText?: Prisma.SortOrder
+  provider?: Prisma.SortOrder
+  posterUrl?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -425,18 +491,28 @@ export type EventMediaUncheckedUpdateManyWithoutEventNestedInput = {
   deleteMany?: Prisma.EventMediaScalarWhereInput | Prisma.EventMediaScalarWhereInput[]
 }
 
+export type EnumEventMediaTypeFieldUpdateOperationsInput = {
+  set?: $Enums.EventMediaType
+}
+
 export type EventMediaCreateWithoutEventInput = {
   id?: string
+  mediaType?: $Enums.EventMediaType
   url: string
   altText?: string | null
+  provider?: string | null
+  posterUrl?: string | null
   sortOrder?: number
   createdAt?: Date | string
 }
 
 export type EventMediaUncheckedCreateWithoutEventInput = {
   id?: string
+  mediaType?: $Enums.EventMediaType
   url: string
   altText?: string | null
+  provider?: string | null
+  posterUrl?: string | null
   sortOrder?: number
   createdAt?: Date | string
 }
@@ -473,40 +549,55 @@ export type EventMediaScalarWhereInput = {
   NOT?: Prisma.EventMediaScalarWhereInput | Prisma.EventMediaScalarWhereInput[]
   id?: Prisma.StringFilter<"EventMedia"> | string
   eventId?: Prisma.StringFilter<"EventMedia"> | string
+  mediaType?: Prisma.EnumEventMediaTypeFilter<"EventMedia"> | $Enums.EventMediaType
   url?: Prisma.StringFilter<"EventMedia"> | string
   altText?: Prisma.StringNullableFilter<"EventMedia"> | string | null
+  provider?: Prisma.StringNullableFilter<"EventMedia"> | string | null
+  posterUrl?: Prisma.StringNullableFilter<"EventMedia"> | string | null
   sortOrder?: Prisma.IntFilter<"EventMedia"> | number
   createdAt?: Prisma.DateTimeFilter<"EventMedia"> | Date | string
 }
 
 export type EventMediaCreateManyEventInput = {
   id?: string
+  mediaType?: $Enums.EventMediaType
   url: string
   altText?: string | null
+  provider?: string | null
+  posterUrl?: string | null
   sortOrder?: number
   createdAt?: Date | string
 }
 
 export type EventMediaUpdateWithoutEventInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumEventMediaTypeFieldUpdateOperationsInput | $Enums.EventMediaType
   url?: Prisma.StringFieldUpdateOperationsInput | string
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EventMediaUncheckedUpdateWithoutEventInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumEventMediaTypeFieldUpdateOperationsInput | $Enums.EventMediaType
   url?: Prisma.StringFieldUpdateOperationsInput | string
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EventMediaUncheckedUpdateManyWithoutEventInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumEventMediaTypeFieldUpdateOperationsInput | $Enums.EventMediaType
   url?: Prisma.StringFieldUpdateOperationsInput | string
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -516,8 +607,11 @@ export type EventMediaUncheckedUpdateManyWithoutEventInput = {
 export type EventMediaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   eventId?: boolean
+  mediaType?: boolean
   url?: boolean
   altText?: boolean
+  provider?: boolean
+  posterUrl?: boolean
   sortOrder?: boolean
   createdAt?: boolean
   event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
@@ -526,8 +620,11 @@ export type EventMediaSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type EventMediaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   eventId?: boolean
+  mediaType?: boolean
   url?: boolean
   altText?: boolean
+  provider?: boolean
+  posterUrl?: boolean
   sortOrder?: boolean
   createdAt?: boolean
   event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
@@ -536,8 +633,11 @@ export type EventMediaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
 export type EventMediaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   eventId?: boolean
+  mediaType?: boolean
   url?: boolean
   altText?: boolean
+  provider?: boolean
+  posterUrl?: boolean
   sortOrder?: boolean
   createdAt?: boolean
   event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
@@ -546,13 +646,16 @@ export type EventMediaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
 export type EventMediaSelectScalar = {
   id?: boolean
   eventId?: boolean
+  mediaType?: boolean
   url?: boolean
   altText?: boolean
+  provider?: boolean
+  posterUrl?: boolean
   sortOrder?: boolean
   createdAt?: boolean
 }
 
-export type EventMediaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "eventId" | "url" | "altText" | "sortOrder" | "createdAt", ExtArgs["result"]["eventMedia"]>
+export type EventMediaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "eventId" | "mediaType" | "url" | "altText" | "provider" | "posterUrl" | "sortOrder" | "createdAt", ExtArgs["result"]["eventMedia"]>
 export type EventMediaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
 }
@@ -571,8 +674,11 @@ export type $EventMediaPayload<ExtArgs extends runtime.Types.Extensions.Internal
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     eventId: string
+    mediaType: $Enums.EventMediaType
     url: string
     altText: string | null
+    provider: string | null
+    posterUrl: string | null
     sortOrder: number
     createdAt: Date
   }, ExtArgs["result"]["eventMedia"]>
@@ -1001,8 +1107,11 @@ export interface Prisma__EventMediaClient<T, Null = never, ExtArgs extends runti
 export interface EventMediaFieldRefs {
   readonly id: Prisma.FieldRef<"EventMedia", 'String'>
   readonly eventId: Prisma.FieldRef<"EventMedia", 'String'>
+  readonly mediaType: Prisma.FieldRef<"EventMedia", 'EventMediaType'>
   readonly url: Prisma.FieldRef<"EventMedia", 'String'>
   readonly altText: Prisma.FieldRef<"EventMedia", 'String'>
+  readonly provider: Prisma.FieldRef<"EventMedia", 'String'>
+  readonly posterUrl: Prisma.FieldRef<"EventMedia", 'String'>
   readonly sortOrder: Prisma.FieldRef<"EventMedia", 'Int'>
   readonly createdAt: Prisma.FieldRef<"EventMedia", 'DateTime'>
 }

@@ -241,6 +241,7 @@ model Event {
   shortDescription   String?
   fullDescription    String?
   coverImageUrl      String?
+  promoVideoUrl      String?
   status             EventStatus @default(DRAFT)
   isFeatured         Boolean     @default(false)
   isPublished        Boolean     @default(false)

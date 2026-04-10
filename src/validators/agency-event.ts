@@ -41,6 +41,7 @@ export const createAgencyEventSchema = z
     coverImageUrl: z.string().url("L’URL de l’image de couverture est invalide."),
     promoVideoUrl: z
       .string()
+      .trim()
       .url("L’URL de la vidéo promotionnelle est invalide.")
       .optional()
       .or(z.literal("")),

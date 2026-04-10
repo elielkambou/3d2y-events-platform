@@ -126,10 +126,10 @@ export function CheckoutForm({
           ? isCashValid
           : false;
 
+  // L'email a été retiré de la validation
   const isFormValid =
     isPaymentDetailsValid &&
     customerName.trim().length >= 2 &&
-    customerEmail.trim().length >= 5 &&
     acceptOrder;
 
   return (
@@ -251,7 +251,7 @@ export function CheckoutForm({
 
       <section className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-xl">
         <p className="text-sm uppercase tracking-[0.25em] text-[#FF6B00]">
-          Coordonnées
+          Informations acheteur
         </p>
         <div className="mt-6 grid gap-5 md:grid-cols-2">
           <div>
@@ -267,16 +267,20 @@ export function CheckoutForm({
             />
           </div>
           <div>
-            <label className="mb-2 block text-sm text-white/70">Email</label>
+            <label className="mb-2 block text-sm text-white/70">
+              Email pour recevoir les billets
+            </label>
             <input
               name="customerEmail"
               type="email"
-              required
               value={customerEmail}
               onChange={(e) => setCustomerEmail(e.target.value)}
-              placeholder="email@exemple.com"
+              placeholder="Optionnel"
               className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none"
             />
+            <p className="mt-2 text-xs text-white/50">
+              Facultatif. Si tu ne renseignes pas d’email, l’achat reste possible.
+            </p>
           </div>
           <div className="md:col-span-2">
             <label className="mb-2 block text-sm text-white/70">Téléphone (optionnel)</label>

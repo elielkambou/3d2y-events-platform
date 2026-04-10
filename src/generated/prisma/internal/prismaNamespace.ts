@@ -2102,6 +2102,7 @@ export const EventScalarFieldEnum = {
   shortDescription: 'shortDescription',
   fullDescription: 'fullDescription',
   coverImageUrl: 'coverImageUrl',
+  promoVideoUrl: 'promoVideoUrl',
   status: 'status',
   isFeatured: 'isFeatured',
   isPublished: 'isPublished',
@@ -2122,8 +2123,11 @@ export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof Ev
 export const EventMediaScalarFieldEnum = {
   id: 'id',
   eventId: 'eventId',
+  mediaType: 'mediaType',
   url: 'url',
   altText: 'altText',
+  provider: 'provider',
+  posterUrl: 'posterUrl',
   sortOrder: 'sortOrder',
   createdAt: 'createdAt'
 } as const
@@ -2509,6 +2513,20 @@ export type EnumEventStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
  * Reference to a field of type 'EventStatus[]'
  */
 export type ListEnumEventStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EventStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'EventMediaType'
+ */
+export type EnumEventMediaTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EventMediaType'>
+    
+
+
+/**
+ * Reference to a field of type 'EventMediaType[]'
+ */
+export type ListEnumEventMediaTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EventMediaType[]'>
     
 
 

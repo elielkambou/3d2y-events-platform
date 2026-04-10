@@ -22,15 +22,17 @@ export async function completeCheckoutAction(formData: FormData) {
   const paymentMethod = String(formData.get("paymentMethod") ?? "OTHER");
   const paymentLabel = String(formData.get("paymentLabel") ?? "Paiement simulé");
   const customerName = String(formData.get("customerName") ?? "").trim();
-  const customerEmail = String(formData.get("customerEmail") ?? "").trim().toLowerCase();
+
+  // Email désormais optionnel pour l'achat direct
+  const customerEmail = String(formData.get("customerEmail") ?? "")
+    .trim()
+    .toLowerCase();
+
   const customerPhoneRaw = String(formData.get("customerPhone") ?? "").trim();
   const customerPhone = customerPhoneRaw.length > 0 ? customerPhoneRaw : null;
 
   if (!ticketTypeId || !quantity || quantity < 1) {
     throw new Error("Données de paiement invalides.");
-  }
-  if (!customerName || !customerEmail) {
-    throw new Error("Nom et email sont requis pour finaliser l'achat.");
   }
 
   const result = await prisma.$transaction(async (tx) => {
@@ -98,9 +100,13 @@ export async function completeCheckoutAction(formData: FormData) {
       (subtotal * agency.commissionRateBps) / 10000,
     );
 
-    const effectiveEmail = user?.email ?? customerEmail;
-    const effectiveName = user?.fullName ?? customerName;
+    const effectiveName = user?.fullName?.trim() || customerName;
+    const effectiveEmail = user?.email?.trim().toLowerCase() || customerEmail || "";
     const effectivePhone = user?.phone ?? customerPhone;
+
+    if (!effectiveName) {
+      throw new Error("Le nom est requis pour finaliser l'achat.");
+    }
 
     const order = await tx.order.create({
       data: {
@@ -200,9 +206,24 @@ export async function completeCheckoutAction(formData: FormData) {
     };
   });
 
-  const emailSent = await sendGuestTicketsEmail(result.orderId, result.customerEmail);
+  let emailSent = false;
+
+  try {
+    const emailResult = await sendGuestTicketsEmail(
+      result.orderId,
+      result.customerEmail,
+    );
+    emailSent = Boolean(emailResult.ok && !emailResult.skipped);
+  } catch (error) {
+    console.error("Guest ticket email delivery failed:", error);
+  }
+
   redirect(
-    `/checkout/success?mode=buy&orderId=${encodeURIComponent(result.orderId)}&email=${encodeURIComponent(result.customerEmail)}&emailSent=${emailSent ? "1" : "0"}`,
+    `/checkout/success?mode=buy&orderId=${encodeURIComponent(
+      result.orderId,
+    )}&email=${encodeURIComponent(result.customerEmail)}&emailSent=${
+      emailSent ? "1" : "0"
+    }`,
   );
 }
 
@@ -214,7 +235,9 @@ export async function completeReservationCheckoutAction(formData: FormData) {
   const paymentMethod = String(formData.get("paymentMethod") ?? "OTHER");
   const paymentLabel = String(formData.get("paymentLabel") ?? "Paiement simulé");
   const customerName = String(formData.get("customerName") ?? "").trim();
-  const customerEmail = String(formData.get("customerEmail") ?? "").trim().toLowerCase();
+  const customerEmail = String(formData.get("customerEmail") ?? "")
+    .trim()
+    .toLowerCase();
   const customerPhoneRaw = String(formData.get("customerPhone") ?? "").trim();
   const customerPhone = customerPhoneRaw.length > 0 ? customerPhoneRaw : null;
 
@@ -283,7 +306,9 @@ export async function completeReservationCheckoutAction(formData: FormData) {
 
     const unitPrice = Number(ticketType.priceAmount);
     const subtotal = unitPrice * quantity;
-    const depositPercent = Number(ticketType.reservationPolicy.depositPercent ?? 0);
+    const depositPercent = Number(
+      ticketType.reservationPolicy.depositPercent ?? 0,
+    );
     const depositAmount = Math.max(
       0,
       Math.round((subtotal * depositPercent) / 100),
@@ -394,8 +419,23 @@ export async function completeReservationCheckoutAction(formData: FormData) {
     };
   });
 
-  const emailSent = await sendGuestTicketsEmail(result.orderId, result.customerEmail);
+  let emailSent = false;
+
+  try {
+    const emailResult = await sendGuestTicketsEmail(
+      result.orderId,
+      result.customerEmail,
+    );
+    emailSent = Boolean(emailResult.ok && !emailResult.skipped);
+  } catch (error) {
+    console.error("Guest ticket email delivery failed:", error);
+  }
+
   redirect(
-    `/checkout/success?mode=reserve&orderId=${encodeURIComponent(result.orderId)}&email=${encodeURIComponent(result.customerEmail)}&emailSent=${emailSent ? "1" : "0"}`,
+    `/checkout/success?mode=reserve&orderId=${encodeURIComponent(
+      result.orderId,
+    )}&email=${encodeURIComponent(result.customerEmail)}&emailSent=${
+      emailSent ? "1" : "0"
+    }`,
   );
 }

@@ -101,9 +101,6 @@ export default async function AdminDeletionRequestsPage() {
                       minChars={5}
                       placeholder="Motif du refus"
                     />
-                    <p className="text-xs text-white/50">
-                       Minimum 5 caractères.
-                    </p>
                     <button
                       type="submit"
                       className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 font-medium text-white transition hover:bg-white/10"
