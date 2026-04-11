@@ -115,7 +115,14 @@ export async function GET(request: Request) {
 
   const pdfBytes = await pdfDoc.save();
 
-  return new NextResponse(pdfBytes, {
+  const pdfArray = pdfBytes instanceof Uint8Array ? pdfBytes : new Uint8Array(pdfBytes);
+
+  const pdfBuffer = pdfArray.buffer.slice(
+    pdfArray.byteOffset,
+    pdfArray.byteOffset + pdfArray.byteLength,
+  ) as ArrayBuffer;
+
+  return new NextResponse(pdfBuffer, {
     headers: {
       "Content-Type": "application/pdf",
       "Content-Disposition": `attachment; filename="billet-${ticketEntry.ticket.serialNumber}.pdf"`,

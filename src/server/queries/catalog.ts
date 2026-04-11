@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma/client";
 import type { Prisma } from "@/generated/prisma/client";
+
 export async function getHomepageData() {
   const [featuredEvents, categories] = await Promise.all([
     prisma.event.findMany({
@@ -139,6 +140,7 @@ export async function getPublishedEventBySlug(slug: string) {
     shortDescription: event.shortDescription,
     fullDescription: event.fullDescription,
     coverImageUrl: event.coverImageUrl,
+    promoVideoUrl: event.promoVideoUrl, // Ajout du champ ici
     isFeatured: event.isFeatured,
     defaultCurrency: event.defaultCurrency,
     publishedAt: event.publishedAt?.toISOString() ?? null,
