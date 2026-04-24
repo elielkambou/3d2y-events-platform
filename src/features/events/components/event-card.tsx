@@ -38,8 +38,8 @@ export function EventCard({ event }: EventCardProps) {
   const quickBuyHref = `/events/${event.slug}`;
 
   return (
-    <article className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-white/20 hover:bg-white/[0.07] hover:shadow-[0_0_25px_rgba(255,107,0,0.12)]">
-      <div className="relative aspect-[16/10] overflow-hidden bg-white/5">
+    <article className="surface-card group overflow-hidden transition hover:-translate-y-0.5 hover:border-primary/20">
+      <div className="relative aspect-[16/10] overflow-hidden bg-muted/60">
         <Link href={`/events/${event.slug}`} className="block h-full w-full">
           {event.coverImageUrl ? (
             <img
@@ -48,30 +48,30 @@ export function EventCard({ event }: EventCardProps) {
               className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center text-white/40">
+            <div className="flex h-full w-full items-center justify-center text-foreground/40">
               Image à venir
             </div>
           )}
         </Link>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C]/90 via-[#0A0A0C]/35 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/10 to-transparent" />
 
         <div className="absolute left-4 top-4 flex gap-2">
           {event.category ? (
-            <span className="rounded-full border border-white/10 bg-[#0A0A0C]/60 px-3 py-1 text-xs text-white backdrop-blur">
+            <span className="rounded-full border border-white/35 bg-white/75 px-3 py-1 text-xs font-medium text-foreground backdrop-blur">
               {event.category.name}
             </span>
           ) : null}
 
           {event.isFeatured ? (
-            <span className="rounded-full bg-gradient-to-br from-[#FF6B00] to-[#8B5CF6] px-3 py-1 text-xs font-medium text-white">
+            <span className="rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
               En vedette
             </span>
           ) : null}
         </div>
 
         <div className="absolute bottom-4 left-4 right-4">
-          <p className="text-xs uppercase tracking-[0.2em] text-white/60">
+          <p className="text-xs uppercase tracking-[0.2em] text-white/75">
             {event.agency.name}
           </p>
           <h3 className="mt-2 text-2xl font-semibold text-white">{event.title}</h3>
@@ -79,12 +79,12 @@ export function EventCard({ event }: EventCardProps) {
       </div>
 
       <div className="space-y-4 p-5">
-        <p className="line-clamp-2 text-sm text-white/70">
+        <p className="line-clamp-2 text-sm text-foreground/70">
           {event.shortDescription ?? "Description à venir."}
         </p>
 
         {event.firstOccurrence ? (
-          <div className="space-y-1 text-sm text-white/70">
+          <div className="space-y-1 text-sm text-foreground/70">
             <p>{formatEventDate(event.firstOccurrence.startsAt)}</p>
             <p>
               {event.firstOccurrence.venueName}
@@ -94,12 +94,12 @@ export function EventCard({ event }: EventCardProps) {
             </p>
           </div>
         ) : (
-          <p className="text-sm text-white/50">Date à confirmer</p>
+          <p className="text-sm text-foreground/50">Date à confirmer</p>
         )}
 
-        <div className="flex items-center justify-between pt-2">
-          <span className="text-sm text-white/50">À partir de</span>
-          <span className="text-lg font-semibold text-white">
+        <div className="flex items-center justify-between rounded-2xl bg-muted/70 px-3 py-2">
+          <span className="text-sm text-foreground/60">À partir de</span>
+          <span className="text-lg font-semibold text-foreground">
             {formatXof(event.minPrice)}
           </span>
         </div>
@@ -107,13 +107,13 @@ export function EventCard({ event }: EventCardProps) {
         <div className="flex gap-2 pt-2">
           <Link
             href={quickBuyHref}
-            className="flex-1 rounded-xl bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] px-4 py-2 text-center text-sm font-medium text-black transition hover:shadow-[0_0_20px_rgba(139,92,246,0.25)]"
+            className="btn-primary flex-1 px-4 py-2"
           >
             Acheter
           </Link>
           <Link
             href={`/events/${event.slug}`}
-            className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10"
+            className="btn-secondary px-4 py-2"
           >
             Détails
           </Link>

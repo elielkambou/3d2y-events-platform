@@ -140,7 +140,7 @@ export async function getPublishedEventBySlug(slug: string) {
     shortDescription: event.shortDescription,
     fullDescription: event.fullDescription,
     coverImageUrl: event.coverImageUrl,
-    promoVideoUrl: event.promoVideoUrl, // Ajout du champ ici
+    promoVideoUrl: event.promoVideoUrl,
     isFeatured: event.isFeatured,
     defaultCurrency: event.defaultCurrency,
     publishedAt: event.publishedAt?.toISOString() ?? null,

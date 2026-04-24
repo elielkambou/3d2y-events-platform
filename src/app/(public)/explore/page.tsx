@@ -16,22 +16,19 @@ export default async function ExplorePage({ searchParams }: ExplorePageProps) {
     : events;
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0A0A0C] text-white">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(139,92,246,0.25),transparent_45%),radial-gradient(circle_at_80%_0%,rgba(255,107,0,0.18),transparent_55%)]" />
-      <div className="relative z-10 mx-auto max-w-7xl px-6 py-16">
-        <p className="text-sm uppercase tracking-[0.25em] bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] bg-clip-text text-transparent">
-          Explore
-        </p>
-        <h1 className="mt-3 text-4xl font-semibold bg-gradient-to-r from-[#FF6B00] to-[#8B5CF6] bg-clip-text text-transparent">
+    <main className="relative min-h-screen overflow-hidden text-foreground">
+      <div className="relative z-10 section-shell py-16">
+        <p className="eyebrow">Explore</p>
+        <h1 className="mt-3 text-4xl font-semibold">
           {category ? `Catégorie : ${category}` : "Tous les événements publiés"}
         </h1>
-        <p className="mt-4 max-w-2xl text-white/70">
+        <p className="text-muted mt-4 max-w-2xl">
           Découvre les prochains événements disponibles sur la plateforme.
         </p>
 
         <div className="mt-10">
           {filteredEvents.length === 0 ? (
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 text-white/60 backdrop-blur-xl">
+            <div className="surface-card p-8 text-foreground/60">
               Aucun événement disponible pour le moment.
             </div>
           ) : (
