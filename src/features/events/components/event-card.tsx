@@ -39,7 +39,7 @@ export function EventCard({ event }: EventCardProps) {
 
   return (
     <article className="surface-card group overflow-hidden transition hover:-translate-y-0.5 hover:border-primary/20">
-      <div className="relative aspect-[16/10] overflow-hidden bg-muted/60">
+      <div className="relative aspect-[5/3] overflow-hidden bg-muted/60">
         <Link href={`/events/${event.slug}`} className="block h-full w-full">
           {event.coverImageUrl ? (
             <img
@@ -70,21 +70,21 @@ export function EventCard({ event }: EventCardProps) {
           ) : null}
         </div>
 
-        <div className="absolute bottom-4 left-4 right-4">
+        <div className="absolute bottom-3 left-3 right-3">
           <p className="text-xs uppercase tracking-[0.2em] text-white/75">
             {event.agency.name}
           </p>
-          <h3 className="mt-2 text-2xl font-semibold text-white">{event.title}</h3>
+          <h3 className="mt-1.5 text-lg font-semibold text-white">{event.title}</h3>
         </div>
       </div>
 
-      <div className="space-y-4 p-5">
-        <p className="line-clamp-2 text-sm text-foreground/70">
+      <div className="space-y-3 p-3.5">
+        <p className="line-clamp-2 text-xs text-foreground/70">
           {event.shortDescription ?? "Description à venir."}
         </p>
 
         {event.firstOccurrence ? (
-          <div className="space-y-1 text-sm text-foreground/70">
+          <div className="space-y-1 text-xs text-foreground/70">
             <p>{formatEventDate(event.firstOccurrence.startsAt)}</p>
             <p>
               {event.firstOccurrence.venueName}
@@ -94,26 +94,26 @@ export function EventCard({ event }: EventCardProps) {
             </p>
           </div>
         ) : (
-          <p className="text-sm text-foreground/50">Date à confirmer</p>
+          <p className="text-xs text-foreground/50">Date à confirmer</p>
         )}
 
-        <div className="flex items-center justify-between rounded-2xl bg-muted/70 px-3 py-2">
-          <span className="text-sm text-foreground/60">À partir de</span>
-          <span className="text-lg font-semibold text-foreground">
+        <div className="flex items-center justify-between rounded-xl bg-muted/70 px-3 py-1.5">
+          <span className="text-xs text-foreground/60">À partir de</span>
+          <span className="text-base font-semibold text-foreground">
             {formatXof(event.minPrice)}
           </span>
         </div>
 
-        <div className="flex gap-2 pt-2">
+        <div className="flex gap-2 pt-1">
           <Link
             href={quickBuyHref}
-            className="btn-primary flex-1 px-4 py-2"
+            className="btn-primary flex-1 px-3 py-1.5 text-xs"
           >
             Acheter
           </Link>
           <Link
             href={`/events/${event.slug}`}
-            className="btn-secondary px-4 py-2"
+            className="btn-secondary px-3 py-1.5 text-xs"
           >
             Détails
           </Link>

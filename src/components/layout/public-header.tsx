@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getSession } from "@/lib/auth/session";
+import { DesignSwitcher } from "@/components/layout/design-switcher";
 
 export async function PublicHeader() {
   const session = await getSession();
@@ -30,6 +31,7 @@ export async function PublicHeader() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <DesignSwitcher />
           {session ? (
             <Link
               href="/account"

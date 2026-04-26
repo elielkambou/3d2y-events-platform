@@ -72,7 +72,7 @@ export default async function HomePage() {
             Aucun événement publié pour le moment.
           </div>
         ) : (
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {featuredEvents.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
