@@ -32,12 +32,12 @@ export function DesignSwitcher() {
   }
 
   return (
-    <label className="hidden items-center gap-2 md:flex">
-      <span className="text-xs text-foreground/60">Aperçu</span>
+    <label className="flex items-center gap-2">
+      <span className="hidden text-xs text-foreground/60 sm:inline">Aperçu</span>
       <select
         value={variant}
         onChange={(event) => updateVariant(event.target.value as DesignId)}
-        className="rounded-lg border border-border/80 bg-background/80 px-2.5 py-1.5 text-xs text-foreground"
+        className="rounded-lg border border-border/80 bg-background/80 px-2 py-1.5 text-[11px] text-foreground sm:px-2.5 sm:text-xs"
       >
         {DESIGN_OPTIONS.map((option) => (
           <option key={option.id} value={option.id}>
